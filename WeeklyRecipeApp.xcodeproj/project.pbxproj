@@ -12,6 +12,11 @@
 		3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */; };
 		3B624C5C20850E9600EA5CCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5B20850E9600EA5CCE /* Assets.xcassets */; };
 		3B624C5F20850E9600EA5CCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5D20850E9600EA5CCE /* LaunchScreen.storyboard */; };
+		3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C6E208517DA00EA5CCE /* Recipe+Convenience.swift */; };
+		3B624C712085183300EA5CCE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C702085183300EA5CCE /* CoreDataStack.swift */; };
+		3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C722085187600EA5CCE /* Ingredient+Convenience.swift */; };
+		3B624C7520851A3A00EA5CCE /* RecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C7420851A3A00EA5CCE /* RecipeController.swift */; };
+		3B624C77208521B600EA5CCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C76208521B600EA5CCE /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		3B624C5B20850E9600EA5CCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B624C5E20850E9600EA5CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3B624C6020850E9600EA5CCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B624C6E208517DA00EA5CCE /* Recipe+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recipe+Convenience.swift"; sourceTree = "<group>"; };
+		3B624C702085183300EA5CCE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		3B624C722085187600EA5CCE /* Ingredient+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingredient+Convenience.swift"; sourceTree = "<group>"; };
+		3B624C7420851A3A00EA5CCE /* RecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeController.swift; sourceTree = "<group>"; };
+		3B624C76208521B600EA5CCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,10 +65,9 @@
 			isa = PBXGroup;
 			children = (
 				3B624C6A20850FCC00EA5CCE /* Storyboards */,
-				3B624C6920850FC500EA5CCE /* ViewController */,
+				3B624C6B2085175D00EA5CCE /* Mode+CoreData */,
 				3B624C6820850FBF00EA5CCE /* ModelController */,
-				3B624C6720850FB800EA5CCE /* Model */,
-				3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */,
+				3B624C6920850FC500EA5CCE /* ViewController */,
 				3B624C6620850FAA00EA5CCE /* Resources */,
 			);
 			path = WeeklyRecipeApp;
@@ -75,16 +84,10 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		3B624C6720850FB800EA5CCE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		3B624C6820850FBF00EA5CCE /* ModelController */ = {
 			isa = PBXGroup;
 			children = (
+				3B624C7420851A3A00EA5CCE /* RecipeController.swift */,
 			);
 			path = ModelController;
 			sourceTree = "<group>";
@@ -92,6 +95,7 @@
 		3B624C6920850FC500EA5CCE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				3B624C76208521B600EA5CCE /* WelcomeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -102,6 +106,17 @@
 				3B624C5520850E9300EA5CCE /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3B624C6B2085175D00EA5CCE /* Mode+CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */,
+				3B624C702085183300EA5CCE /* CoreDataStack.swift */,
+				3B624C6E208517DA00EA5CCE /* Recipe+Convenience.swift */,
+				3B624C722085187600EA5CCE /* Ingredient+Convenience.swift */,
+			);
+			path = "Mode+CoreData";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,8 +190,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */,
 				3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */,
+				3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */,
 				3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */,
+				3B624C712085183300EA5CCE /* CoreDataStack.swift in Sources */,
+				3B624C7520851A3A00EA5CCE /* RecipeController.swift in Sources */,
+				3B624C77208521B600EA5CCE /* WelcomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
