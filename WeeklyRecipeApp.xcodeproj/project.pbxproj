@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5120850E9300EA5CCE /* AppDelegate.swift */; };
-		3B624C5420850E9300EA5CCE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5320850E9300EA5CCE /* ViewController.swift */; };
 		3B624C5720850E9300EA5CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5520850E9300EA5CCE /* Main.storyboard */; };
 		3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */; };
 		3B624C5C20850E9600EA5CCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5B20850E9600EA5CCE /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		3B624C4E20850E9300EA5CCE /* WeeklyRecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyRecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B624C5120850E9300EA5CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3B624C5320850E9300EA5CCE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3B624C5620850E9300EA5CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3B624C5920850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeeklyRecipeApp.xcdatamodel; sourceTree = "<group>"; };
 		3B624C5B20850E9600EA5CCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,15 +54,54 @@
 		3B624C5020850E9300EA5CCE /* WeeklyRecipeApp */ = {
 			isa = PBXGroup;
 			children = (
+				3B624C6A20850FCC00EA5CCE /* Storyboards */,
+				3B624C6920850FC500EA5CCE /* ViewController */,
+				3B624C6820850FBF00EA5CCE /* ModelController */,
+				3B624C6720850FB800EA5CCE /* Model */,
+				3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */,
+				3B624C6620850FAA00EA5CCE /* Resources */,
+			);
+			path = WeeklyRecipeApp;
+			sourceTree = "<group>";
+		};
+		3B624C6620850FAA00EA5CCE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				3B624C5120850E9300EA5CCE /* AppDelegate.swift */,
-				3B624C5320850E9300EA5CCE /* ViewController.swift */,
-				3B624C5520850E9300EA5CCE /* Main.storyboard */,
 				3B624C5B20850E9600EA5CCE /* Assets.xcassets */,
 				3B624C5D20850E9600EA5CCE /* LaunchScreen.storyboard */,
 				3B624C6020850E9600EA5CCE /* Info.plist */,
-				3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */,
 			);
-			path = WeeklyRecipeApp;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3B624C6720850FB800EA5CCE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3B624C6820850FBF00EA5CCE /* ModelController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ModelController;
+			sourceTree = "<group>";
+		};
+		3B624C6920850FC500EA5CCE /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3B624C6A20850FCC00EA5CCE /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3B624C5520850E9300EA5CCE /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +176,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */,
-				3B624C5420850E9300EA5CCE /* ViewController.swift in Sources */,
 				3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +322,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MC2BEA2U5Y;
-				INFOPLIST_FILE = WeeklyRecipeApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/WeeklyRecipeApp/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +340,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MC2BEA2U5Y;
-				INFOPLIST_FILE = WeeklyRecipeApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/WeeklyRecipeApp/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
