@@ -8,28 +8,64 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
-
+class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    @IBOutlet weak var selectDayButton: UIButton!
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var selectButton: UIButton!
+    
+    
+    let weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    var week: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        selectButton.isHidden = true
+        pickerView.isHidden = true
+        pickerView.delegate = self
+        pickerView.dataSource = self
     }
     
-
-    /*
+    //MARK: - UIPickerViewSetup
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return weeks[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return weeks.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // I NEED TO SAVE THE DAY OF THE WEEK THAT THE USER TAPPED...
+        //-----------------------------------------------------------
+    }
+    
+    @IBAction func selectDateButtonTapped(_ sender: UIButton) {
+        if pickerView.isHidden == true {
+            selectDayButton.isHidden = true
+            pickerView.isHidden = false
+            selectButton.isHidden = false
+        } else {
+            selectDayButton.isHidden = false
+            pickerView.isHidden = true
+            selectButton.isHidden = false
+        }
+    }
+    
+    @IBAction func selectButtonTapped(_ sender: UIButton) {
+        // I NEED TO SAVE THE DAY OF THE WEEK THAT THE USER TAPPED...
+        //-----------------------------------------------------------
+    }
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        // DO I NEED TO HAVE A DEGUE HERE??
+        //-----------------------------------------------------------
     }
-    */
 
 }

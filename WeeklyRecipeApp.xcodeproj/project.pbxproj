@@ -17,6 +17,8 @@
 		3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C722085187600EA5CCE /* Ingredient+Convenience.swift */; };
 		3B624C7520851A3A00EA5CCE /* RecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C7420851A3A00EA5CCE /* RecipeController.swift */; };
 		3B624C77208521B600EA5CCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C76208521B600EA5CCE /* WelcomeViewController.swift */; };
+		3B624C79208557E900EA5CCE /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */; };
+		3B624C7B20855E4900EA5CCE /* IngredientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C7A20855E4900EA5CCE /* IngredientController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		3B624C722085187600EA5CCE /* Ingredient+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ingredient+Convenience.swift"; sourceTree = "<group>"; };
 		3B624C7420851A3A00EA5CCE /* RecipeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeController.swift; sourceTree = "<group>"; };
 		3B624C76208521B600EA5CCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
+		3B624C7A20855E4900EA5CCE /* IngredientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +68,8 @@
 		3B624C5020850E9300EA5CCE /* WeeklyRecipeApp */ = {
 			isa = PBXGroup;
 			children = (
-				3B624C6A20850FCC00EA5CCE /* Storyboards */,
-				3B624C6B2085175D00EA5CCE /* Mode+CoreData */,
+				3B624C6B2085175D00EA5CCE /* Model+CoreData */,
+				3B624C6A20850FCC00EA5CCE /* View */,
 				3B624C6820850FBF00EA5CCE /* ModelController */,
 				3B624C6920850FC500EA5CCE /* ViewController */,
 				3B624C6620850FAA00EA5CCE /* Resources */,
@@ -88,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				3B624C7420851A3A00EA5CCE /* RecipeController.swift */,
+				3B624C7A20855E4900EA5CCE /* IngredientController.swift */,
 			);
 			path = ModelController;
 			sourceTree = "<group>";
@@ -96,19 +101,20 @@
 			isa = PBXGroup;
 			children = (
 				3B624C76208521B600EA5CCE /* WelcomeViewController.swift */,
+				3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		3B624C6A20850FCC00EA5CCE /* Storyboards */ = {
+		3B624C6A20850FCC00EA5CCE /* View */ = {
 			isa = PBXGroup;
 			children = (
 				3B624C5520850E9300EA5CCE /* Main.storyboard */,
 			);
-			path = Storyboards;
+			path = View;
 			sourceTree = "<group>";
 		};
-		3B624C6B2085175D00EA5CCE /* Mode+CoreData */ = {
+		3B624C6B2085175D00EA5CCE /* Model+CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */,
@@ -116,7 +122,7 @@
 				3B624C6E208517DA00EA5CCE /* Recipe+Convenience.swift */,
 				3B624C722085187600EA5CCE /* Ingredient+Convenience.swift */,
 			);
-			path = "Mode+CoreData";
+			path = "Model+CoreData";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,8 +196,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B624C79208557E900EA5CCE /* AddRecipeViewController.swift in Sources */,
 				3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */,
 				3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */,
+				3B624C7B20855E4900EA5CCE /* IngredientController.swift in Sources */,
 				3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */,
 				3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */,
 				3B624C712085183300EA5CCE /* CoreDataStack.swift in Sources */,

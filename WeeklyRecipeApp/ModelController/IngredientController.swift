@@ -1,5 +1,5 @@
 //
-//  RecipeController.swift
+//  IngredientController.swift
 //  WeeklyRecipeApp
 //
 //  Created by Jacob Metcalf on 4/16/18.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-class RecipeController {
+class IngredientController {
     
-    static let shared = RecipeController()
+    static let shared = IngredientController()
     
-    var recipes: [Recipe] = []
+    var ingredients: [Ingredient] = []
     
-    func addRecipeWith(title: String, ingredients: [Ingredient], directions: String) {
-        let recipe = Recipe(title: title, ingredients: ingredients, directions: directions)
-        self.recipes.append(recipe)
+    func addIngredientWith(name: String) {
+        let ingredient = Ingredient(name: name)
+        self.ingredients.append(ingredient)
         saveToPersistentStore()
     }
     
