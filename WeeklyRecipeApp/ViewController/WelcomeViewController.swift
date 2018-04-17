@@ -10,7 +10,6 @@ import UIKit
 
 class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    @IBOutlet weak var selectDayButton: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var selectButton: UIButton!
     
@@ -20,8 +19,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectButton.isHidden = true
-        pickerView.isHidden = true
         pickerView.delegate = self
         pickerView.dataSource = self
     }
@@ -42,18 +39,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         // I NEED TO SAVE THE DAY OF THE WEEK THAT THE USER TAPPED...
         //-----------------------------------------------------------
-    }
-    
-    @IBAction func selectDateButtonTapped(_ sender: UIButton) {
-        if pickerView.isHidden == true {
-            selectDayButton.isHidden = true
-            pickerView.isHidden = false
-            selectButton.isHidden = false
-        } else {
-            selectDayButton.isHidden = false
-            pickerView.isHidden = true
-            selectButton.isHidden = false
-        }
     }
     
     @IBAction func selectButtonTapped(_ sender: UIButton) {

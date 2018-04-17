@@ -26,15 +26,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mG3-l9-yqB">
-                                <rect key="frame" x="137.5" y="316" width="99" height="35"/>
-                                <color key="backgroundColor" red="0.74108815762028024" green="0.97843261636041079" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <state key="normal" title="Select Date"/>
-                                <connections>
-                                    <action selector="selectDateButtonTapped:" destination="80W-94-KW1" eventType="touchUpInside" id="WnS-eh-96a"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Please select a day of the week you would like to go shopping." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPU-7l-Mm5">
                                 <rect key="frame" x="50" y="171" width="275" height="41"/>
                                 <constraints>
@@ -70,10 +61,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="R4M-ch-eQx" firstAttribute="top" secondItem="lke-yd-6D9" secondAttribute="top" constant="40" id="J1V-Zl-e3i"/>
-                            <constraint firstItem="mG3-l9-yqB" firstAttribute="centerY" secondItem="UcZ-kg-l8L" secondAttribute="centerY" id="L6b-J9-OW9"/>
                             <constraint firstItem="YNJ-uJ-8rp" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="QLV-Xh-ILp"/>
                             <constraint firstItem="R4M-ch-eQx" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="RO9-fH-ddm"/>
-                            <constraint firstItem="mG3-l9-yqB" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="TJP-jb-wkU"/>
                             <constraint firstItem="Ces-4j-YG0" firstAttribute="top" secondItem="DPU-7l-Mm5" secondAttribute="bottom" constant="21" id="aOf-uA-GYa"/>
                             <constraint firstItem="YNJ-uJ-8rp" firstAttribute="top" secondItem="Ces-4j-YG0" secondAttribute="bottom" constant="31" id="bzP-EA-bOT"/>
                             <constraint firstItem="DPU-7l-Mm5" firstAttribute="top" secondItem="R4M-ch-eQx" secondAttribute="bottom" constant="46" id="dDM-36-41n"/>
@@ -87,7 +76,6 @@
                     <connections>
                         <outlet property="pickerView" destination="Ces-4j-YG0" id="aNt-3u-Zm3"/>
                         <outlet property="selectButton" destination="YNJ-uJ-8rp" id="Mrk-xE-fLe"/>
-                        <outlet property="selectDayButton" destination="mG3-l9-yqB" id="OY1-OR-J6f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PtK-WC-yMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -107,12 +95,28 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" id="hD6-By-Zoc">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="recipeCell" textLabel="a40-eP-sP6" detailTextLabel="Qry-OW-oIh" style="IBUITableViewCellStyleValue1" id="hD6-By-Zoc">
                                         <rect key="frame" x="0.0" y="28" width="339" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hD6-By-Zoc" id="eDw-BW-wf1">
                                             <rect key="frame" x="0.0" y="0.0" width="339" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a40-eP-sP6">
+                                                    <rect key="frame" x="15" y="12" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qry-OW-oIh">
+                                                    <rect key="frame" x="280" y="12" width="44" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.54141695205479456" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="Jd2-op-0zD" kind="show" identifier="toRecipeDetail" id="l3L-VI-6kg"/>
@@ -166,7 +170,7 @@
                                 <rect key="frame" x="38" y="108" width="300" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQJ-ad-3qi">
                                 <rect key="frame" x="18" y="154" width="91" height="21"/>

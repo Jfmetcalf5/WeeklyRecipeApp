@@ -34,6 +34,7 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let recipe = RecipeController.shared.recipes[indexPath.row]
         cell.textLabel?.text = recipe.title
+        cell.detailTextLabel?.text = recipe.directions
         
         return cell
     }
