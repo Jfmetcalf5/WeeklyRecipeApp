@@ -14,14 +14,14 @@ class RecipeController {
     static let shared = RecipeController()
     
     var recipes: [Recipe] {
-        
         let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         return (try? CoreDataStack.context.fetch(request)) ?? []
     }
     
-    func addRecipeWith(title: String, ingredients: [Ingredient], directions: String) {
-        let _ = Recipe(title: title, ingredients: ingredients, directions: directions)
+    @discardableResult func addRecipeWith(title: String, ingredients: [Ingredient], directions: String) -> Recipe {
+        let recipe = Recipe(title: title, ingredients: ingredients, directions: directions)
         saveToPersistentStore()
+        return recipe
     }
     
     func delete(recipe: Recipe) {
@@ -33,8 +33,6 @@ class RecipeController {
     
     func update(recipe: Recipe, with title: String, ingredients: [Ingredient], directions: String) {
         recipe.title = title
-        //        recipe.ingredients = ingredients     NEED HELP WITH THIS TMORROW!!!
-        //-------------------------------------------------------------------
         recipe.directions = directions
         saveToPersistentStore()
     }
