@@ -12,11 +12,8 @@ class IngredientController {
     
     static let shared = IngredientController()
     
-    var ingredients: [Ingredient] = []
-    
-    func addIngredientWith(name: String, quantity: Int16) {
-        let ingredient = Ingredient(name: name, quantity: quantity)
-        self.ingredients.append(ingredient)
+    func addIngredientWith(name: String, quantity: Int16, recipe: Recipe) {
+        let _ = Ingredient(name: name, quantity: quantity)
         saveToPersistentStore()
     }
     

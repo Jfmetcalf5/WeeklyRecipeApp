@@ -28,18 +28,24 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBAction func addIngredientButtonTapped(_ sender: UIButton) {
         guard let name = ingredientTextField.text, ingredientTextField.text != nil,
             let quantityString = quantityTextField.text, let quantity = Int16(quantityString) else { return }
-        IngredientController.shared.addIngredientWith(name: name, quantity: quantity)
-        view.resignFirstResponder()
-        ingredientsTableView.reloadData()
+        if let recipe = recipe {            
+            IngredientController.shared.addIngredientWith(name: name, quantity: quantity, recipe: recipe)
+            view.resignFirstResponder()
+            quantityTextField.text = ""
+            ingredientTextField.text = ""
+            ingredientsTableView.reloadData()
+        }
     }
     
     @IBAction func checkButtonTapped(_ sender: UIButton) {
         guard let title = titleTextField.text, titleTextField.text != nil,
-            let directions = directionsTextView.text, directionsTextView.text != nil else { return }
+            let directions = directionsTextView.text, directionsTextView.text != nil, let ingredientsOrderedSet = recipe?.ingredients,
+            let ingredients = ingredientsOrderedSet.array as? [Ingredient] else { return }
+        
         if let recipe = recipe {
-            RecipeController.shared.update(recipe: recipe, with: title, ingredients: IngredientController.shared.ingredients, directions: directions)
+            RecipeController.shared.update(recipe: recipe, with: title, ingredients: ingredients, directions: directions)
         } else {
-            RecipeController.shared.addRecipeWith(title: title, ingredients: IngredientController.shared.ingredients, directions: directions)
+            RecipeController.shared.addRecipeWith(title: title, ingredients: ingredients, directions: directions)
         }
         navigationController?.popViewController(animated: true)
         
@@ -63,31 +69,40 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //MARK: - Ingredients Table View Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        guard let recipe = recipe else { return 0 }
-//        return recipe.ingredients?.count
-        return IngredientController.shared.ingredients.count
-        // -----------------------------------------------------------------------
+        if let recipe = recipe {
+            guard let ingredientsOrderedSet = recipe.ingredients,
+                let ingredients = ingredientsOrderedSet.array as? [Ingredient] else { return 0 }
+            return ingredients.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
         
-        let ingredient = IngredientController.shared.ingredients[indexPath.row]
+        if let recipe = recipe {
         
-        cell.textLabel?.text = String(ingredient.quantity)
+        guard let ingredientsOrderedSet = recipe.ingredients,
+            let ingredients = ingredientsOrderedSet.array as? [Ingredient] else { return UITableViewCell() }
+        
+        let ingredient = ingredients[indexPath.row]
+        
+        cell.textLabel?.text = "\(ingredient.quantity)"
         cell.detailTextLabel?.text = ingredient.name
-        quantityTextField.text = ""
-        ingredientTextField.text = ""
         
         return cell
+        } else {
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let recipe = RecipeController.shared.recipes[indexPath.row]
-
+            
             RecipeController.shared.delete(recipe: recipe)
-
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
