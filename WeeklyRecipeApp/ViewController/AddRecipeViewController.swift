@@ -41,6 +41,10 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         ingredientsTableView.reloadData()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return view.endEditing(true)
+    }
+    
     @IBAction func addIngredientButtonTapped(_ sender: UIButton) {
         if let recipe = recipe {
             guard let name = ingredientTextField.text, ingredientTextField.text != nil,
@@ -70,7 +74,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-        if titleTextField.text == "" || directionsTextView.text == "", recipe == recipe {
+        if titleTextField.text == "" || directionsTextView.text == "" {
             let alert = UIAlertController(title: "Continue?", message: "If you to go back, all work will be lost. Would you like to proceed?", preferredStyle: .alert)
             let yes = UIAlertAction(title: "Yes", style: .default) { (yes) in
                 if let recipe = self.recipe {

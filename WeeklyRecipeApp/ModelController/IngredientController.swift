@@ -13,7 +13,8 @@ class IngredientController {
     static let shared = IngredientController()
     
     func addIngredientWith(name: String, quantity: Int16, recipe: Recipe) {
-        let _ = Ingredient(name: name, quantity: quantity)
+        let ingredient = Ingredient(name: name, quantity: quantity)
+        recipe.addToIngredients(ingredient)
         saveToPersistentStore()
     }
     
