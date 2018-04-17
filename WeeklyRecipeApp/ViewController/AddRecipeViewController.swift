@@ -41,6 +41,12 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         ingredientsTableView.reloadData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        guard let recipe = recipe, recipe.title == "" || recipe.directions == "" else { return }
+        RecipeController.shared.delete(recipe: recipe)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         return view.endEditing(true)
     }
@@ -59,28 +65,18 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     
     @IBAction func checkButtonTapped(_ sender: UIButton) {
         guard let title = titleTextField.text, titleTextField.text != "",
-            let directions = directionsTextView.text, directionsTextView.text != "" else {
-                let alert = UIAlertController(title: "Missing Information", message: "Please make sure you enter all the information", preferredStyle: .alert)
-                let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
-                alert.addAction(ok)
-                present(alert, animated: true, completion: nil); return }
-        
-        if let recipe = recipe {
-            RecipeController.shared.update(recipe: recipe, with: title, directions: directions)
-        } else {
-            RecipeController.shared.addRecipeWith(title: title, directions: directions)
+            let directions = directionsTextView.text, directionsTextView.text != "" else { return }
+                if let recipe = recipe {
+                    RecipeController.shared.update(recipe: recipe, with: title, directions: directions)
+                }
+                navigationController?.popViewController(animated: true)
         }
-        navigationController?.popViewController(animated: true)
-    }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
-        if titleTextField.text == "" || directionsTextView.text == "" {
+        if titleTextField.text != "" || directionsTextView.text != "" {
             let alert = UIAlertController(title: "Continue?", message: "If you to go back, all work will be lost. Would you like to proceed?", preferredStyle: .alert)
             let yes = UIAlertAction(title: "Yes", style: .default) { (yes) in
-                if let recipe = self.recipe {
-                    RecipeController.shared.delete(recipe: recipe)
                     self.navigationController?.popViewController(animated: true)
-                }
             }
             let no = UIAlertAction(title: "No", style: .destructive, handler: nil)
             alert.addAction(yes)
