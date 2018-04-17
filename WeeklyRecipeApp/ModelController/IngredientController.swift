@@ -14,15 +14,22 @@ class IngredientController {
     
     var ingredients: [Ingredient] = []
     
-    func addIngredientWith(name: String) {
-        let ingredient = Ingredient(name: name)
+    func addIngredientWith(name: String, quantity: Int16) {
+        let ingredient = Ingredient(name: name, quantity: quantity)
         self.ingredients.append(ingredient)
         saveToPersistentStore()
     }
     
+    func delete(ingredient: Ingredient) {
+        if let moc = ingredient.managedObjectContext {
+            moc.delete(ingredient)
+            saveToPersistentStore()
+        }
+    }
+    
     func saveToPersistentStore() {
         do {
-            try CoreDateStack.context.save()
+            try CoreDataStack.context.save()
         } catch {
             print("\(error.localizedDescription)")
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0AA89820858DA3007F94F9 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */; };
 		3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5120850E9300EA5CCE /* AppDelegate.swift */; };
 		3B624C5720850E9300EA5CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5520850E9300EA5CCE /* Main.storyboard */; };
 		3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
 		3B624C4E20850E9300EA5CCE /* WeeklyRecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyRecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B624C5120850E9300EA5CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B624C5620850E9300EA5CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				3B624C76208521B600EA5CCE /* WelcomeViewController.swift */,
 				3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */,
+				3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B0AA89820858DA3007F94F9 /* RecipeListViewController.swift in Sources */,
 				3B624C79208557E900EA5CCE /* AddRecipeViewController.swift in Sources */,
 				3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */,
 				3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */,

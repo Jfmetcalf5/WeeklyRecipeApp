@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension Recipe {
-    convenience init(title: String, ingredients: [Ingredient], directions: String, context: NSManagedObjectContext = CoreDateStack.context) {
+    convenience init(title: String, ingredients: [Ingredient], directions: String, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.title = title
         self.directions = directions
