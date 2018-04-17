@@ -10,9 +10,10 @@ import Foundation
 import CoreData
 
 extension Ingredient {
-    convenience init(name: String, quantity: Int16, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(name: String, quantity: Int16, unit: String, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.name = name
         self.quantity = quantity
+        self.unit = unit
     }
 }
