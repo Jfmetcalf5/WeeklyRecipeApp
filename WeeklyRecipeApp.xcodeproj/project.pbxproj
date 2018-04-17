@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B0AA89820858DA3007F94F9 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */; };
+		3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B101A8E20868949003FD569 /* ShiftableViewController.swift */; };
 		3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5120850E9300EA5CCE /* AppDelegate.swift */; };
 		3B624C5720850E9300EA5CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5520850E9300EA5CCE /* Main.storyboard */; };
 		3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
+		3B101A8E20868949003FD569 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
 		3B624C4E20850E9300EA5CCE /* WeeklyRecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyRecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B624C5120850E9300EA5CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B624C5620850E9300EA5CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +53,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B101A8D20868937003FD569 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				3B101A8E20868949003FD569 /* ShiftableViewController.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		3B624C4520850E9300EA5CCE = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +80,7 @@
 		3B624C5020850E9300EA5CCE /* WeeklyRecipeApp */ = {
 			isa = PBXGroup;
 			children = (
+				3B101A8D20868937003FD569 /* Helpers */,
 				3B624C6B2085175D00EA5CCE /* Model+CoreData */,
 				3B624C6A20850FCC00EA5CCE /* View */,
 				3B624C6820850FBF00EA5CCE /* ModelController */,
@@ -204,6 +215,7 @@
 				3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */,
 				3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */,
 				3B624C7B20855E4900EA5CCE /* IngredientController.swift in Sources */,
+				3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */,
 				3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */,
 				3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */,
 				3B624C712085183300EA5CCE /* CoreDataStack.swift in Sources */,

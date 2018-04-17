@@ -166,7 +166,7 @@
                                 <rect key="frame" x="38" y="108" width="300" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingredients:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQJ-ad-3qi">
                                 <rect key="frame" x="18" y="154" width="91" height="21"/>
@@ -276,11 +276,12 @@
                                     <constraint firstAttribute="height" constant="179" id="RGZ-zD-7Nw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" lookupSuggestion="YES"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="kee-sN-clO" firstAttribute="centerX" secondItem="htW-I4-EPf" secondAttribute="centerX" id="2WV-QA-cy0"/>
                             <constraint firstItem="Zoa-A9-ZWl" firstAttribute="leading" secondItem="Qts-jg-NLF" secondAttribute="leading" constant="16" id="9mI-q8-nPL"/>
@@ -331,6 +332,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomConstraint" destination="q3S-kT-3V9" id="dQU-fA-2du"/>
                         <outlet property="directionsTextView" destination="y6Q-xm-ppM" id="Tbh-MN-TCy"/>
                         <outlet property="ingredientTextField" destination="9PE-aj-XXc" id="HU0-CC-AO2"/>
                         <outlet property="ingredientsTableView" destination="0YL-CA-Hk5" id="Idn-yX-00A"/>

@@ -8,12 +8,13 @@
 
 import UIKit
 
-class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate {
+class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var directionsTextView: UITextView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var ingredientsTableView: UITableView!
     
@@ -21,17 +22,14 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
-
+        
         titleTextField.delegate = self
         quantityTextField.delegate = self
         ingredientTextField.delegate = self
         directionsTextView.delegate = self
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        return view.endEditing(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,8 +74,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             let alert = UIAlertController(title: "Continue?", message: "If you to go back, all work will be lost. Would you like to proceed?", preferredStyle: .alert)
             let yes = UIAlertAction(title: "Yes", style: .default) { (yes) in
                 if let recipe = self.recipe {
-                RecipeController.shared.delete(recipe: recipe)
-                self.navigationController?.popViewController(animated: true)
+                    RecipeController.shared.delete(recipe: recipe)
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
             let no = UIAlertAction(title: "No", style: .destructive, handler: nil)
@@ -116,5 +114,4 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
 }
