@@ -34,13 +34,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         return view.endEditing(true)
     }
     
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n" {
-            view.endEditing(true)
-        }
-        return true
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let recipe = recipe {
@@ -82,9 +75,10 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if titleTextField.text == "" || directionsTextView.text == "", recipe == recipe {
             let alert = UIAlertController(title: "Continue?", message: "If you to go back, all work will be lost. Would you like to proceed?", preferredStyle: .alert)
             let yes = UIAlertAction(title: "Yes", style: .default) { (yes) in
-                guard let recipe = self.recipe else { return }
+                if let recipe = self.recipe {
                 RecipeController.shared.delete(recipe: recipe)
                 self.navigationController?.popViewController(animated: true)
+                }
             }
             let no = UIAlertAction(title: "No", style: .destructive, handler: nil)
             alert.addAction(yes)

@@ -141,7 +141,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Recipe"/>
                                 <connections>
-                                    <segue destination="Jd2-op-0zD" kind="show" id="pGu-lJ-kzd"/>
+                                    <segue destination="Jd2-op-0zD" kind="show" identifier="toNewRecipe" id="pGu-lJ-kzd"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -475,6 +475,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="l3L-VI-6kg"/>
+        <segue reference="pGu-lJ-kzd"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -56,6 +56,10 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
             let detailVC = segue.destination as? AddRecipeViewController else { return }
             let recipe = RecipeController.shared.recipes[indexPath.row]
             detailVC.recipe = recipe
+        } else if segue.identifier == "toNewRecipe" {
+            guard let detailVC = segue.destination as? AddRecipeViewController else { return }
+            let recipe = Recipe(title: "", ingredients: [], directions: "")
+            detailVC.recipe = recipe
         }
     }
 }
