@@ -29,6 +29,18 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
+<<<<<<< HEAD
+    @IBAction func addIngredientButtonTapped(_ sender: UIButton) {
+        guard let name = ingredientTextField.text, ingredientTextField.text != nil,
+            let quantityString = quantityTextField.text, let quantity = Int16(quantityString) else { return }
+        if let recipe = recipe {            
+            IngredientController.shared.addIngredientWith(name: name, quantity: quantity, recipe: recipe)
+            view.resignFirstResponder()
+            quantityTextField.text = ""
+            ingredientTextField.text = ""
+            ingredientsTableView.reloadData()
+        }
+=======
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let recipe = recipe {
@@ -36,6 +48,7 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             directionsTextView.text = recipe.directions
         }
         ingredientsTableView.reloadData()
+>>>>>>> safe
     }
     
     @IBAction func addIngredientButtonTapped(_ sender: UIButton) {
@@ -51,12 +64,18 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func checkButtonTapped(_ sender: UIButton) {
+<<<<<<< HEAD
+        guard let title = titleTextField.text, titleTextField.text != nil,
+            let directions = directionsTextView.text, directionsTextView.text != nil, let ingredientsOrderedSet = recipe?.ingredients,
+            let ingredients = ingredientsOrderedSet.array as? [Ingredient] else { return }
+=======
         guard let title = titleTextField.text, titleTextField.text != "",
             let directions = directionsTextView.text, directionsTextView.text != "" else {
                 let alert = UIAlertController(title: "Missing Information", message: "Please make sure you enter all the information", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "Ok", style: .default, handler: nil)
                 alert.addAction(ok)
                 present(alert, animated: true, completion: nil); return }
+>>>>>>> safe
         
         if let recipe = recipe {
             RecipeController.shared.update(recipe: recipe, with: title, ingredients: ingredients, directions: directions)
@@ -84,18 +103,42 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //MARK: - Ingredients Table View Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+<<<<<<< HEAD
+        if let recipe = recipe {
+            guard let ingredientsOrderedSet = recipe.ingredients,
+                let ingredients = ingredientsOrderedSet.array as? [Ingredient] else { return 0 }
+            return ingredients.count
+        } else {
+            return 0
+        }
+=======
         let ingredients = recipe?.ingredients?.count
         return ingredients ?? 0
+>>>>>>> safe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
+<<<<<<< HEAD
+        
+        if let recipe = recipe {
+        
+        guard let ingredientsOrderedSet = recipe.ingredients,
+            let ingredients = ingredientsOrderedSet.array as? [Ingredient] else { return UITableViewCell() }
+        
+        let ingredient = ingredients[indexPath.row]
+        
+        cell.textLabel?.text = "\(ingredient.quantity)"
+        cell.detailTextLabel?.text = ingredient.name
+        
+=======
         if let recipe = recipe {
             guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { return UITableViewCell() }
             let ingredient = ingredients[indexPath.row]
             cell.textLabel?.text = "\(ingredient.quantity)"
             cell.detailTextLabel?.text = ingredient.name
         }
+>>>>>>> safe
         return cell
         } else {
             return cell
