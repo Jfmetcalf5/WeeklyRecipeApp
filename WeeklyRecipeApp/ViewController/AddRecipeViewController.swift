@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var quantityTextField: UITextField!
@@ -23,10 +23,22 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
-        
-        if recipe == nil {
-            self.recipe = RecipeController.shared.addRecipeWith(title: "", ingredients: [], directions: "")
+
+        titleTextField.delegate = self
+        quantityTextField.delegate = self
+        ingredientTextField.delegate = self
+        directionsTextView.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return view.endEditing(true)
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            view.endEditing(true)
         }
+        return true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +71,9 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
                 present(alert, animated: true, completion: nil); return }
         
         if let recipe = recipe {
-            RecipeController.shared.update(recipe: recipe, with: title, ingredients: ingredients, directions: directions)
+            RecipeController.shared.update(recipe: recipe, with: title, directions: directions)
         } else {
-            RecipeController.shared.addRecipeWith(title: title, ingredients: ingredients, directions: directions)
+            RecipeController.shared.addRecipeWith(title: title, directions: directions)
         }
         navigationController?.popViewController(animated: true)
     }
@@ -70,6 +82,8 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         if titleTextField.text == "" || directionsTextView.text == "", recipe == recipe {
             let alert = UIAlertController(title: "Continue?", message: "If you to go back, all work will be lost. Would you like to proceed?", preferredStyle: .alert)
             let yes = UIAlertAction(title: "Yes", style: .default) { (yes) in
+                guard let recipe = self.recipe else { return }
+                RecipeController.shared.delete(recipe: recipe)
                 self.navigationController?.popViewController(animated: true)
             }
             let no = UIAlertAction(title: "No", style: .destructive, handler: nil)
@@ -97,9 +111,6 @@ class AddRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             cell.detailTextLabel?.text = ingredient.name
         }
         return cell
-        } else {
-            return cell
-        }
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

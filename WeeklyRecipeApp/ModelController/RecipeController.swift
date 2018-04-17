@@ -18,8 +18,8 @@ class RecipeController {
         return (try? CoreDataStack.context.fetch(request)) ?? []
     }
     
-    @discardableResult func addRecipeWith(title: String, ingredients: [Ingredient], directions: String) -> Recipe {
-        let recipe = Recipe(title: title, ingredients: ingredients, directions: directions)
+    @discardableResult func addRecipeWith(title: String, directions: String) -> Recipe {
+        let recipe = Recipe(title: title, ingredients: [], directions: directions)
         saveToPersistentStore()
         return recipe
     }
@@ -31,7 +31,7 @@ class RecipeController {
         }
     }
     
-    func update(recipe: Recipe, with title: String, ingredients: [Ingredient], directions: String) {
+    func update(recipe: Recipe, with title: String, directions: String) {
         recipe.title = title
         recipe.directions = directions
         saveToPersistentStore()
