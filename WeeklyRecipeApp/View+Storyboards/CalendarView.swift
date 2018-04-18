@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CalendarViewDelegate: class {
+    func calendarViewCellSelected(collectionView: UICollectionView, indexPath: IndexPath)
+}
+
 struct Colors {
     static var darkGray = #colorLiteral(red: 0.3764705882, green: 0.3647058824, blue: 0.3647058824, alpha: 1)
     static var green = UIColor.green
@@ -52,6 +56,10 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var presentYear = 0
     var todaysDate = 0
     var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
+    
+    var delegate: CalendarViewDelegate?
+    
+    var isSelected: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -131,16 +139,25 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell=collectionView.cellForItem(at: indexPath)
+        selectedCell = cell
         cell?.backgroundColor=Colors.green.withAlphaComponent(0.3)
         let lbl = cell?.subviews[1] as! UILabel
         lbl.textColor=UIColor.white
+        isSelected = true
     }
+    
+    var selectedCell: UICollectionViewCell?
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell=collectionView.cellForItem(at: indexPath)
-        cell?.backgroundColor=UIColor.clear
         let lbl = cell?.subviews[1] as! UILabel
         lbl.textColor = Style.activeCellLblColor
+        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) {
+            
+        } else {
+            cell?.backgroundColor=UIColor.clear
+        }
+        isSelected = false
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

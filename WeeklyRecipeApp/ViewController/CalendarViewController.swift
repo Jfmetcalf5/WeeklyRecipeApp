@@ -13,18 +13,21 @@ enum MyTheme {
     case dark
 }
 
-class CalendarViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
-
+class CalendarViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, CalendarViewDelegate {
+    
+    
     @IBOutlet weak var recipeTableView: UITableView!
     var theme = MyTheme.dark
     
+    var recipe: Recipe?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        calenderView.delegate = self
+        
         self.title = "My Calender"
         self.navigationController?.navigationBar.isTranslucent=false
         self.view.backgroundColor=Style.bgColor
-        
-        calenderView.myCollectionView.delegate = self
         
         recipeTableView.delegate = self
         recipeTableView.dataSource = self
@@ -40,6 +43,11 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         self.navigationItem.rightBarButtonItem = rightBarBtn
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        recipeTableView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5) {
@@ -47,6 +55,19 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        recipeTableView.alpha = 0
+    }
+    
+    func calendarViewCellSelected(collectionView: UICollectionView, indexPath: IndexPath) {
+        //        if let dayCell = calenderView.selectedCell {
+        //            if recipe != nil {
+        //                dayCell.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
+        //                calenderView.myCollectionView.reloadData()
+        //            }
+        //        }
+    }
     
     //MARK: - RecipeTableView Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,17 +84,28 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-        //        showTableView()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if calenderView.isSelected == true {
+            let alert = UIAlertController(title: "Confirm?", message: "Do you want to add a recipe to the \(calenderView.todaysDate)", preferredStyle: .alert)
+            
+            let yesAction = UIAlertAction(title: "Yes", style: .default) { (yes) in
+                
+                let recipe = RecipeController.shared.recipes[indexPath.row]
+//                self.performSegue(withIdentifier: "<#T##String#>", sender: indexPath)
+                
+                guard let dayCell = self.calenderView.selectedCell else { return }
+                dayCell.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
+            }
+            
+            let noAction = UIAlertAction(title: "No", style: .default) { (no) in
+                return
+            }
+            alert.addAction(yesAction)
+            alert.addAction(noAction)
+            
+            present(alert, animated: true, completion: nil)
+        }
     }
-    
-//    func showTableView() {
-//        UIView.animate(withDuration: 0.5) {
-//            self.recipeTableView.alpha = 1.0
-//        }
-//    }
-    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -95,15 +127,15 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         v.translatesAutoresizingMaskIntoConstraints=false
         return v
     }()
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
