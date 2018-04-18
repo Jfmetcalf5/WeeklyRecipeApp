@@ -13,6 +13,7 @@ class RecipeController {
     
     static let shared = RecipeController()
     
+
     var recipes: [Recipe] {
         let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         return (try? CoreDataStack.context.fetch(request)) ?? []

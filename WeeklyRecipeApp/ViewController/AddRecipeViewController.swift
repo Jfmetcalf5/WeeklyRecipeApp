@@ -37,7 +37,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         ingredientTextField.delegate = self
         directionsTextView.delegate = self
         
-        unitTextView.inputAccessoryView = unitPickerView
+        unitTextView.inputView = unitPickerView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,8 +72,9 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         }
     }
     
-    @IBAction func checkButtonTapped(_ sender: UIButton) {
-        guard let title = titleTextField.text, titleTextField.text != "",
+    
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+    guard let title = titleTextField.text, titleTextField.text != "",
             let directions = directionsTextView.text, directionsTextView.text != "" else { return }
         if let recipe = recipe {
             RecipeController.shared.update(recipe: recipe, with: title, directions: directions)

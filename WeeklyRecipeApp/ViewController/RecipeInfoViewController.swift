@@ -21,20 +21,30 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         ingredientsListTableView.delegate = self
         ingredientsListTableView.dataSource = self
         updateViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateViews()
         ingredientsListTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let ingredients = recipe?.ingredients?.array as? [Ingredient] {
+        guard let recipe = recipe else { return 0 }
+        if let ingredients = recipe.ingredients?.array as? [Ingredient] {
+            print("\(String(describing: recipe.title)) the row is \(ingredients.count)")
             return ingredients.count
         } else {
             return 0
         }
     }
     
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ingredientsListTableView.dequeueReusableCell(withIdentifier: "ingredientListCell", for: indexPath)
-        if let ingredients = recipe?.ingredients?.array as? [Ingredient] {
+        guard let recipe = recipe else { return UITableViewCell() }
+        if let ingredients = recipe.ingredients?.array as? [Ingredient] {
             let ingredient = ingredients[indexPath.row]
             cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
             cell.detailTextLabel?.text = ingredient.name
@@ -52,10 +62,12 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
     
     // MARK: - Navigation
     
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toEditRecipe" {
+            guard let detailVC = segue.destination as? AddRecipeViewController else { return }
+            guard let recipe = recipe else { return }
+            detailVC.recipe = recipe
+        }
     }
     
 }
