@@ -108,7 +108,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         if let recipe = recipe {
             guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { return UITableViewCell() }
             let ingredient = ingredients[indexPath.row]
-            cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "☹️")"
+            cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
             cell.detailTextLabel?.text = ingredient.name
         }
         return cell

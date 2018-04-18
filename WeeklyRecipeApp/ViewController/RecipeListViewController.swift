@@ -54,7 +54,7 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRecipeDetail" {
             guard let indexPath = recipeTableView.indexPathForSelectedRow,
-            let detailVC = segue.destination as? AddRecipeViewController else { return }
+            let detailVC = segue.destination as? RecipeInfoViewController else { return }
             let recipe = RecipeController.shared.recipes[indexPath.row]
             detailVC.recipe = recipe
         } else if segue.identifier == "toNewRecipe" {

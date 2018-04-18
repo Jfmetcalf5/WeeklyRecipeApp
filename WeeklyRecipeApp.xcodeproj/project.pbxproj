@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3B0AA89820858DA3007F94F9 /* RecipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */; };
+		3B0AD73220877F5500262C08 /* RecipeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0AD73120877F5500262C08 /* RecipeInfoViewController.swift */; };
 		3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B101A8E20868949003FD569 /* ShiftableViewController.swift */; };
 		3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5120850E9300EA5CCE /* AppDelegate.swift */; };
 		3B624C5720850E9300EA5CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5520850E9300EA5CCE /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewController.swift; sourceTree = "<group>"; };
+		3B0AD73120877F5500262C08 /* RecipeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInfoViewController.swift; sourceTree = "<group>"; };
 		3B101A8E20868949003FD569 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
 		3B624C4E20850E9300EA5CCE /* WeeklyRecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyRecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B624C5120850E9300EA5CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				3B624C76208521B600EA5CCE /* WelcomeViewController.swift */,
 				3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */,
 				3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */,
+				3B0AD73120877F5500262C08 /* RecipeInfoViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */,
 				3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */,
 				3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */,
+				3B0AD73220877F5500262C08 /* RecipeInfoViewController.swift in Sources */,
 				3B624C712085183300EA5CCE /* CoreDataStack.swift in Sources */,
 				3B624C7520851A3A00EA5CCE /* RecipeController.swift in Sources */,
 				3B624C77208521B600EA5CCE /* WelcomeViewController.swift in Sources */,
