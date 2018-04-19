@@ -140,13 +140,14 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? DateCVCell
         selectedDate = cell?.date
+        // This is empty.. look below and remember to delete the other comment :)
         cell?.backgroundColor=Colors.green.withAlphaComponent(0.3)
         guard let lbl = cell?.subviews[1] as? UILabel else { return }
         lbl.textColor=UIColor.white
         isSelected = true
     }
     
-    var selectedDate: Date?
+    var selectedDate: Date? // This is empty for some reason.... :(
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell=collectionView.cellForItem(at: indexPath)

@@ -101,8 +101,10 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         if calenderView.isSelected == true {
             if segue.identifier == "toCalendarRecipeList" {
                 guard let detailVC = segue.destination as? DayRecipeViewController else { return }
-                let selectedDay = calenderView.selectedDate
-                detailVC.selectedDay = selectedDay
+//                let day = DayController.shared.daysOfMonth
+//                let selectedDay = calenderView.selectedDate        This isnt even getting anything...
+                //// I need to find a way to get the selected "Day" to take to the seuge...
+                
             }
         } else {
             let alert = UIAlertController(title: "Missing", message: "Please select a date that you want to add a recipe too", preferredStyle: .alert)

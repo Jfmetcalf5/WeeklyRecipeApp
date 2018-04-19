@@ -36,8 +36,9 @@ class DayController {
         UserDefaults.standard.set(true, forKey: daysHaveBeenCreatedKey)
     }
     
+    var daysOfMonth: [Day] = []
+    
     func fetchDaysFor(month: Int, year: Int, lastDay: Int) {
-        //        var days: [Date] = []
         var firstDayOfMonth: Date?
         var lastDayOfMonth: Date?
         let firstComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: year, month: month, day: 1, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
@@ -55,7 +56,7 @@ class DayController {
         request.predicate = compound
         do {
             let days = (try CoreDataStack.context.fetch(request))
-            print(days.count)
+            daysOfMonth = days
         } catch let e {
             print("Error fetching Days from CoreData :\(e.localizedDescription)")
         }

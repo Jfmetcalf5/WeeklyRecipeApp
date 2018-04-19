@@ -9,7 +9,7 @@
 import UIKit
 
 class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var calendarRecipesTableView: UITableView!
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -60,12 +60,12 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAddRecipeToDay" {
             guard let indexPath = calendarRecipesTableView.indexPathForSelectedRow,
-            let detailVC = segue.destination as? CalendarViewController,
-            let date = selectedDay else { return }
-            let recipe = RecipeController.shared.recipes[indexPath.row]
-//            DayController.shared.add(recipe: recipe, to: date)
+                let detailVC = segue.destination as? CalendarViewController else { return }
+                let recipe = RecipeController.shared.recipes[indexPath.row]
+            let day = DayController.shared.daysOfMonth[indexPath.row]
+            DayController.shared.add(recipe: recipe, to: day)
             detailVC.recipe = recipe
         }
     }
-
+    
 }
