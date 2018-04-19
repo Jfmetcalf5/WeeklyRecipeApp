@@ -72,7 +72,7 @@ class MonthView: UIView {
     let lblName: UILabel = {
         let lbl=UILabel()
         lbl.text="Default Month Year text"
-        lbl.textColor = Style.monthViewLblColor
+        lbl.textColor = UIColor.black
         lbl.textAlignment = .center
         lbl.font=UIFont.boldSystemFont(ofSize: 16)
         lbl.translatesAutoresizingMaskIntoConstraints=false
@@ -82,7 +82,7 @@ class MonthView: UIView {
     let btnRight: UIButton = {
         let btn=UIButton()
         btn.setTitle(">", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
+        btn.setTitleColor(UIColor.black, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         return btn
@@ -91,7 +91,7 @@ class MonthView: UIView {
     let btnLeft: UIButton = {
         let btn=UIButton()
         btn.setTitle("<", for: .normal)
-        btn.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
+        btn.setTitleColor(UIColor.black, for: .normal)
         btn.translatesAutoresizingMaskIntoConstraints=false
         btn.addTarget(self, action: #selector(btnLeftRightAction(sender:)), for: .touchUpInside)
         btn.setTitleColor(UIColor.lightGray, for: .disabled)

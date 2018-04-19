@@ -15,7 +15,7 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var recipeNameLabel: UILabel!
     
-    var number: Int?
+    var selectedDay: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,13 +29,9 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         calendarRecipesTableView.reloadData()
     }
     
-    @IBAction func addRecipeToDayButtonTapped(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     func updateViews() {
-        guard let number = number else { return }
-        dateLabel.text = "\(number)"
+        guard let selectedDay = selectedDay else { return }
+        dateLabel.text = "\(selectedDay.day)"
     }
     
     //MARK: - RecipeTableView Functions
@@ -47,8 +43,8 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = calendarRecipesTableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
         let recipe = RecipeController.shared.recipes[indexPath.row]
         
-        cell.textLabel?.text = "\(String(describing: recipe.title))"
-        cell.detailTextLabel?.text = "\(String(describing: recipe.directions))"
+        cell.textLabel?.text = recipe.title
+        cell.detailTextLabel?.text = recipe.directions
         
         return cell
     }
@@ -64,8 +60,10 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toAddRecipeToDay" {
             guard let indexPath = calendarRecipesTableView.indexPathForSelectedRow,
-            let detailVC = segue.destination as? CalendarViewController else { return }
+            let detailVC = segue.destination as? CalendarViewController,
+            let date = selectedDay else { return }
             let recipe = RecipeController.shared.recipes[indexPath.row]
+//            DayController.shared.add(recipe: recipe, to: date)
             detailVC.recipe = recipe
         }
     }

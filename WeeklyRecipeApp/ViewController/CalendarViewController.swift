@@ -19,8 +19,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
     
     var theme = MyTheme.dark
     
-    @IBOutlet weak var addRecipeButton: UIButton!
-    
     var recipe: Recipe?
     
     override func viewDidLoad() {
@@ -34,15 +32,13 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.delegate = self
         dayRecipesTableView.dataSource = self
         dayRecipesTableView.alpha = 0
+        dayRecipesTableView.allowsSelection = false
         
         view.addSubview(calenderView)
         calenderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive=true
         calenderView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -12).isActive=true
         calenderView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 12).isActive=true
         calenderView.heightAnchor.constraint(equalToConstant: 365).isActive=true
-        
-        let rightBarBtn = UIBarButtonItem(title: "Light", style: .plain, target: self, action: #selector(rightBarBtnAction))
-        self.navigationItem.rightBarButtonItem = rightBarBtn
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,24 +58,19 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.alpha = 0
     }
     
-    @IBAction func addRecipeButtonTapped(_ sender: UIButton) {
-    }
-    //    func calendarViewCellSelected(collectionView: UICollectionView, indexPath: IndexPath) {
-    //        //        if let dayCell = calenderView.selectedCell {
-    //        //            if recipe != nil {
-    //        //                dayCell.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
-    //        //                calenderView.myCollectionView.reloadData()
-    //        //            }
-    //        //        }
-    //    }
-    
     //MARK: - RecipeTableView Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard recipe != nil else { return 0 }
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dayRecipesTableView.dequeueReusableCell(withIdentifier: "dayRecipeListCell", for: indexPath)
+        
+        guard let recipe = recipe else { return UITableViewCell() }
+        
+        cell.textLabel?.text = recipe.title
+        cell.detailTextLabel?.text = recipe.directions
         
         return cell
     }
@@ -110,8 +101,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         if calenderView.isSelected == true {
             if segue.identifier == "toCalendarRecipeList" {
                 guard let detailVC = segue.destination as? DayRecipeViewController else { return }
-                let number = calenderView.todaysDate
-                detailVC.number = number
+                let selectedDay = calenderView.selectedDate
+                detailVC.selectedDay = selectedDay
             }
         } else {
             let alert = UIAlertController(title: "Missing", message: "Please select a date that you want to add a recipe too", preferredStyle: .alert)

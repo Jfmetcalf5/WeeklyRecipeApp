@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 protocol CalendarViewDelegate: class {
     func calendarViewCellSelected(collectionView: UICollectionView, indexPath: IndexPath)
@@ -25,16 +26,6 @@ struct Style {
     static var activeCellLblColor = UIColor.white
     static var activeCellLblColorHighlighted = UIColor.black
     static var weekdaysLblColor = UIColor.white
-    
-    static func themeDark(){
-        bgColor = Colors.darkGray
-        monthViewLblColor = UIColor.white
-        monthViewBtnRightColor = UIColor.white
-        monthViewBtnLeftColor = UIColor.white
-        activeCellLblColor = UIColor.white
-        activeCellLblColorHighlighted = UIColor.black
-        weekdaysLblColor = UIColor.white
-    }
     
     static func themeLight(){
         bgColor = UIColor.white
@@ -56,6 +47,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var presentYear = 0
     var todaysDate = 0
     var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
+    var currentCalendarDates: [Date] = []
     
     var delegate: CalendarViewDelegate?
     
@@ -71,7 +63,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         self.init()
         
         if theme == .dark {
-            Style.themeDark()
+            Style.themeLight()
         } else {
             Style.themeLight()
         }
@@ -87,7 +79,8 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         monthView.btnLeft.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
         
         for i in 0..<7 {
-            (weekdaysView.myStackView.subviews[i] as! UILabel).textColor = Style.weekdaysLblColor
+            guard let label = (weekdaysView.myStackView.subviews[i] as? UILabel) else  { return }
+            label.textColor = Style.weekdaysLblColor
         }
     }
     
@@ -103,6 +96,9 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         }
         //end
         
+        //        createDatesFor(month: currentMonthIndex)
+        DayController.shared.fetchDaysFor(month: currentMonthIndex, year: currentYear, lastDay: (numOfDaysInMonth[currentMonthIndex - 1]) + 1)
+        
         presentMonthIndex=currentMonthIndex
         presentYear=currentYear
         
@@ -110,7 +106,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         
         myCollectionView.delegate=self
         myCollectionView.dataSource=self
-        myCollectionView.register(dateCVCell.self, forCellWithReuseIdentifier: "Cell")
+        myCollectionView.register(DateCVCell.self, forCellWithReuseIdentifier: "Cell")
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -118,14 +114,14 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! dateCVCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? DateCVCell else { return UICollectionViewCell() }
         cell.backgroundColor=UIColor.clear
         if indexPath.item <= firstWeekDayOfMonth - 2 {
             cell.isHidden=true
         } else {
             let calcDate = indexPath.row-firstWeekDayOfMonth+2
             cell.isHidden=false
-            cell.lbl.text="\(calcDate)"
+            cell.lbl.text = "\(calcDate)"
             if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
                 cell.isUserInteractionEnabled=false
                 cell.lbl.textColor = UIColor.lightGray
@@ -134,35 +130,35 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 cell.lbl.textColor = Style.activeCellLblColor
             }
         }
+        guard indexPath.row < currentCalendarDates.count else { return cell }
+        cell.date = currentCalendarDates[indexPath.row]
         return cell
     }
     
+    
+    //MARK: - CollectionViewDidSelect and DeselectItems
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell=collectionView.cellForItem(at: indexPath)
-        selectedCell = cell
+        let cell = collectionView.cellForItem(at: indexPath) as? DateCVCell
+        selectedDate = cell?.date
         cell?.backgroundColor=Colors.green.withAlphaComponent(0.3)
-        let lbl = cell?.subviews[1] as! UILabel
+        guard let lbl = cell?.subviews[1] as? UILabel else { return }
         lbl.textColor=UIColor.white
         isSelected = true
     }
     
-    var selectedCell: UICollectionViewCell?
+    var selectedDate: Date?
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell=collectionView.cellForItem(at: indexPath)
-        let lbl = cell?.subviews[1] as! UILabel
+        guard let lbl = cell?.subviews[1] as? UILabel else { return }
         lbl.textColor = Style.activeCellLblColor
-//        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) {
-        
-//        } else {
-            cell?.backgroundColor=UIColor.clear
-//        }
+        cell?.backgroundColor=UIColor.clear
         isSelected = false
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width/7 - 8
-        let height: CGFloat = 40
+        let height: CGFloat = 35
         return CGSize(width: width, height: height)
     }
     
@@ -175,7 +171,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func getFirstWeekDay() -> Int {
-        let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday)!
+        guard let day = ("\(currentYear)-\(currentMonthIndex)-01".date?.firstDayOfTheMonth.weekday) else { return 0 }
         //return day == 7 ? 1 : day
         return day
     }
@@ -192,7 +188,9 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 numOfDaysInMonth[monthIndex] = 28
             }
         }
-        //end
+        
+        //        createDatesFor(month: currentMonthIndex)
+        DayController.shared.fetchDaysFor(month: currentMonthIndex, year: currentYear, lastDay: (numOfDaysInMonth[currentMonthIndex - 1]) + 1)
         
         firstWeekDayOfMonth=getFirstWeekDay()
         
@@ -248,61 +246,5 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-class dateCVCell: UICollectionViewCell {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor=UIColor.clear
-        layer.cornerRadius=5
-        layer.masksToBounds=true
-        
-        setupViews()
-    }
-    
-    func setupViews() {
-        addSubview(lbl)
-        lbl.topAnchor.constraint(equalTo: topAnchor).isActive=true
-        lbl.leftAnchor.constraint(equalTo: leftAnchor).isActive=true
-        lbl.rightAnchor.constraint(equalTo: rightAnchor).isActive=true
-        lbl.bottomAnchor.constraint(equalTo: bottomAnchor).isActive=true
-    }
-    
-    let lbl: UILabel = {
-        let label = UILabel()
-        label.text = "00"
-        label.textAlignment = .center
-        label.font=UIFont.systemFont(ofSize: 16)
-        label.textColor=Colors.darkGray
-        label.translatesAutoresizingMaskIntoConstraints=false
-        return label
-    }()
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
-//get first day of the month
-extension Date {
-    var weekday: Int {
-        return Calendar.current.component(.weekday, from: self)
-    }
-    var firstDayOfTheMonth: Date {
-        return Calendar.current.date(from: Calendar.current.dateComponents([.year,.month], from: self))!
-    }
-}
-
-//get date from string
-extension String {
-    static var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
-    
-    var date: Date? {
-        return String.dateFormatter.date(from: self)
     }
 }
