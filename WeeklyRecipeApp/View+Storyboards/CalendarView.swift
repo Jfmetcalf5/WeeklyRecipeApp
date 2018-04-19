@@ -152,11 +152,11 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         let cell=collectionView.cellForItem(at: indexPath)
         let lbl = cell?.subviews[1] as! UILabel
         lbl.textColor = Style.activeCellLblColor
-        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) {
-            
-        } else {
+//        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) {
+        
+//        } else {
             cell?.backgroundColor=UIColor.clear
-        }
+//        }
         isSelected = false
     }
     

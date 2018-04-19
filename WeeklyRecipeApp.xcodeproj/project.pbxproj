@@ -27,6 +27,7 @@
 		3B624C77208521B600EA5CCE /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C76208521B600EA5CCE /* WelcomeViewController.swift */; };
 		3B624C79208557E900EA5CCE /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */; };
 		3B624C7B20855E4900EA5CCE /* IngredientController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C7A20855E4900EA5CCE /* IngredientController.swift */; };
+		3BD988D3208822ED00FE0D89 /* DayRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BD988D2208822ED00FE0D89 /* DayRecipeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		3B624C76208521B600EA5CCE /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		3B624C7A20855E4900EA5CCE /* IngredientController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientController.swift; sourceTree = "<group>"; };
+		3BD988D2208822ED00FE0D89 /* DayRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayRecipeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */,
 				3B0AD73120877F5500262C08 /* RecipeInfoViewController.swift */,
 				3B0A7E892087B204007C55CF /* CalendarViewController.swift */,
+				3BD988D2208822ED00FE0D89 /* DayRecipeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */,
 				3B0A7E882087B1DE007C55CF /* MonthView.swift in Sources */,
 				3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */,
+				3BD988D3208822ED00FE0D89 /* DayRecipeViewController.swift in Sources */,
 				3B0AD73220877F5500262C08 /* RecipeInfoViewController.swift in Sources */,
 				3B624C712085183300EA5CCE /* CoreDataStack.swift in Sources */,
 				3B624C7520851A3A00EA5CCE /* RecipeController.swift in Sources */,
