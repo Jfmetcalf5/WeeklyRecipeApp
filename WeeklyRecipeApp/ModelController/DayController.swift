@@ -57,6 +57,7 @@ class DayController {
         do {
             let days = (try CoreDataStack.context.fetch(request))
             daysOfMonth = days
+            print(daysOfMonth.compactMap({$0.date}))
         } catch let e {
             print("Error fetching Days from CoreData :\(e.localizedDescription)")
         }

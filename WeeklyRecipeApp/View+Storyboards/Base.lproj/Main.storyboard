@@ -47,8 +47,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Select"/>
                                 <connections>
-                                    <action selector="selectButtonTapped:" destination="80W-94-KW1" eventType="touchUpInside" id="YmI-MR-GsR"/>
-                                    <segue destination="Hyv-hz-PTf" kind="show" id="37S-zq-myY"/>
+                                    <segue destination="Hyv-hz-PTf" kind="show" identifier="toTheApp" id="37S-zq-myY"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R4M-ch-eQx">
@@ -223,7 +222,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="recipeTableView" destination="v0u-Dg-cZq" id="DGJ-Fw-MGj"/>
+                        <outlet property="recipeTableView" destination="v0u-Dg-cZq" id="m2t-MP-FFF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5a6-Pt-hXu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -728,7 +727,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="xIV-dL-mtM"/>
         <segue reference="o2Z-Ze-W3Q"/>
-        <segue reference="kyJ-EX-JRe"/>
+        <segue reference="pGu-lJ-kzd"/>
     </inferredMetricsTieBreakers>
 </document>

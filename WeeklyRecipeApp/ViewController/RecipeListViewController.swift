@@ -17,7 +17,6 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         recipeTableView.delegate = self
         recipeTableView.dataSource = self
-        recipeTableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

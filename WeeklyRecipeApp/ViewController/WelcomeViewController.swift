@@ -10,12 +10,23 @@ import UIKit
 
 class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    private let dayWasSelectedKey = "DayWasSelected"
+    
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var selectButton: UIButton!
     
     
     let weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    var week: String = ""
+    var weekDay: String?
+    
+    //    override func viewWillAppear(_ animated: Bool) {
+    //        super.viewWillAppear(animated)
+    ////        guard UserDefaults.standard.bool(forKey: dayWasSelectedKey) == false else {
+    //            print("Find some way to present the next view controller")
+    //            //            guard let recipeController = UIViewController() as? RecipeListViewController else { return }
+    //            //                        present(recipeController, animated: true, completion: nil)
+    //            //            return }
+    //        }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,21 +48,15 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        // I NEED TO SAVE THE DAY OF THE WEEK THAT THE USER TAPPED...
-        //-----------------------------------------------------------
+        let weekDay = weeks[row]
+        self.weekDay = weekDay
+        saveSelectedDay()
     }
     
-    
-    @IBAction func selectButtonTapped(_ sender: UIButton) {
-        // I NEED TO SAVE THE DAY OF THE WEEK THAT THE USER TAPPED...
-        //-----------------------------------------------------------
+    func saveSelectedDay() {
+        guard let _ = weekDay else { return }
+        UserDefaults.standard.setValue(true, forKey: dayWasSelectedKey)
     }
-    
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // DO I NEED TO HAVE A DEGUE HERE??
-        //-----------------------------------------------------------
-    }
-
 }
+
+
