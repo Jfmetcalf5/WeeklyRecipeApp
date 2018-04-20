@@ -15,11 +15,10 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var recipeNameLabel: UILabel!
     
-    var selectedDay: Date?
+    var day: Day?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateViews()
         calendarRecipesTableView.delegate = self
         calendarRecipesTableView.dataSource = self
     }
@@ -27,11 +26,6 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         calendarRecipesTableView.reloadData()
-    }
-    
-    func updateViews() {
-        guard let selectedDay = selectedDay else { return }
-        dateLabel.text = "\(selectedDay.day)"
     }
     
     //MARK: - RecipeTableView Functions
@@ -58,13 +52,19 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if recipeNameLabel.text == "(Recipe Name)" {
+            let alert = UIAlertController(title: "Recipe Needed", message: "Please select a recipe from the list before you precc 'Add Recipe'", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(okayAction)
+            return
+        }
         if segue.identifier == "toAddRecipeToDay" {
             guard let indexPath = calendarRecipesTableView.indexPathForSelectedRow,
-                let detailVC = segue.destination as? CalendarViewController else { return }
+                let detailVC = segue.destination as? CalendarViewController,
+            let day = day else { return }
                 let recipe = RecipeController.shared.recipes[indexPath.row]
-            let day = DayController.shared.daysOfMonth[indexPath.row]
-            DayController.shared.add(recipe: recipe, to: day)
-            detailVC.recipe = recipe
+            RecipeController.shared.add(recipe: recipe, to: day)
+            detailVC.recipes.append(recipe)
         }
     }
     

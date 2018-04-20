@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 protocol CalendarViewDelegate: class {
-    func calendarViewCellSelected(collectionView: UICollectionView, indexPath: IndexPath)
+    func dayCellWasSelected(day: Day)
 }
 
 struct Colors {
@@ -49,7 +49,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
     var currentCalendarDates: [Date] = []
     
-    var delegate: CalendarViewDelegate?
+    weak var delegate: CalendarViewDelegate?
     
     var isSelected: Bool = false
     
@@ -117,25 +117,24 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? DateCVCell else { return UICollectionViewCell() }
-        let day = DayController.shared.daysOfMonth[indexPath.row]
-        print(day.date)
         cell.backgroundColor = UIColor.clear
         if indexPath.item <= firstWeekDayOfMonth - 2 {
             cell.isHidden = true
         } else {
-            let calcDate = indexPath.row-firstWeekDayOfMonth+2
+            let calcDate = indexPath.item - firstWeekDayOfMonth + 2
             cell.isHidden = false
             cell.lbl.text = "\(calcDate)"
+            
             if calcDate < todaysDate && currentYear == presentYear && currentMonthIndex == presentMonthIndex {
                 cell.isUserInteractionEnabled = false
                 cell.lbl.textColor = UIColor.lightGray
             } else {
+                let day = DayController.shared.daysOfMonth[indexPath.item]
+                cell.day = day
                 cell.isUserInteractionEnabled = true
                 cell.lbl.textColor = Style.activeCellLblColor
             }
         }
-        guard indexPath.row < currentCalendarDates.count else { return cell }
-        cell.date = currentCalendarDates[indexPath.row]
         return cell
     }
     
@@ -143,15 +142,14 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     //MARK: - CollectionViewDidSelect and DeselectItems
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? DateCVCell
-        selectedDate = cell?.date
-        // This is empty.. look below and remember to delete the other comment :)
+        if let day = cell?.day {
+        delegate?.dayCellWasSelected(day: day)
+        }
         cell?.backgroundColor = Colors.green.withAlphaComponent(0.3)
         guard let lbl = cell?.subviews[1] as? UILabel else { return }
         lbl.textColor = UIColor.white
         isSelected = true
     }
-    
-    var selectedDate: Date? // This is empty for some reason.... :(
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath)
@@ -182,7 +180,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func didChangeMonth(monthIndex: Int, year: Int) {
-        currentMonthIndex = monthIndex+1
+        currentMonthIndex = monthIndex + 1
         currentYear = year
         
         //for leap year, make february month of 29 days

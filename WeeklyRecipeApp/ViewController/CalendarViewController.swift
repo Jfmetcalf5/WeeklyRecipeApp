@@ -13,13 +13,13 @@ enum MyTheme {
     case dark
 }
 
-class CalendarViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource/*, CalendarViewDelegate*/ {
+class CalendarViewController: UIViewController, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, CalendarViewDelegate {
     
     @IBOutlet weak var dayRecipesTableView: UITableView!
     
     var theme = MyTheme.dark
     
-    var recipe: Recipe?
+    var recipes: [Recipe] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,8 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.dataSource = self
         dayRecipesTableView.alpha = 0
         dayRecipesTableView.allowsSelection = false
+        
+        calenderView.delegate = self
         
         view.addSubview(calenderView)
         calenderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive=true
@@ -58,16 +60,24 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.alpha = 0
     }
     
+    private var selectedDay: Day?
+    func dayCellWasSelected(day: Day) {
+        let day = day
+        selectedDay = day
+        let recipes = DayController.shared.fetchRecipesFrom(day: day)
+        self.recipes = recipes
+        dayRecipesTableView.reloadData()
+    }
+    
     //MARK: - RecipeTableView Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard recipe != nil else { return 0 }
-        return 1
+        return recipes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dayRecipesTableView.dequeueReusableCell(withIdentifier: "dayRecipeListCell", for: indexPath)
         
-        guard let recipe = recipe else { return UITableViewCell() }
+        let recipe = recipes[indexPath.row]
         
         cell.textLabel?.text = recipe.title
         cell.detailTextLabel?.text = recipe.directions
@@ -101,14 +111,12 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         if calenderView.isSelected == true {
             if segue.identifier == "toCalendarRecipeList" {
                 guard let detailVC = segue.destination as? DayRecipeViewController else { return }
-//                let day = DayController.shared.daysOfMonth
-//                let selectedDay = calenderView.selectedDate        This isnt even getting anything...
-                //// I need to find a way to get the selected "Day" to take to the seuge...
-                
+                let selectedDay = self.selectedDay
+                detailVC.day = selectedDay
             }
         } else {
             let alert = UIAlertController(title: "Missing", message: "Please select a date that you want to add a recipe too", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         }

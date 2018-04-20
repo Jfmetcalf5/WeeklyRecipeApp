@@ -15,18 +15,22 @@ class DayController {
     
     private let daysHaveBeenCreatedKey = "DaysHaveBeenCreated"
     
-    @discardableResult func add(recipe: Recipe, to day: Day) -> Recipe {
-        day.addToRecipes(recipe)
-        saveToPersistentStore()
-        return recipe
-    }
+//    @discardableResult func add(recipe: Recipe, to day: Day) -> Recipe {
+//        day.addToRecipes(recipe)
+//        saveToPersistentStore()
+//        return recipe
+//    }
     
     func createDaysForTenYears() {
         guard UserDefaults.standard.bool(forKey: daysHaveBeenCreatedKey) == false else { return }
         var dates: [Date] = []
         
+        let firstComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2018, month: 4, day: 1, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+
+        guard let firstDayOfMonth = Calendar.current.date(from: firstComponents) else { return }
+
         for i in 0...3650 {
-            guard let date = Calendar.current.date(byAdding: .day, value: i, to: Date()) else { continue }
+            guard let date = Calendar.current.date(byAdding: .day, value: i, to: firstDayOfMonth) else { continue }
             dates.append(date)
         }
         for date in dates {
@@ -34,6 +38,21 @@ class DayController {
         }
         saveToPersistentStore()
         UserDefaults.standard.set(true, forKey: daysHaveBeenCreatedKey)
+    }
+    
+    func fetchRecipesFrom(day: Day) -> [Recipe] {
+        
+        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        
+        let predicate = NSPredicate(format: "%@ in days", day)
+        request.predicate = predicate
+        do {
+            let recipes = (try CoreDataStack.context.fetch(request))
+            return recipes
+        } catch let e {
+            print("Error fetching Days from CoreData :\(e.localizedDescription)")
+            return []
+        }
     }
     
     var daysOfMonth: [Day] = []
@@ -53,11 +72,12 @@ class DayController {
         let predicate1 = NSPredicate(format: "date >= %@", firstDay as NSDate)
         let predicate2 = NSPredicate(format: "date <= %@", lastDay as NSDate)
         let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
+        let sortDesciptor = NSSortDescriptor(key: "date", ascending: true)
         request.predicate = compound
+        request.sortDescriptors = [sortDesciptor]
         do {
             let days = (try CoreDataStack.context.fetch(request))
             daysOfMonth = days
-            print(daysOfMonth.compactMap({$0.date}))
         } catch let e {
             print("Error fetching Days from CoreData :\(e.localizedDescription)")
         }

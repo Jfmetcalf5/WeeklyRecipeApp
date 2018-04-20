@@ -10,7 +10,7 @@ import UIKit
 
 class DateCVCell: UICollectionViewCell {
     
-    var date: Date?
+    var day: Day?
     
     override init(frame: CGRect) {
         super.init(frame: frame)

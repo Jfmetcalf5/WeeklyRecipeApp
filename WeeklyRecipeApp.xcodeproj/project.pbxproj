@@ -125,8 +125,8 @@
 		3B624C6820850FBF00EA5CCE /* ModelController */ = {
 			isa = PBXGroup;
 			children = (
-				3B624C7420851A3A00EA5CCE /* RecipeController.swift */,
 				3B624C7A20855E4900EA5CCE /* IngredientController.swift */,
+				3B624C7420851A3A00EA5CCE /* RecipeController.swift */,
 				3B0F17CA2088F1A8007B3879 /* DayController.swift */,
 			);
 			path = ModelController;

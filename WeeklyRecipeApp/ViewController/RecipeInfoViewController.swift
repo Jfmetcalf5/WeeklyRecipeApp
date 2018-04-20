@@ -32,7 +32,6 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let recipe = recipe else { return 0 }
         if let ingredients = recipe.ingredients?.array as? [Ingredient] {
-            print("\(String(describing: recipe.title)) the row is \(ingredients.count)")
             return ingredients.count
         } else {
             return 0
