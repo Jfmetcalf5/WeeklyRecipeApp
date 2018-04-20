@@ -38,7 +38,7 @@ struct Style {
     }
 }
 
-class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MonthViewDelegate {
+class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MonthViewDelegate, CalendarViewControllerDelegate {
     
     var numOfDaysInMonth = [31,28,31,30,31,30,31,31,30,31,30,31]
     var currentMonthIndex: Int = 0
@@ -48,41 +48,22 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     var todaysDate = 0
     var firstWeekDayOfMonth = 0   //(Sunday-Saturday 1-7)
     var currentCalendarDates: [Date] = []
+    weak var parentVC: CalendarViewController!
     
-    weak var delegate: CalendarViewDelegate?
+    weak var delegate: CalendarViewController?
     
     var isSelected: Bool = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         initializeView()
-        
     }
     
-    convenience init(theme: MyTheme) {
+    convenience init(theme: MyTheme, parentVC: CalendarViewController) {
         self.init()
-        
-        if theme == .dark {
-            Style.themeLight()
-        } else {
-            Style.themeLight()
-        }
-        
+        Style.themeLight()
+        self.parentVC = parentVC
         initializeView()
-    }
-    
-    func changeTheme() {
-        myCollectionView.reloadData()
-        
-        monthView.lblName.textColor = Style.monthViewLblColor
-        monthView.btnRight.setTitleColor(Style.monthViewBtnRightColor, for: .normal)
-        monthView.btnLeft.setTitleColor(Style.monthViewBtnLeftColor, for: .normal)
-        
-        for i in 0..<7 {
-            guard let label = (weekdaysView.myStackView.subviews[i] as? UILabel) else  { return }
-            label.textColor = Style.weekdaysLblColor
-        }
     }
     
     func initializeView() {
@@ -97,8 +78,6 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         }
         //end
         
-        //        createDatesFor(month: currentMonthIndex)
-        
         presentMonthIndex = currentMonthIndex
         presentYear = currentYear
         
@@ -109,6 +88,9 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         myCollectionView.register(DateCVCell.self, forCellWithReuseIdentifier: "Cell")
         
         DayController.shared.fetchDaysFor(month: currentMonthIndex, year: currentYear, lastDay: numOfDaysInMonth[currentMonthIndex - 1])
+        
+        guard parentVC != nil else { return }
+        self.parentVC.delegate = self
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -129,8 +111,16 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 cell.isUserInteractionEnabled = false
                 cell.lbl.textColor = UIColor.lightGray
             } else {
-                let day = DayController.shared.daysOfMonth[indexPath.item]
-                cell.day = day
+                if indexPath.item < DayController.shared.daysOfMonth.count {
+                    let day = DayController.shared.daysOfMonth[indexPath.item]
+                    cell.day = day
+                } else {
+                    let day = DayController.shared.daysOfMonth[indexPath.row - 12]
+                    cell.day = day
+                }
+                if cell.day?.recipes?.count != 0 {
+                    cell.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
+                }
                 cell.isUserInteractionEnabled = true
                 cell.lbl.textColor = Style.activeCellLblColor
             }
@@ -138,16 +128,24 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         return cell
     }
     
-    
     //MARK: - CollectionViewDidSelect and DeselectItems
+    var dayCellSelectedHasNoMoreRecipes: DateCVCell?
+    var dayCellLabelToFollow: UILabel?
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? DateCVCell
-        if let day = cell?.day {
-        delegate?.dayCellWasSelected(day: day)
-        }
-        cell?.backgroundColor = Colors.green.withAlphaComponent(0.3)
         guard let lbl = cell?.subviews[1] as? UILabel else { return }
+        dayCellLabelToFollow = lbl
         lbl.textColor = UIColor.white
+        if let day = cell?.day {
+            dayCellSelectedHasNoMoreRecipes = cell
+            delegate?.dayCellWasSelected(day: day)
+        }
+        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) {
+            cell?.backgroundColor = UIColor.orange.withAlphaComponent(0.7)
+        } else {
+            cell?.backgroundColor = Colors.green.withAlphaComponent(0.7)
+        }
         isSelected = true
     }
     
@@ -155,9 +153,19 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         let cell = collectionView.cellForItem(at: indexPath)
         guard let lbl = cell?.subviews[1] as? UILabel else { return }
         lbl.textColor = Style.activeCellLblColor
-        cell?.backgroundColor = UIColor.clear
+        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.7) {
+            cell?.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
+        } else {
+            cell?.backgroundColor = UIColor.clear
+        }
         isSelected = false
     }
+    
+    func recipeHasBeenDeletedOn(day: Day) {
+        dayCellSelectedHasNoMoreRecipes?.backgroundColor = UIColor.clear
+        dayCellLabelToFollow?.textColor = UIColor.black
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width/7 - 8

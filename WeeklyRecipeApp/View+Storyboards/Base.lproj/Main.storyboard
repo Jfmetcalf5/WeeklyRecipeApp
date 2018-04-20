@@ -212,9 +212,9 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="2Kr-DJ-Jd2">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VbW-5T-keK">
-                                <rect key="frame" x="281" y="7" width="78" height="30"/>
+                                <rect key="frame" x="262" y="7" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Recipe"/>
+                                <state key="normal" title="Create Recipe"/>
                                 <connections>
                                     <segue destination="Jd2-op-0zD" kind="show" identifier="toNewRecipe" id="pGu-lJ-kzd"/>
                                 </connections>
@@ -497,7 +497,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DZR-NP-lUg">
                                 <rect key="frame" x="281" y="7" width="78" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add Recipe"/>
+                                <state key="normal" title="Select A Recipe"/>
                                 <connections>
                                     <segue destination="Obq-bJ-TYP" kind="show" identifier="toCalendarRecipeList" id="xIV-dL-mtM"/>
                                 </connections>

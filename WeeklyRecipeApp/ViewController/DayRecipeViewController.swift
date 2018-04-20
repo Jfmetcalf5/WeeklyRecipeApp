@@ -64,7 +64,6 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
             let day = day else { return }
                 let recipe = RecipeController.shared.recipes[indexPath.row]
             RecipeController.shared.add(recipe: recipe, to: day)
-            detailVC.recipes.append(recipe)
         }
     }
     

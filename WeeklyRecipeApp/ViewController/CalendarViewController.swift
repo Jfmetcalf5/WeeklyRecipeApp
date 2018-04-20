@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CalendarViewControllerDelegate: class {
+    func recipeHasBeenDeletedOn(day: Day)
+}
+
 enum MyTheme {
     case light
     case dark
@@ -19,12 +23,15 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
     
     var theme = MyTheme.dark
     
-    var recipes: [Recipe] = []
+    private var selectedDay: Day?
+    
+    weak var delegate: CalendarViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //        calenderView.delegate = self
         
+        setupCalendarView()
         self.title = "My Calender"
         self.navigationController?.navigationBar.isTranslucent=false
         self.view.backgroundColor=Style.bgColor
@@ -32,7 +39,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.delegate = self
         dayRecipesTableView.dataSource = self
         dayRecipesTableView.alpha = 0
-//        dayRecipesTableView.allowsSelection = false
+        //        dayRecipesTableView.allowsSelection = false
         
         calenderView.delegate = self
         
@@ -60,61 +67,58 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.alpha = 0
     }
     
-    private var selectedDay: Day?
     func dayCellWasSelected(day: Day) {
         let day = day
         selectedDay = day
-        let recipes = DayController.shared.fetchRecipesFrom(day: day)
-        self.recipes = recipes
         dayRecipesTableView.reloadData()
     }
     
     //MARK: - RecipeTableView Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipes.count
+        return selectedDay?.recipes?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = dayRecipesTableView.dequeueReusableCell(withIdentifier: "dayRecipeListCell", for: indexPath)
         
-        let recipe = recipes[indexPath.row]
+        let recipe = selectedDay?.recipes?.object(at: indexPath.row) as? Recipe
         
-        cell.textLabel?.text = recipe.title
-        cell.detailTextLabel?.text = recipe.directions
+        cell.textLabel?.text = recipe?.title
+        cell.detailTextLabel?.text = recipe?.directions
         
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            let recipe = recipes[indexPath.row]
-//            
-//            RecipeController.shared.delete(recipe: recipe)
-//            
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//        }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            guard let daysRecipes = selectedDay?.recipes?.array as? [Recipe],
+                let day = selectedDay else { return }
+            
+            let recipeToDelete = daysRecipes[indexPath.row]
+            
+            RecipeController.shared.remove(recipe: recipeToDelete, from: day)
+            
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            if day.recipes?.count == 0 {
+            delegate?.recipeHasBeenDeletedOn(day: day)
+            }
+        }
+    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         calenderView.myCollectionView.collectionViewLayout.invalidateLayout()
     }
     
-    @objc func rightBarBtnAction(sender: UIBarButtonItem) {
-        if theme == .dark {
-            sender.title = "Dark"
-            theme = .light
-            Style.themeLight()
-        }
-        self.view.backgroundColor=Style.bgColor
-        calenderView.changeTheme()
-    }
+    var calenderView: CalenderView!
     
-    let calenderView: CalenderView = {
-        let v=CalenderView(theme: MyTheme.light)
+    func setupCalendarView() {
+        let v = CalenderView(theme: MyTheme.light, parentVC: self)
         v.translatesAutoresizingMaskIntoConstraints=false
-        return v
-    }()
+        self.calenderView = v
+    }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
