@@ -19,9 +19,11 @@ class RecipeController {
         return (try? CoreDataStack.context.fetch(request)) ?? []
     }
     
+    
+    
     @discardableResult func add(recipe: Recipe, to day: Day) -> Recipe {
-        day.recipes = [recipe]
-        recipe.days = [day]
+        day.addToRecipes(recipe)
+        recipe.addToDays(day)
         saveToPersistentStore()
         return recipe
     }

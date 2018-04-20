@@ -32,7 +32,7 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.delegate = self
         dayRecipesTableView.dataSource = self
         dayRecipesTableView.alpha = 0
-        dayRecipesTableView.allowsSelection = false
+//        dayRecipesTableView.allowsSelection = false
         
         calenderView.delegate = self
         
@@ -84,6 +84,16 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         
         return cell
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            let recipe = recipes[indexPath.row]
+//            
+//            RecipeController.shared.delete(recipe: recipe)
+//            
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//        }
+//    }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
