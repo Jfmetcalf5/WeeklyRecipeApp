@@ -12,7 +12,7 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var ingredientsListTableView: UITableView!
-    @IBOutlet weak var directionsLabel: UILabel!
+    @IBOutlet weak var directionsTextView: UITextView!
     
     var recipe: Recipe?
     
@@ -55,7 +55,7 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
     func updateViews() {
         guard let recipe = recipe else { return }
         titleLabel.text = recipe.title
-        directionsLabel.text = recipe.directions
+        directionsTextView.text = recipe.directions
     }
     
     
