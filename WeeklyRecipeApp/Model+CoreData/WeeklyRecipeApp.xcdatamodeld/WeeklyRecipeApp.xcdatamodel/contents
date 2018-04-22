@@ -16,9 +16,13 @@
         <relationship name="days" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Day" inverseName="recipes" inverseEntity="Day" syncable="YES"/>
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Ingredient" inverseName="recipies" inverseEntity="Ingredient" syncable="YES"/>
     </entity>
+    <entity name="WeekSelected" representedClassName="WeekSelected" syncable="YES" codeGenerationType="class">
+        <attribute name="week" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Day" positionX="-216" positionY="54" width="128" height="75"/>
         <element name="Ingredient" positionX="-54" positionY="18" width="128" height="105"/>
         <element name="Recipe" positionX="-378" positionY="21" width="128" height="105"/>
+        <element name="WeekSelected" positionX="-216" positionY="63" width="128" height="60"/>
     </elements>
 </model>

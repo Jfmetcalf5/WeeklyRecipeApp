@@ -15,12 +15,6 @@ class DayController {
     
     private let daysHaveBeenCreatedKey = "DaysHaveBeenCreated"
     
-//    @discardableResult func add(recipe: Recipe, to day: Day) -> Recipe {
-//        day.addToRecipes(recipe)
-//        saveToPersistentStore()
-//        return recipe
-//    }
-    
     func createDaysForTenYears() {
         guard UserDefaults.standard.bool(forKey: daysHaveBeenCreatedKey) == false else { return }
         var dates: [Date] = []

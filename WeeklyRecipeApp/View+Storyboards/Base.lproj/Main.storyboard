@@ -56,9 +56,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Wednesday)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCy-Hd-ZVe">
+                                <rect key="frame" x="101" y="315.5" width="173" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uo-Ov-lG4">
+                                <rect key="frame" x="16" y="60" width="84" height="30"/>
+                                <state key="normal" title="Change Day"/>
+                                <connections>
+                                    <action selector="changeDayButtonTapped:" destination="80W-94-KW1" eventType="touchUpInside" id="gQU-Ah-5xC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="fCy-Hd-ZVe" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="APh-4V-Rjd"/>
+                            <constraint firstItem="9Uo-Ov-lG4" firstAttribute="leading" secondItem="lke-yd-6D9" secondAttribute="leading" constant="16" id="Ht9-m6-I5b"/>
                             <constraint firstItem="R4M-ch-eQx" firstAttribute="top" secondItem="lke-yd-6D9" secondAttribute="top" constant="40" id="J1V-Zl-e3i"/>
                             <constraint firstItem="YNJ-uJ-8rp" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="QLV-Xh-ILp"/>
                             <constraint firstItem="R4M-ch-eQx" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="RO9-fH-ddm"/>
@@ -67,12 +82,17 @@
                             <constraint firstItem="DPU-7l-Mm5" firstAttribute="top" secondItem="R4M-ch-eQx" secondAttribute="bottom" constant="46" id="dDM-36-41n"/>
                             <constraint firstItem="Ces-4j-YG0" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="hAf-uz-w8K"/>
                             <constraint firstItem="DPU-7l-Mm5" firstAttribute="centerX" secondItem="UcZ-kg-l8L" secondAttribute="centerX" id="hg3-Sh-7SF"/>
+                            <constraint firstItem="fCy-Hd-ZVe" firstAttribute="centerY" secondItem="UcZ-kg-l8L" secondAttribute="centerY" id="mXD-tY-sz5"/>
                             <constraint firstItem="Ces-4j-YG0" firstAttribute="centerY" secondItem="UcZ-kg-l8L" secondAttribute="centerY" id="qI6-bW-02r"/>
+                            <constraint firstItem="9Uo-Ov-lG4" firstAttribute="top" secondItem="lke-yd-6D9" secondAttribute="top" constant="40" id="vxK-8s-JXK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lke-yd-6D9"/>
                     </view>
                     <navigationItem key="navigationItem" id="bU6-J6-pdu"/>
                     <connections>
+                        <outlet property="WeekDaySelected" destination="fCy-Hd-ZVe" id="nWB-FA-jpF"/>
+                        <outlet property="changeDayButton" destination="9Uo-Ov-lG4" id="3w7-g9-gdJ"/>
+                        <outlet property="descriptionLabel" destination="DPU-7l-Mm5" id="boV-sj-9x5"/>
                         <outlet property="pickerView" destination="Ces-4j-YG0" id="aNt-3u-Zm3"/>
                         <outlet property="selectButton" destination="YNJ-uJ-8rp" id="Mrk-xE-fLe"/>
                     </connections>
@@ -181,7 +201,7 @@
         <!--Recipe List View Controller-->
         <scene sceneID="L5d-T1-rkh">
             <objects>
-                <viewController id="gMR-dA-VvG" customClass="RecipeListViewController" customModule="WeeklyRecipeApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="RecipeListViewController" storyboardIdentifier="RecipeListViewController" id="gMR-dA-VvG" customClass="RecipeListViewController" customModule="WeeklyRecipeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CnQ-kn-BRt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -753,6 +773,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="o2Z-Ze-W3Q"/>
-        <segue reference="kyJ-EX-JRe"/>
+        <segue reference="pGu-lJ-kzd"/>
     </inferredMetricsTieBreakers>
 </document>

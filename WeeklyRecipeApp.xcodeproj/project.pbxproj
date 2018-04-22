@@ -18,6 +18,8 @@
 		3B0F17C92088F0CB007B3879 /* Day+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F17C82088F0CB007B3879 /* Day+Convenience.swift */; };
 		3B0F17CB2088F1A8007B3879 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F17CA2088F1A8007B3879 /* DayController.swift */; };
 		3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B101A8E20868949003FD569 /* ShiftableViewController.swift */; };
+		3B2CB193208BEF40008DD137 /* WeekSelected+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CB192208BEF40008DD137 /* WeekSelected+Convenience.swift */; };
+		3B2CB195208BEFC8008DD137 /* WeekSelected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CB194208BEFC8008DD137 /* WeekSelected.swift */; };
 		3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5120850E9300EA5CCE /* AppDelegate.swift */; };
 		3B624C5720850E9300EA5CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5520850E9300EA5CCE /* Main.storyboard */; };
 		3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */; };
@@ -45,6 +47,8 @@
 		3B0F17C82088F0CB007B3879 /* Day+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+Convenience.swift"; sourceTree = "<group>"; };
 		3B0F17CA2088F1A8007B3879 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
 		3B101A8E20868949003FD569 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
+		3B2CB192208BEF40008DD137 /* WeekSelected+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekSelected+Convenience.swift"; sourceTree = "<group>"; };
+		3B2CB194208BEFC8008DD137 /* WeekSelected.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSelected.swift; sourceTree = "<group>"; };
 		3B624C4E20850E9300EA5CCE /* WeeklyRecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyRecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B624C5120850E9300EA5CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B624C5620850E9300EA5CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 				3B624C7A20855E4900EA5CCE /* IngredientController.swift */,
 				3B624C7420851A3A00EA5CCE /* RecipeController.swift */,
 				3B0F17CA2088F1A8007B3879 /* DayController.swift */,
+				3B2CB194208BEFC8008DD137 /* WeekSelected.swift */,
 			);
 			path = ModelController;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 				3B624C6E208517DA00EA5CCE /* Recipe+Convenience.swift */,
 				3B624C722085187600EA5CCE /* Ingredient+Convenience.swift */,
 				3B0F17C82088F0CB007B3879 /* Day+Convenience.swift */,
+				3B2CB192208BEF40008DD137 /* WeekSelected+Convenience.swift */,
 			);
 			path = "Model+CoreData";
 			sourceTree = "<group>";
@@ -248,8 +254,10 @@
 				3B0A7E8A2087B204007C55CF /* CalendarViewController.swift in Sources */,
 				3B0A7E842087B193007C55CF /* CalendarView.swift in Sources */,
 				3B624C7B20855E4900EA5CCE /* IngredientController.swift in Sources */,
+				3B2CB193208BEF40008DD137 /* WeekSelected+Convenience.swift in Sources */,
 				3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */,
 				3B0F17CB2088F1A8007B3879 /* DayController.swift in Sources */,
+				3B2CB195208BEFC8008DD137 /* WeekSelected.swift in Sources */,
 				3B0F17C52088EA98007B3879 /* DateCVCell.swift in Sources */,
 				3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */,
 				3B0A7E882087B1DE007C55CF /* MonthView.swift in Sources */,
