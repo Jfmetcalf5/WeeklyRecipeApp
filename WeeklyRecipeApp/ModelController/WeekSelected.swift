@@ -23,6 +23,7 @@ class WeekSelectedController {
             let weekSelected = (try CoreDataStack.context.fetch(request))
             for week in weekSelected {
                 tempWeekSelected = week
+                print(week.week)
                 return week
             }
         } catch let e {

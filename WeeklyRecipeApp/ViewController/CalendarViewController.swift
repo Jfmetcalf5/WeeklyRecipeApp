@@ -39,7 +39,6 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         dayRecipesTableView.delegate = self
         dayRecipesTableView.dataSource = self
         dayRecipesTableView.alpha = 0
-        //        dayRecipesTableView.allowsSelection = false
         
         calenderView.delegate = self
         
@@ -65,6 +64,20 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         dayRecipesTableView.alpha = 0
+    }
+    
+    @IBAction func changeDayButtonTapped(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Switch Day?", message: "Are you sure you would like to switch the days?  It will erase your current day!", preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .default) { (yes) in
+            self.performSegue(withIdentifier: "toChangeDay", sender: self)
+        }
+        let noAction = UIAlertAction(title: "No", style: .cancel) { (no) in
+            print("They'd rather not change days... 😬")
+        }
+        alert.addAction(yesAction)
+        alert.addAction(noAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     func dayCellWasSelected(day: Day) {
@@ -128,6 +141,9 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
                 let selectedDay = self.selectedDay
                 detailVC.day = selectedDay
             }
+        } else if segue.identifier == "toChangeDay" {
+                guard let detailVC = segue.destination as? WelcomeViewController else { return }
+                detailVC.weekDay = ""
         } else {
             let alert = UIAlertController(title: "Missing", message: "Please select a date that you want to add a recipe too", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "Okay", style: .default, handler: nil)

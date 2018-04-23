@@ -10,14 +10,13 @@ import UIKit
 
 class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    
     private let dayWasSelectedKey = "DayWasSelected"
     
-    @IBOutlet weak var changeDayButton: UIButton!
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var selectButton: UIButton!
-    @IBOutlet weak var WeekDaySelected: UILabel!
+//    @IBOutlet weak var WeekDaySelected: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    
     
     let weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     var weekDay: String?
@@ -25,28 +24,17 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     override func viewDidLoad() {
         super.viewDidLoad()
         let week = WeekSelectedController.shared.fetchWeek()
-        if UserDefaults.standard.bool(forKey: dayWasSelectedKey) == true {
-            
-            pickerView.isHidden = true
-            changeDayButton.isHidden = true
-            
-            weekDay = week.week
-            
-            guard let day = weekDay else { return }
-            print("User has previously selected \(day)")
-            
-            selectButton.setTitle("Continue", for: .normal)
-            WeekDaySelected.text = weekDay
-            descriptionLabel.text = "You have selected \(day) if you would like to change it click the top left button, otherwise press continue"
-
-        } else {
-            WeekDaySelected.isHidden = true
-            pickerView.delegate = self
-            pickerView.dataSource = self
-        }
+        self.weekDay = week.week
+        pickerView.delegate = self
+        pickerView.dataSource = self
     }
-    @IBAction func changeDayButtonTapped(_ sender: UIButton) {
-        print("I need to present an alert here to make it all work out ⌨️")
+    
+    @IBAction func selectButtonTapped(_ sender: UIButton) {
+        if let weekDay = weekDay {
+            WeekSelectedController.shared.saveTheWeekSelected(week: weekDay)
+            UserDefaults.standard.set(true, forKey: dayWasSelectedKey)
+//            navigationController?.isNavigationBarHidden = true
+        }
     }
     
     //MARK: - UIPickerViewSetup
@@ -65,8 +53,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let weekDay = weeks[row]
         self.weekDay = weekDay
-        WeekSelectedController.shared.saveTheWeekSelected(week: weekDay)
-        UserDefaults.standard.set(true, forKey: dayWasSelectedKey)
     }
 }
 

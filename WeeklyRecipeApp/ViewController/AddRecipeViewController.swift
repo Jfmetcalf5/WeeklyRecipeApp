@@ -20,17 +20,23 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     @IBOutlet weak var directionsTextView: UITextView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet var ingredientsListTableView: UITableView!
+    
     @IBOutlet weak var ingredientsTableView: UITableView!
     
     var recipe: Recipe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
         
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
+        
+        ingredientsListTableView.delegate = self
+        ingredientsListTableView.dataSource = self
         
         titleTextField.delegate = self
         quantityTextField.delegate = self
@@ -38,6 +44,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         directionsTextView.delegate = self
         
         unitTextView.inputView = unitPickerView
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +81,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
-    guard let title = titleTextField.text, titleTextField.text != "",
+        guard let title = titleTextField.text, titleTextField.text != "",
             let directions = directionsTextView.text, directionsTextView.text != "" else { return }
         if let recipe = recipe {
             RecipeController.shared.update(recipe: recipe, with: title, directions: directions)
@@ -100,25 +107,40 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     
     //MARK: - Ingredients Table View Functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == ingredientsTableView {
         let ingredients = recipe?.ingredients?.count
         return ingredients ?? 0
+        } else if tableView == ingredientsListTableView {
+            return self.ingredientsList.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
-        if let recipe = recipe {
-            guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { return UITableViewCell() }
-            let ingredient = ingredients[indexPath.row]
-            cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
-            cell.detailTextLabel?.text = ingredient.name
+        
+        if tableView == ingredientsTableView {
+            let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
+            if let recipe = recipe {
+                guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { return UITableViewCell() }
+                let ingredient = ingredients[indexPath.row]
+                cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
+                cell.detailTextLabel?.text = ingredient.name
+            }
+            return cell
+        } else if tableView == ingredientsListTableView {
+            let cell = ingredientsListTableView.dequeueReusableCell(withIdentifier: "ingredientsListCell", for: indexPath)
+            let ingredient = ingredientsList[indexPath.row]
+            cell.textLabel?.text = ingredient
+            return cell
+        } else {
+            return UITableViewCell()
         }
-        return cell
     }
-    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let recipe = recipe,
-            let ingredients = recipe.ingredients?.array as? [Ingredient] else { return }
+                let ingredients = recipe.ingredients?.array as? [Ingredient] else { return }
             let ingredient = ingredients[indexPath.row]
             
             let alert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this ingredient? You can't undo this process.", preferredStyle: .alert)

@@ -19,13 +19,13 @@ struct Colors {
 }
 
 struct Style {
-    static var bgColor = UIColor.white
-    static var monthViewLblColor = UIColor.white
-    static var monthViewBtnRightColor = UIColor.white
-    static var monthViewBtnLeftColor = UIColor.white
-    static var activeCellLblColor = UIColor.white
+    static var bgColor = UIColor.black
+    static var monthViewLblColor = UIColor.black
+    static var monthViewBtnRightColor = UIColor.black
+    static var monthViewBtnLeftColor = UIColor.black
+    static var activeCellLblColor = UIColor.black
     static var activeCellLblColorHighlighted = UIColor.black
-    static var weekdaysLblColor = UIColor.white
+    static var weekdaysLblColor = UIColor.black
     
     static func themeLight(){
         bgColor = UIColor.white
