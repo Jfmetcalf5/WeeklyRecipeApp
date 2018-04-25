@@ -15,7 +15,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBOutlet weak var pickerView: UIPickerView!
     @IBOutlet weak var selectButton: UIButton!
-//    @IBOutlet weak var WeekDaySelected: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
     let weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -23,8 +22,8 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let week = WeekSelectedController.shared.fetchWeek()
-        self.weekDay = week.week
+        let weekSelected = WeekSelectedController.shared.fetchWeek()
+        self.weekDay = weekSelected.dayOfWeek
         pickerView.delegate = self
         pickerView.dataSource = self
     }
@@ -33,7 +32,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         if let weekDay = weekDay {
             WeekSelectedController.shared.saveTheWeekSelected(week: weekDay)
             UserDefaults.standard.set(true, forKey: dayWasSelectedKey)
-//            navigationController?.isNavigationBarHidden = true
         }
     }
     

@@ -60,7 +60,6 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         if segue.identifier == "toAddRecipeToDay" {
             guard let indexPath = calendarRecipesTableView.indexPathForSelectedRow,
-                let detailVC = segue.destination as? CalendarViewController,
             let day = day else { return }
                 let recipe = RecipeController.shared.recipes[indexPath.row]
             RecipeController.shared.add(recipe: recipe, to: day)

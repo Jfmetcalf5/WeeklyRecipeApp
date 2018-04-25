@@ -15,6 +15,8 @@ class DayController {
     
     private let daysHaveBeenCreatedKey = "DaysHaveBeenCreated"
     
+    let weeks = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+    
     func createDaysForTenYears() {
         guard UserDefaults.standard.bool(forKey: daysHaveBeenCreatedKey) == false else { return }
         var dates: [Date] = []
@@ -27,17 +29,31 @@ class DayController {
             guard let date = Calendar.current.date(byAdding: .day, value: i, to: firstDayOfMonth) else { continue }
             dates.append(date)
         }
+        
+        var dayOfWeek: String = "Sunday"
+        
         for date in dates {
-            let _ = Day(date: date, recipes: [])
+            let _ = Day(date: date, recipes: [], dayOfWeek: dayOfWeek)
+            
+            guard let nextDayOfWeek = nextDay(currentDay: dayOfWeek) else { return }
+            
+            dayOfWeek = nextDayOfWeek
         }
         saveToPersistentStore()
         UserDefaults.standard.set(true, forKey: daysHaveBeenCreatedKey)
     }
     
+    func nextDay(currentDay: String) -> String? {
+        guard let indexOfCurrentDay = weeks.index(of: currentDay) else { return nil }
+        if indexOfCurrentDay < weeks.count - 1 {
+            return weeks[indexOfCurrentDay + 1]
+        } else {
+            return weeks[0]
+        }
+    }
+    
     func fetchRecipesFrom(day: Day) -> [Recipe] {
-        
         let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
-        
         let predicate = NSPredicate(format: "%@ in days", day)
         request.predicate = predicate
         do {

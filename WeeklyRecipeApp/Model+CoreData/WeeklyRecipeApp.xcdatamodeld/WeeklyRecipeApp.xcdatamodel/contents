@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Day" representedClassName="Day" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dayOfWeek" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="recipes" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Recipe" inverseName="days" inverseEntity="Recipe" syncable="YES"/>
     </entity>
     <entity name="Ingredient" representedClassName="Ingredient" syncable="YES" codeGenerationType="class">
@@ -17,10 +18,10 @@
         <relationship name="ingredients" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Ingredient" inverseName="recipies" inverseEntity="Ingredient" syncable="YES"/>
     </entity>
     <entity name="WeekSelected" representedClassName="WeekSelected" syncable="YES" codeGenerationType="class">
-        <attribute name="week" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dayOfWeek" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Day" positionX="-216" positionY="54" width="128" height="75"/>
+        <element name="Day" positionX="-216" positionY="54" width="128" height="90"/>
         <element name="Ingredient" positionX="-54" positionY="18" width="128" height="105"/>
         <element name="Recipe" positionX="-378" positionY="21" width="128" height="105"/>
         <element name="WeekSelected" positionX="-216" positionY="63" width="128" height="60"/>

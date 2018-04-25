@@ -36,4 +36,9 @@ class IngredientsListController {
         return allIngredients
     }
     
+    @discardableResult func fetchIngredientsWithSearchTerm(string: String) -> [String] {
+        let searchedIngredients = allIngredients.filter{$0.lowercased().contains(string.lowercased())}
+        return searchedIngredients
+    }
+    
 }

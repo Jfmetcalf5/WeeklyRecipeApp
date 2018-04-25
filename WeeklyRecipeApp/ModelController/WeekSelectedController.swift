@@ -21,20 +21,19 @@ class WeekSelectedController {
         
         do {
             let weekSelected = (try CoreDataStack.context.fetch(request))
-            for week in weekSelected {
-                tempWeekSelected = week
-                print(week.week)
-                return week
+            for dayOfWeek in weekSelected {
+                tempWeekSelected = dayOfWeek
+                return dayOfWeek
             }
         } catch let e {
             print("Error fetching WeekSelected from CoreData :\(e.localizedDescription)")
-            return WeekSelected(week: "Saturday")
+            return WeekSelected(dayOfWeek: "Saturday")
         }
-        return WeekSelected(week: "Saturday")
+        return WeekSelected(dayOfWeek: "Saturday")
     }
     
     func saveTheWeekSelected(week: String) {
-        let _ = WeekSelected(week: week)
+        let _ = WeekSelected(dayOfWeek: week)
         saveToPersistentStore()
     }
     

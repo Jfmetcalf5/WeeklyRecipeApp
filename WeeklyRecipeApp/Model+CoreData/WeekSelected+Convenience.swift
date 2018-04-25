@@ -10,8 +10,8 @@ import Foundation
 import CoreData
 
 extension WeekSelected {
-    convenience init(week: String, context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(dayOfWeek: String, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
-        self.week = week
+        self.dayOfWeek = dayOfWeek
     }
 }

@@ -10,8 +10,9 @@ import Foundation
 import CoreData
 
 extension Day {
-    convenience init(date: Date, recipes: [Recipe], context: NSManagedObjectContext = CoreDataStack.context) {
+    convenience init(date: Date, recipes: [Recipe], dayOfWeek: String, context: NSManagedObjectContext = CoreDataStack.context) {
         self.init(context: context)
         self.date = date
+        self.dayOfWeek = dayOfWeek
     }
 }

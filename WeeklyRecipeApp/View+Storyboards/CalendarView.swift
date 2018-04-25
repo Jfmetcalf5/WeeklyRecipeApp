@@ -141,10 +141,10 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             dayCellSelectedHasNoMoreRecipes = cell
             delegate?.dayCellWasSelected(day: day)
         }
-        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) {
+        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) || cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.7) {
             cell?.backgroundColor = UIColor.orange.withAlphaComponent(0.7)
         } else {
-            cell?.backgroundColor = Colors.green.withAlphaComponent(0.7)
+            cell?.backgroundColor = Colors.green.withAlphaComponent(0.5)
         }
         isSelected = true
     }

@@ -9,46 +9,52 @@
 import UIKit
 
 
-class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UITableViewDataSource {
+class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet var unitPickerView: UIPickerView!
     
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var quantityTextField: UITextField!
     @IBOutlet weak var unitTextView: UITextField!
-    @IBOutlet weak var ingredientTextField: UITextField!
     @IBOutlet weak var directionsTextView: UITextView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet var ingredientsListTableView: UITableView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var ingredientsListTableView: UITableView!
     @IBOutlet weak var ingredientsTableView: UITableView!
     
     var recipe: Recipe?
     
+    var ingredientsList: [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let ingredientsList = IngredientsListController.shared.fetchIngredients()
+        self.ingredientsList = ingredientsList
+        
+        setupSearchBar()
         
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
         
+        ingredientsListTableView.delegate = self
+        ingredientsListTableView.dataSource = self
+        ingredientsListTableView.isHidden = true
+        
         ingredientsTableView.delegate = self
         ingredientsTableView.dataSource = self
         
-        ingredientsListTableView.delegate = self
-        ingredientsListTableView.dataSource = self
-        
         titleTextField.delegate = self
         quantityTextField.delegate = self
-        ingredientTextField.delegate = self
         directionsTextView.delegate = self
         
         unitTextView.inputView = unitPickerView
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         if let recipe = recipe {
             titleTextField.text = recipe.title
             directionsTextView.text = recipe.directions
@@ -66,19 +72,59 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         return view.endEditing(true)
     }
     
+    @IBAction func dismissKeyboard(_ sender: UIButton) {
+        view.endEditing(true)
+    }
+    
+    //MARK: - Ingredient Search Bar Function
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        ingredientsListTableView.isHidden = false
+        filterContent(searchText: self.searchBar.text!)
+        if searchBar.text == "" {
+            ingredientsListTableView.isHidden = true
+        }
+    }
+    
+    func filterContent(searchText: String) {
+        let searchedIngredients = IngredientsListController.shared.fetchIngredientsWithSearchTerm(string: searchText)
+        ingredientsList = searchedIngredients
+        ingredientsListTableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        searchBar.resignFirstResponder()
+    }
+    
+    func setupSearchBar() {
+        searchBar.delegate = self
+        searchBar.returnKeyType = .done
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        ingredientsListTableView.isHidden = true
+        return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+    
+    //MARK: - Buttons Tapped Functions
+    
     @IBAction func addIngredientButtonTapped(_ sender: UIButton) {
         if let recipe = recipe {
-            guard let name = ingredientTextField.text, ingredientTextField.text != nil,
+            guard let name = searchBar.text, name != "",
                 let quantityString = quantityTextField.text, let quantity = Int16(quantityString), let unit = unitTextView.text, unit != "" else { return }
             IngredientController.shared.addIngredientWith(name: name, quantity: quantity, unit: unit, recipe: recipe)
             view.resignFirstResponder()
             ingredientsTableView.reloadData()
-            ingredientTextField.text = ""
+            searchBar.text = ""
             unitTextView.text = ""
             quantityTextField.text = ""
         }
     }
-    
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let title = titleTextField.text, titleTextField.text != "",
@@ -91,52 +137,52 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         if titleTextField.text != "" || directionsTextView.text != "" {
-            let alert = UIAlertController(title: "Continue?", message: "If you to go back, all work will be lost. Would you like to proceed?", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Continue?", message: "If you have made changes, all you changes will be lost. Would you like to proceed?", preferredStyle: .alert)
             let yes = UIAlertAction(title: "Yes", style: .default) { (yes) in
                 self.navigationController?.popViewController(animated: true)
             }
             let no = UIAlertAction(title: "No", style: .destructive, handler: nil)
             alert.addAction(yes)
             alert.addAction(no)
-            
             present(alert, animated: true, completion: nil)
         } else {
             navigationController?.popViewController(animated: true)
         }
     }
     
-    //MARK: - Ingredients Table View Functions
+    //MARK: - Ingredients and IngredientsList Table View Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == ingredientsTableView {
         let ingredients = recipe?.ingredients?.count
         return ingredients ?? 0
-        } else if tableView == ingredientsListTableView {
-            return self.ingredientsList.count
-        } else {
-            return 0
         }
+        if tableView == ingredientsListTableView {
+            return ingredientsList.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if tableView == ingredientsTableView {
-            let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
-            if let recipe = recipe {
-                guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { return UITableViewCell() }
-                let ingredient = ingredients[indexPath.row]
-                cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
-                cell.detailTextLabel?.text = ingredient.name
-            }
-            return cell
-        } else if tableView == ingredientsListTableView {
+        let cell = ingredientsTableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
+        if let recipe = recipe {
+            guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { return UITableViewCell() }
+            let ingredient = ingredients[indexPath.row]
+            cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
+            cell.detailTextLabel?.text = ingredient.name
+        }
+        return cell
+        }
+        if tableView == ingredientsListTableView {
             let cell = ingredientsListTableView.dequeueReusableCell(withIdentifier: "ingredientsListCell", for: indexPath)
             let ingredient = ingredientsList[indexPath.row]
             cell.textLabel?.text = ingredient
             return cell
-        } else {
-            return UITableViewCell()
         }
+        return UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let recipe = recipe,
@@ -154,12 +200,23 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
             present(alert, animated: true, completion: nil)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == ingredientsListTableView {
+            let ingredient = ingredientsList[indexPath.row]
+            searchBar.text = ingredient
+        }
+    }
 }
 
 
+//MARK: - Picker view Functionality
+
 extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    static let units = [UnitVolume.cups, .pints, .tablespoons, .teaspoons, .quarts]
+    static let units = [UnitVolume.cups, .pints, .tablespoons, .teaspoons, .quarts, .fluidOunces, .milliliters, .liters]
+    
+    static let listOfUnits = [UnitMass.pounds, .grams, .ounces]
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -171,6 +228,11 @@ extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource 
             let abrv = unit.symbol
             abrvs.append(abrv)
         }
+//        for un in AddRecipeViewController.listOfUnits {
+//            let u = un.symbol
+//            abrvs.append(u)
+//        }
+        print(abrvs.count)
         return abrvs[row]
     }
     
