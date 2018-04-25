@@ -214,7 +214,8 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
 
 extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    static let units = [UnitVolume.cups, .pints, .tablespoons, .teaspoons, .quarts, .fluidOunces, .milliliters, .liters]
+    static let units = ["", "c", "pt", "tbsp", "tsp", "qt", "floz", "mL", "L", "lb", "g", "oz"]
+//    static let units = [UnitVolume.cups, .pints, .tablespoons, .teaspoons, .quarts, .fluidOunces, .milliliters, .liters]
     
 //    static let listOfUnits = [UnitMass.pounds, .grams, .ounces]
     
@@ -223,16 +224,17 @@ extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        var abrvs: [String] = []
-        for unit in AddRecipeViewController.units {
-            let abrv = unit.symbol
-            abrvs.append(abrv)
-        }
+//        var abrvs: [String] = []
+//        for unit in AddRecipeViewController.units {
+//            let abrv = unit.symbol
+//            abrvs.append(abrv)
+//        }
 //        for un in AddRecipeViewController.listOfUnits {
 //            let u = un.symbol
 //            abrvs.append(u)
 //        }
-        return abrvs[row]
+//        return abrvs[row]
+        return AddRecipeViewController.units[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -241,7 +243,7 @@ extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let indexPath = unitPickerView.selectedRow(inComponent: component)
-        let name = AddRecipeViewController.units[indexPath].symbol
+        let name = AddRecipeViewController.units[indexPath]
         view.endEditing(true)
         unitTextView.text = name
     }
