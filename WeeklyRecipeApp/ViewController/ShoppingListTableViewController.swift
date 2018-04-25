@@ -12,6 +12,7 @@ class ShoppingListTableViewController: UITableViewController {
     
     var day: String?
     var days: [Day] = []
+    var weeksIngredients: [Ingredient] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +22,47 @@ class ShoppingListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         getAndCheck()
         checkIfTodaysTheDay()
+//        mergeTheDuplicates()
     }
     
+//    func mergeTheDuplicates() {
+//        var startIndex = 0
+//        for ingredient in weeksIngredients {
+//            while startIndex < weeksIngredients.count - 1 {
+//                if ingredient == weeksIngredients[startIndex + 1] {
+//                    sameIngredients.append(ingredient)
+//                    sameIngredients.append(weeksIngredients[startIndex + 1])
+//                } else {
+//                    differentIngredients.append(ingredient)
+//                }
+//                startIndex += 1
+//            }
+//        }
+//    }
+//
+//    func addIngredientsThatAreTheSame() {
+//        var startIndex = 0
+//        var totalIngredients: Int?
+//        if sameIngredients.count > 1 {
+//            for ingredient in sameIngredients {
+//                while startIndex < sameIngredients.count - 1 {
+//                    let ingredient = sameIngredients.reduce(Ingredient, {$0 = $1)
+//                        //                        var mutIngredient = ingredient
+//                        //                        let totalIngredient = mutIngredient.quantity + sameIngredients[startIndex + 1].quantity
+//                        //                        startIndex += 1
+//                        //                        mutIngredient.quantity = totalIngredient
+//                        //                            totalIngredients = Int(totalIngredient)
+//                    }
+//                }
+//                print("\(totalIngredients)")
+//            }
+//        }
+    
     func getAndCheck() {
-        WeekSelectedController.shared.fetchWeek()
-        let day = ShoppingListController.shared.getTheSelectedDay()
-        let days = ShoppingListController.shared.checkAndGetAllDaysForVisibleMonth()
+        let day = UserDefaults.standard.string(forKey: "DayWasSelected")
+        let daysForVisibleMonth = ShoppingListController.shared.checkAndGetAllMatchingDaysForVisibleMonth()
         self.day = day
-        self.days = days
+        self.days = daysForVisibleMonth
     }
     
     func checkIfTodaysTheDay() {
@@ -38,21 +72,31 @@ class ShoppingListTableViewController: UITableViewController {
                 let sweetAction = UIAlertAction(title: "Sweet", style: .default, handler: nil)
                 alert.addAction(sweetAction)
                 present(alert, animated: true, completion: nil)
-                ShoppingListController.shared.getTheIngredientsForTheNextSixDaysFrom(matchingDay: today)
+                
+                let weeksWorthIngredients = ShoppingListController.shared.getTheIngredientsForTheNextSixDaysFrom(matchingDay: today)
+                self.weeksIngredients = weeksWorthIngredients
+                tableView.reloadData()
             }
+            let alert = UIAlertController(title: "No Ingredients Available", message: "From the day you selected, we couldn't find any ingredients for the following week", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(okayAction)
+            present(alert, animated: true, completion: nil)
         }
     }
     
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return weeksIngredients.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "weeksIngredientCell", for: indexPath)
         
+        let ingredient = weeksIngredients[indexPath.row]
         
+        cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "")"
+        cell.detailTextLabel?.text = ingredient.name
         
         return cell
     }

@@ -25,7 +25,6 @@
 		3B0F17CB2088F1A8007B3879 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F17CA2088F1A8007B3879 /* DayController.swift */; };
 		3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B101A8E20868949003FD569 /* ShiftableViewController.swift */; };
 		3B2CB193208BEF40008DD137 /* WeekSelected+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CB192208BEF40008DD137 /* WeekSelected+Convenience.swift */; };
-		3B2CB195208BEFC8008DD137 /* WeekSelectedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CB194208BEFC8008DD137 /* WeekSelectedController.swift */; };
 		3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5120850E9300EA5CCE /* AppDelegate.swift */; };
 		3B624C5720850E9300EA5CCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B624C5520850E9300EA5CCE /* Main.storyboard */; };
 		3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5820850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld */; };
@@ -60,7 +59,6 @@
 		3B0F17CA2088F1A8007B3879 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
 		3B101A8E20868949003FD569 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
 		3B2CB192208BEF40008DD137 /* WeekSelected+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekSelected+Convenience.swift"; sourceTree = "<group>"; };
-		3B2CB194208BEFC8008DD137 /* WeekSelectedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSelectedController.swift; sourceTree = "<group>"; };
 		3B624C4E20850E9300EA5CCE /* WeeklyRecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyRecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B624C5120850E9300EA5CCE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B624C5620850E9300EA5CCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -145,7 +143,6 @@
 				3B624C7A20855E4900EA5CCE /* IngredientController.swift */,
 				3B624C7420851A3A00EA5CCE /* RecipeController.swift */,
 				3B0F17CA2088F1A8007B3879 /* DayController.swift */,
-				3B2CB194208BEFC8008DD137 /* WeekSelectedController.swift */,
 				3B0B4413208E73090041BAD8 /* IngredientListController.swift */,
 				3B0842C9208FA6B40054CDCC /* ShoppingListController.swift */,
 			);
@@ -278,7 +275,6 @@
 				3B2CB193208BEF40008DD137 /* WeekSelected+Convenience.swift in Sources */,
 				3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */,
 				3B0F17CB2088F1A8007B3879 /* DayController.swift in Sources */,
-				3B2CB195208BEFC8008DD137 /* WeekSelectedController.swift in Sources */,
 				3B0B4412208E6F7E0041BAD8 /* IngredientsList.swift in Sources */,
 				3B0F17C52088EA98007B3879 /* DateCVCell.swift in Sources */,
 				3B624C6F208517DA00EA5CCE /* Recipe+Convenience.swift in Sources */,

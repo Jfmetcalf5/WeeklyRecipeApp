@@ -14,30 +14,15 @@ class ShoppingListController {
     static let shared = ShoppingListController()
     
     var dayOfWeek: String?
+    var daysInWeek: [Day] = []
     
-    var day: Day?
-    
-    func getTheSelectedDay() -> String? {
-        guard let weekSelected = WeekSelectedController.shared.tempWeekSelected else { return nil }
-        let request: NSFetchRequest<WeekSelected> = WeekSelected.fetchRequest()
-        
-        do {
-            let weeksSelected = (try CoreDataStack.context.fetch(request))
-            for weekSelected in weeksSelected {
-//                tempWeekSelected = dayOfWeek
-                return weekSelected.dayOfWeek
-            }
-        } catch let e {
-            print("Error fetching WeekSelected from CoreData :\(e.localizedDescription)")
-            return "Something broke"
-        }
-//        return tempWeekSelected
-        guard let dayOfWeek = weekSelected.dayOfWeek else { return nil }
+    func getTheSelectedDay() {
+        let dayOfWeek = UserDefaults.standard.string(forKey: "DayWasSelected")
         self.dayOfWeek = dayOfWeek
-        return dayOfWeek
     }
     
-    func checkAndGetAllDaysForVisibleMonth() -> [Day] {
+    func checkAndGetAllMatchingDaysForVisibleMonth() -> [Day] {
+        getTheSelectedDay()
         let days = DayController.shared.daysOfMonth
         var matchingDays: [Day] = []
         for day in days {
@@ -50,24 +35,36 @@ class ShoppingListController {
     
     func checkIfTodayIsTheDayToGoShopping(days: [Day]) -> Day? {
         let todaysDate = Calendar.current.component(.day, from: Date())
+        let todaysMonth = Calendar.current.component(.month, from: Date())
+        let todaysYear = Calendar.current.component(.year, from: Date())
         for day in days {
-            if todaysDate == day.date?.day {
+            if todaysDate == day.date?.day && todaysMonth == day.date?.month && todaysYear == day.date?.year {
                 return day
             }
             continue
-            
-            // ALSO... IT CHECKS ON MONTH THAT IS VISIBLE... MAYBE I NEED TO BE LES SPECIFIC AND USE THE Day object RATHER THAN THE dayOfWeek............
         }
         return nil
     }
     
-    func getTheIngredientsForTheNextSixDaysFrom(matchingDay: Day) {
-        let sixDaysFromToday = Calendar.current.component(.day, from: Date(timeInterval: 604800, since: Date()))
-        matchingDay.date?.addTimeInterval(604800)
-        
-        print(matchingDay)
-        // NEED HELP HERE TOMORROW.... NOT SURE HOW TO ASSOCIATE THE DAY WITH THIS
-        // BUT STILL WORK ON IT ON YOUR OWN!!! PLEASE!!!
+    func getTheIngredientsForTheNextSixDaysFrom(matchingDay: Day) -> [Ingredient] {
+        guard let fromDate = matchingDay.date,
+            let toDate = matchingDay.date?.addingTimeInterval(604800) else { return [] }
+        let days = DayController.shared.fetchDaysInWeek(fromDate: fromDate, toDate: toDate)
+        self.daysInWeek = days
+        var ingredientsInWeek: [Ingredient] = []
+        for day in days {
+            guard let recipes = day.recipes?.array as? [Recipe] else { continue }
+            if recipes.count > 1 {
+                for recipe in recipes {
+                    guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { continue }
+                    ingredientsInWeek.append(contentsOf: ingredients)
+                }
+            } else {
+                guard let ingredients = recipes.first?.ingredients?.array as? [Ingredient] else { continue }
+                ingredientsInWeek.append(contentsOf: ingredients)
+            }
+        }
+        return ingredientsInWeek
     }
     
 }

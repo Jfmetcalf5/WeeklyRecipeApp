@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         DayController.shared.createDaysForTenYears()
         
-        if UserDefaults.standard.bool(forKey: "DayWasSelected") == true {
+        if UserDefaults.standard.bool(forKey: "dayTrueWasSelected") == true {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             let initialViewController = storyboard.instantiateViewController(withIdentifier: "myTabBarController")

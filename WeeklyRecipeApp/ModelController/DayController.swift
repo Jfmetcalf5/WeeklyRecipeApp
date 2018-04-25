@@ -17,8 +17,11 @@ class DayController {
     
     let weeks = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
+    var daysOfMonth: [Day] = []
+    var tempWeekSelected: String?
+    
     func createDaysForTenYears() {
-        guard UserDefaults.standard.bool(forKey: daysHaveBeenCreatedKey) == false else { return }
+        guard UserDefaults.standard.bool(forKey: "dayTrueWasSelected") == false else { return }
         var dates: [Date] = []
         
         let firstComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: 2018, month: 4, day: 1, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
@@ -31,7 +34,6 @@ class DayController {
         }
         
         var dayOfWeek: String = "Sunday"
-        
         for date in dates {
             let _ = Day(date: date, recipes: [], dayOfWeek: dayOfWeek)
             
@@ -65,8 +67,6 @@ class DayController {
         }
     }
     
-    var daysOfMonth: [Day] = []
-    
     func fetchDaysFor(month: Int, year: Int, lastDay: Int) {
         var firstDayOfMonth: Date?
         var lastDayOfMonth: Date?
@@ -91,6 +91,25 @@ class DayController {
         } catch let e {
             print("Error fetching Days from CoreData :\(e.localizedDescription)")
         }
+    }
+    
+    func fetchDaysInWeek(fromDate: Date, toDate: Date) -> [Day] {
+        var daysInWeek: [Day] = []
+        let request: NSFetchRequest<Day> = Day.fetchRequest()
+        
+        let predicate1 = NSPredicate(format: "date >= %@", fromDate as NSDate)
+        let predicate2 = NSPredicate(format: "date <= %@", toDate as NSDate)
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
+        let sortDesciptor = NSSortDescriptor(key: "date", ascending: true)
+        request.predicate = compound
+        request.sortDescriptors = [sortDesciptor]
+        do {
+            let days = (try CoreDataStack.context.fetch(request))
+            daysInWeek = days
+        } catch let e {
+            print("Error fetching Days from CoreData :\(e.localizedDescription)")
+        }
+        return daysInWeek
     }
     
     func saveToPersistentStore() {

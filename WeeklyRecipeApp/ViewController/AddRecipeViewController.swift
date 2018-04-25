@@ -49,7 +49,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         quantityTextField.delegate = self
         directionsTextView.delegate = self
         
-        unitTextView.inputView = unitPickerView
+        unitTextView.inputAccessoryView = unitPickerView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -216,7 +216,7 @@ extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource 
     
     static let units = [UnitVolume.cups, .pints, .tablespoons, .teaspoons, .quarts, .fluidOunces, .milliliters, .liters]
     
-    static let listOfUnits = [UnitMass.pounds, .grams, .ounces]
+//    static let listOfUnits = [UnitMass.pounds, .grams, .ounces]
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -232,7 +232,6 @@ extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource 
 //            let u = un.symbol
 //            abrvs.append(u)
 //        }
-        print(abrvs.count)
         return abrvs[row]
     }
     

@@ -200,7 +200,6 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             }
         }
         
-        //        createDatesFor(month: currentMonthIndex)
         DayController.shared.fetchDaysFor(month: currentMonthIndex, year: currentYear, lastDay: numOfDaysInMonth[currentMonthIndex - 1])
         
         firstWeekDayOfMonth = getFirstWeekDay()
