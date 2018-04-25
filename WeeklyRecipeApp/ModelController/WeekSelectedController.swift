@@ -15,7 +15,7 @@ class WeekSelectedController {
     
     var tempWeekSelected: WeekSelected?
     
-    @discardableResult func fetchWeek() -> WeekSelected {
+    @discardableResult func fetchWeek() -> WeekSelected? {
         
         let request: NSFetchRequest<WeekSelected> = WeekSelected.fetchRequest()
         
@@ -29,11 +29,17 @@ class WeekSelectedController {
             print("Error fetching WeekSelected from CoreData :\(e.localizedDescription)")
             return WeekSelected(dayOfWeek: "Saturday")
         }
-        return WeekSelected(dayOfWeek: "Saturday")
+        return tempWeekSelected
     }
     
-    func saveTheWeekSelected(week: String) {
-        let _ = WeekSelected(dayOfWeek: week)
+    func saveTheWeekSelected(dayOfWeek: String) {
+        let dayOfWeek = WeekSelected(dayOfWeek: dayOfWeek)
+        tempWeekSelected = dayOfWeek
+        saveToPersistentStore()
+    }
+    
+    func update(weekSelected: WeekSelected, with dayOfWeek: String) {
+        weekSelected.dayOfWeek = dayOfWeek
         saveToPersistentStore()
     }
     

@@ -19,18 +19,19 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     let weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     var weekDay: String?
+//    var weekSelected: WeekSelected?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let weekSelected = WeekSelectedController.shared.fetchWeek()
-        self.weekDay = weekSelected.dayOfWeek
+        self.weekDay = weekSelected?.dayOfWeek
         pickerView.delegate = self
         pickerView.dataSource = self
     }
     
     @IBAction func selectButtonTapped(_ sender: UIButton) {
         if let weekDay = weekDay {
-            WeekSelectedController.shared.saveTheWeekSelected(week: weekDay)
+            WeekSelectedController.shared.saveTheWeekSelected(dayOfWeek: weekDay)
             UserDefaults.standard.set(true, forKey: dayWasSelectedKey)
         }
     }

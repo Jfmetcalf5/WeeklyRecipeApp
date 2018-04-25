@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 class ShoppingListController {
     
@@ -16,9 +17,22 @@ class ShoppingListController {
     
     var day: Day?
     
-    func getTheSelectedDay() -> String {
-        guard let weekSelected = WeekSelectedController.shared.tempWeekSelected,
-            let dayOfWeek = weekSelected.dayOfWeek else { return "" }
+    func getTheSelectedDay() -> String? {
+        guard let weekSelected = WeekSelectedController.shared.tempWeekSelected else { return nil }
+        let request: NSFetchRequest<WeekSelected> = WeekSelected.fetchRequest()
+        
+        do {
+            let weeksSelected = (try CoreDataStack.context.fetch(request))
+            for weekSelected in weeksSelected {
+//                tempWeekSelected = dayOfWeek
+                return weekSelected.dayOfWeek
+            }
+        } catch let e {
+            print("Error fetching WeekSelected from CoreData :\(e.localizedDescription)")
+            return "Something broke"
+        }
+//        return tempWeekSelected
+        guard let dayOfWeek = weekSelected.dayOfWeek else { return nil }
         self.dayOfWeek = dayOfWeek
         return dayOfWeek
     }
@@ -47,12 +61,13 @@ class ShoppingListController {
         return nil
     }
     
-    func getTheIngredientsForTheNextSixDaysFrom(day: Day) {
-        
+    func getTheIngredientsForTheNextSixDaysFrom(matchingDay: Day) {
         let sixDaysFromToday = Calendar.current.component(.day, from: Date(timeInterval: 604800, since: Date()))
-            // NEED HELP HERE TOMORROW.... NOT SURE HOW TO ASSOCIATE THE DAY WITH THIS
+        matchingDay.date?.addTimeInterval(604800)
         
+        print(matchingDay)
+        // NEED HELP HERE TOMORROW.... NOT SURE HOW TO ASSOCIATE THE DAY WITH THIS
         // BUT STILL WORK ON IT ON YOUR OWN!!! PLEASE!!!
     }
-
+    
 }

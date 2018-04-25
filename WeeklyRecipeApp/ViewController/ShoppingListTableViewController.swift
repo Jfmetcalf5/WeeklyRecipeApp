@@ -38,7 +38,7 @@ class ShoppingListTableViewController: UITableViewController {
                 let sweetAction = UIAlertAction(title: "Sweet", style: .default, handler: nil)
                 alert.addAction(sweetAction)
                 present(alert, animated: true, completion: nil)
-                ShoppingListController.shared.getTheIngredientsForTheNextSixDaysFrom(day: today)
+                ShoppingListController.shared.getTheIngredientsForTheNextSixDaysFrom(matchingDay: today)
             }
         }
     }

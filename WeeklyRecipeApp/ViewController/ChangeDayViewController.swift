@@ -22,8 +22,9 @@ class ChangeDayViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     @IBAction func changeDayButtonTapped(_ sender: UIButton) {
-        guard let week = weekDay else { return }
-        WeekSelectedController.shared.saveTheWeekSelected(week: week)
+        guard let dayOfWeek = weekDay,
+        let weekSelected = WeekSelectedController.shared.fetchWeek() else { return }
+        WeekSelectedController.shared.update(weekSelected: weekSelected, with: dayOfWeek)
         UserDefaults.standard.set(true, forKey: "DayWasSelected")
         navigationController?.popViewController(animated: true)
     }
@@ -33,6 +34,9 @@ class ChangeDayViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        WeekSelectedController.shared.saveTheWeekSelected(dayOfWeek: weeks[row])
+        let dayOfWeek = weeks[row]
+        self.weekDay = dayOfWeek
         return weeks[row]
     }
     
@@ -44,4 +48,6 @@ class ChangeDayViewController: UIViewController, UIPickerViewDelegate, UIPickerV
         let weekDay = weeks[row]
         self.weekDay = weekDay
     }
+    
+    
 }
