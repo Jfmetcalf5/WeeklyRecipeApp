@@ -25,6 +25,9 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if let date = day?.date?.day {
+            dateLabel.text = "\(date)"
+        }
         calendarRecipesTableView.reloadData()
     }
     
