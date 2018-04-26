@@ -24,7 +24,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
         super.viewDidLoad()
         pickerView.delegate = self
         pickerView.dataSource = self
-        presentAlert()
     }
     
     @IBAction func selectButtonTapped(_ sender: UIButton) {
@@ -32,16 +31,6 @@ class WelcomeViewController: UIViewController, UIPickerViewDelegate, UIPickerVie
             UserDefaults.standard.set(weekDay, forKey: dayWasSelectedKey)
             UserDefaults.standard.set(true, forKey: "dayTrueWasSelected")
         }
-    }
-    
-    func presentAlert() {
-//        if UserDefaults.standard.bool(forKey: "WelcomeAlertSent") == false {
-//            let alert = UIAlertController(title: "Welcome to _______", message: "Just for your information, when assigning a recipe to a specific day, you are currently unable to add multiple of the same recipe to the same day... this bug will be fixed soon", preferredStyle: .alert)
-//            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
-//            alert.addAction(okayAction)
-//            present(alert, animated: true, completion: nil)
-//        }
-//        UserDefaults.standard.set(true, forKey: "WelcomeAlertSent")
     }
     
     //MARK: - UIPickerViewSetup

@@ -23,41 +23,9 @@ class ShoppingListTableViewController: UITableViewController {
         getAndCheck()
         checkIfTodaysTheDay()
         navigationItem.title = day ?? "Unknown Day?"
-        //        mergeTheDuplicates()
+
     }
-    
-    //    func mergeTheDuplicates() {
-    //        var startIndex = 0
-    //        for ingredient in weeksIngredients {
-    //            while startIndex < weeksIngredients.count - 1 {
-    //                if ingredient == weeksIngredients[startIndex + 1] {
-    //                    sameIngredients.append(ingredient)
-    //                    sameIngredients.append(weeksIngredients[startIndex + 1])
-    //                } else {
-    //                    differentIngredients.append(ingredient)
-    //                }
-    //                startIndex += 1
-    //            }
-    //        }
-    //    }
-    //
-    //    func addIngredientsThatAreTheSame() {
-    //        var startIndex = 0
-    //        var totalIngredients: Int?
-    //        if sameIngredients.count > 1 {
-    //            for ingredient in sameIngredients {
-    //                while startIndex < sameIngredients.count - 1 {
-    //                    let ingredient = sameIngredients.reduce(Ingredient, {$0 = $1)
-    //                        //                        var mutIngredient = ingredient
-    //                        //                        let totalIngredient = mutIngredient.quantity + sameIngredients[startIndex + 1].quantity
-    //                        //                        startIndex += 1
-    //                        //                        mutIngredient.quantity = totalIngredient
-    //                        //                            totalIngredients = Int(totalIngredient)
-    //                    }
-    //                }
-    //                print("\(totalIngredients)")
-    //            }
-    //        }
+
     
     func getAndCheck() {
         let day = UserDefaults.standard.string(forKey: "DayWasSelected")
@@ -102,21 +70,11 @@ class ShoppingListTableViewController: UITableViewController {
         
         cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "")"
         cell.detailTextLabel?.text = ingredient.name
-        
-        //        if todays date is the days date then add the image
-        //        cell.imageView?.image = #imageLiteral(resourceName: "EmptyBox")
+
         
         return cell
     }
-    
-    //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-    //        if editingStyle == .delete {
-    //
-    //            weeksIngredients.remove(at: indexPath.row)
-    //
-    //            tableView.deleteRows(at: [indexPath], with: .automatic)
-    //        }
-    //    }
+
     
     // MARK: - Navigation
     

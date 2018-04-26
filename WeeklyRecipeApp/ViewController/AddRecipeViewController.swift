@@ -215,25 +215,14 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
 extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     static let units = [" ", "c", "pt", "tbsp", "tsp", "qt", "floz", "mL", "L", "lb", "g", "oz"]
-//    static let units = [UnitVolume.cups, .pints, .tablespoons, .teaspoons, .quarts, .fluidOunces, .milliliters, .liters]
-    
-//    static let listOfUnits = [UnitMass.pounds, .grams, .ounces]
+
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        var abrvs: [String] = []
-//        for unit in AddRecipeViewController.units {
-//            let abrv = unit.symbol
-//            abrvs.append(abrv)
-//        }
-//        for un in AddRecipeViewController.listOfUnits {
-//            let u = un.symbol
-//            abrvs.append(u)
-//        }
-//        return abrvs[row]
+
         return AddRecipeViewController.units[row]
     }
     

@@ -129,6 +129,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     //MARK: - CollectionViewDidSelect and DeselectItems
+    
     var dayCellSelectedHasNoMoreRecipes: DateCVCell?
     var dayCellLabelToFollow: UILabel?
     
