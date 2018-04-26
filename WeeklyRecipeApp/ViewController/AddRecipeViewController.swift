@@ -214,7 +214,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
 
 extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    static let units = ["", "c", "pt", "tbsp", "tsp", "qt", "floz", "mL", "L", "lb", "g", "oz"]
+    static let units = [" ", "c", "pt", "tbsp", "tsp", "qt", "floz", "mL", "L", "lb", "g", "oz"]
 //    static let units = [UnitVolume.cups, .pints, .tablespoons, .teaspoons, .quarts, .fluidOunces, .milliliters, .liters]
     
 //    static let listOfUnits = [UnitMass.pounds, .grams, .ounces]

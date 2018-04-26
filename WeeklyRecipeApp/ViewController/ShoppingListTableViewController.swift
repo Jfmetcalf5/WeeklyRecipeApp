@@ -22,6 +22,7 @@ class ShoppingListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         getAndCheck()
         checkIfTodaysTheDay()
+        navigationItem.title = day ?? "Unknown Day?"
         //        mergeTheDuplicates()
     }
     
@@ -102,8 +103,20 @@ class ShoppingListTableViewController: UITableViewController {
         cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "")"
         cell.detailTextLabel?.text = ingredient.name
         
+        //        if todays date is the days date then add the image
+        //        cell.imageView?.image = #imageLiteral(resourceName: "EmptyBox")
+        
         return cell
     }
+    
+    //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    //        if editingStyle == .delete {
+    //
+    //            weeksIngredients.remove(at: indexPath.row)
+    //
+    //            tableView.deleteRows(at: [indexPath], with: .automatic)
+    //        }
+    //    }
     
     // MARK: - Navigation
     
