@@ -77,7 +77,7 @@ class ShoppingListTableViewController: UITableViewController {
                 self.weeksIngredients = weeksWorthIngredients
                 tableView.reloadData()
             }
-            let alert = UIAlertController(title: "No Ingredients Available", message: "From the day you selected, we couldn't find any ingredients for the following week", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Not today", message: "You'll be able to see the shopping list only on the day of the week you selected to go shopping... sorry", preferredStyle: .alert)
             let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
             alert.addAction(okayAction)
             present(alert, animated: true, completion: nil)

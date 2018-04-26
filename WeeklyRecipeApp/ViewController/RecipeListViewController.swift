@@ -15,6 +15,7 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presentAlert()
         recipeTableView.delegate = self
         recipeTableView.dataSource = self
     }
@@ -22,6 +23,16 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recipeTableView.reloadData()
+    }
+    
+    func presentAlert() {
+        if UserDefaults.standard.bool(forKey: "WelcomeAlertSent") == false {
+            let alert = UIAlertController(title: "Welcome to _______", message: "Just for your information, when assigning a recipe to a specific day, you are currently unable to add the same recipe multiple times to one day... this bug will be fixed soon", preferredStyle: .alert)
+            let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+            alert.addAction(okayAction)
+            present(alert, animated: true, completion: nil)
+        }
+        UserDefaults.standard.set(true, forKey: "WelcomeAlertSent")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
