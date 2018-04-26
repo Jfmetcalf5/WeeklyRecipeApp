@@ -33,12 +33,14 @@ class ShoppingListController {
         return matchingDays
     }
     
-    func checkIfTodayIsTheDayToGoShopping(days: [Day]) -> Day? {
+    func checkIfTodayIsTheDayToGoShopping(days: [Day], for dayOfWeek: String) -> Day? {
         let todaysDate = Calendar.current.component(.day, from: Date())
         let todaysMonth = Calendar.current.component(.month, from: Date())
         let todaysYear = Calendar.current.component(.year, from: Date())
+        
         for day in days {
-            if todaysDate == day.date?.day && todaysMonth == day.date?.month && todaysYear == day.date?.year {
+            guard let dayDay = day.date?.day, let monthDay = day.date?.month, let yearDay = day.date?.year, let dateDay = day.date else { return nil }
+            if todaysDate <= dayDay && todaysMonth <= monthDay && todaysYear <= yearDay && dateDay.addingTimeInterval(-604800) < Date() {
                 return day
             }
             continue

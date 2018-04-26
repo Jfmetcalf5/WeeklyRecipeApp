@@ -22,41 +22,41 @@ class ShoppingListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         getAndCheck()
         checkIfTodaysTheDay()
-//        mergeTheDuplicates()
+        //        mergeTheDuplicates()
     }
     
-//    func mergeTheDuplicates() {
-//        var startIndex = 0
-//        for ingredient in weeksIngredients {
-//            while startIndex < weeksIngredients.count - 1 {
-//                if ingredient == weeksIngredients[startIndex + 1] {
-//                    sameIngredients.append(ingredient)
-//                    sameIngredients.append(weeksIngredients[startIndex + 1])
-//                } else {
-//                    differentIngredients.append(ingredient)
-//                }
-//                startIndex += 1
-//            }
-//        }
-//    }
-//
-//    func addIngredientsThatAreTheSame() {
-//        var startIndex = 0
-//        var totalIngredients: Int?
-//        if sameIngredients.count > 1 {
-//            for ingredient in sameIngredients {
-//                while startIndex < sameIngredients.count - 1 {
-//                    let ingredient = sameIngredients.reduce(Ingredient, {$0 = $1)
-//                        //                        var mutIngredient = ingredient
-//                        //                        let totalIngredient = mutIngredient.quantity + sameIngredients[startIndex + 1].quantity
-//                        //                        startIndex += 1
-//                        //                        mutIngredient.quantity = totalIngredient
-//                        //                            totalIngredients = Int(totalIngredient)
-//                    }
-//                }
-//                print("\(totalIngredients)")
-//            }
-//        }
+    //    func mergeTheDuplicates() {
+    //        var startIndex = 0
+    //        for ingredient in weeksIngredients {
+    //            while startIndex < weeksIngredients.count - 1 {
+    //                if ingredient == weeksIngredients[startIndex + 1] {
+    //                    sameIngredients.append(ingredient)
+    //                    sameIngredients.append(weeksIngredients[startIndex + 1])
+    //                } else {
+    //                    differentIngredients.append(ingredient)
+    //                }
+    //                startIndex += 1
+    //            }
+    //        }
+    //    }
+    //
+    //    func addIngredientsThatAreTheSame() {
+    //        var startIndex = 0
+    //        var totalIngredients: Int?
+    //        if sameIngredients.count > 1 {
+    //            for ingredient in sameIngredients {
+    //                while startIndex < sameIngredients.count - 1 {
+    //                    let ingredient = sameIngredients.reduce(Ingredient, {$0 = $1)
+    //                        //                        var mutIngredient = ingredient
+    //                        //                        let totalIngredient = mutIngredient.quantity + sameIngredients[startIndex + 1].quantity
+    //                        //                        startIndex += 1
+    //                        //                        mutIngredient.quantity = totalIngredient
+    //                        //                            totalIngredients = Int(totalIngredient)
+    //                    }
+    //                }
+    //                print("\(totalIngredients)")
+    //            }
+    //        }
     
     func getAndCheck() {
         let day = UserDefaults.standard.string(forKey: "DayWasSelected")
@@ -67,17 +67,21 @@ class ShoppingListTableViewController: UITableViewController {
     
     func checkIfTodaysTheDay() {
         if days != [] {
-            if let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days) {
-                let alert = UIAlertController(title: "Today's The Day!", message: "You should have a formulated shopping list that you can take to the store!", preferredStyle: .alert)
-                let sweetAction = UIAlertAction(title: "Sweet", style: .default, handler: nil)
-                alert.addAction(sweetAction)
-                present(alert, animated: true, completion: nil)
+            guard let day = day else { return }
+            if let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days, for: day) {
                 
                 let weeksWorthIngredients = ShoppingListController.shared.getTheIngredientsForTheNextSixDaysFrom(matchingDay: today)
                 self.weeksIngredients = weeksWorthIngredients
                 tableView.reloadData()
+                
+                if Date() == day.date {
+                    let alert = UIAlertController(title: "Today's The Day!", message: "You should have a formulated shopping list that you can take to the store!", preferredStyle: .alert)
+                    let sweetAction = UIAlertAction(title: "Sweet", style: .default, handler: nil)
+                    alert.addAction(sweetAction)
+                    present(alert, animated: true, completion: nil)
+                }
             }
-            let alert = UIAlertController(title: "Not today", message: "You'll be able to see the shopping list only on the day of the week you selected to go shopping... sorry", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Almost there!", message: "You cant do anything to the list yet. Come back on \(day) and you will be able to edit and check off your shopping list", preferredStyle: .alert)
             let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
             alert.addAction(okayAction)
             present(alert, animated: true, completion: nil)
