@@ -12,7 +12,6 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBOutlet weak var calendarRecipesTableView: UITableView!
     
-    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var recipeNameLabel: UILabel!
     
     var day: Day?
@@ -25,9 +24,6 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let date = day?.date?.day {
-            dateLabel.text = "\(date)"
-        }
         calendarRecipesTableView.reloadData()
     }
     

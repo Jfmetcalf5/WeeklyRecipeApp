@@ -26,6 +26,7 @@ class RecipeController {
     
     @discardableResult func add(recipe: Recipe, to day: Day) -> Recipe {
         day.addToRecipes(recipe)
+        recipe.addToDays(day)
         saveToPersistentStore()
         return recipe
     }

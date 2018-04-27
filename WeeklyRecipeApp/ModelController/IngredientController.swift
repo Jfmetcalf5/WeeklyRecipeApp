@@ -25,6 +25,11 @@ class IngredientController {
         }
     }
     
+    func updateIsChecked(ingredient: Ingredient) {
+        ingredient.isChecked = !ingredient.isChecked
+        saveToPersistentStore()
+    }
+    
     func saveToPersistentStore() {
         do {
             try CoreDataStack.context.save()

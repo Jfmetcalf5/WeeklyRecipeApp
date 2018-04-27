@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3B0842CA208FA6B40054CDCC /* ShoppingListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0842C9208FA6B40054CDCC /* ShoppingListController.swift */; };
 		3B0842CE208FD9AC0054CDCC /* ShoppingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0842CD208FD9AC0054CDCC /* ShoppingListTableViewController.swift */; };
+		3B09E30F2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09E30E2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift */; };
 		3B0A7E842087B193007C55CF /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0A7E832087B193007C55CF /* CalendarView.swift */; };
 		3B0A7E862087B1CD007C55CF /* WeekdaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0A7E852087B1CD007C55CF /* WeekdaysView.swift */; };
 		3B0A7E882087B1DE007C55CF /* MonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0A7E872087B1DE007C55CF /* MonthView.swift */; };
@@ -43,6 +44,7 @@
 /* Begin PBXFileReference section */
 		3B0842C9208FA6B40054CDCC /* ShoppingListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListController.swift; sourceTree = "<group>"; };
 		3B0842CD208FD9AC0054CDCC /* ShoppingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewController.swift; sourceTree = "<group>"; };
+		3B09E30E2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListIngredientTableViewCell.swift; sourceTree = "<group>"; };
 		3B0A7E832087B193007C55CF /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		3B0A7E852087B1CD007C55CF /* WeekdaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysView.swift; sourceTree = "<group>"; };
 		3B0A7E872087B1DE007C55CF /* MonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthView.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				3B0A7E852087B1CD007C55CF /* WeekdaysView.swift */,
 				3B0A7E872087B1DE007C55CF /* MonthView.swift */,
 				3B0F17C42088EA98007B3879 /* DateCVCell.swift */,
+				3B09E30E2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift */,
 			);
 			path = "View+Storyboards";
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				3B624C79208557E900EA5CCE /* AddRecipeViewController.swift in Sources */,
 				3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */,
 				3B0842CE208FD9AC0054CDCC /* ShoppingListTableViewController.swift in Sources */,
+				3B09E30F2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift in Sources */,
 				3B624C5A20850E9300EA5CCE /* WeeklyRecipeApp.xcdatamodeld in Sources */,
 				3B0B4409208E44AF0041BAD8 /* ChangeDayViewController.swift in Sources */,
 				3B0A7E862087B1CD007C55CF /* WeekdaysView.swift in Sources */,

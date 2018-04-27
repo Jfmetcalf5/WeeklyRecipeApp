@@ -27,7 +27,7 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func presentAlert() {
         if UserDefaults.standard.bool(forKey: "WelcomeAlertSent") == false {
-            let alert = UIAlertController(title: "Welcome to _______", message: "Just for your information, when assigning a recipe to a specific day, you are currently unable to add the same recipe multiple times to one day... this bug will be fixed soon", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Welcome to Recipe Planner", message: "For your information, when assigning a recipe to a specific day, you are currently unable to add the same recipe multiple times to one day.  This bug will be fixed soon", preferredStyle: .alert)
             let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
             alert.addAction(okayAction)
             present(alert, animated: true, completion: nil)

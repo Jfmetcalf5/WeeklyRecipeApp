@@ -37,6 +37,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
         
         unitPickerView.delegate = self
         unitPickerView.dataSource = self
+        unitPickerView.backgroundColor = UIColor.cyan.withAlphaComponent(0.2)
         
         ingredientsListTableView.delegate = self
         ingredientsListTableView.dataSource = self
@@ -236,5 +237,4 @@ extension AddRecipeViewController: UIPickerViewDelegate, UIPickerViewDataSource 
         view.endEditing(true)
         unitTextView.text = name
     }
-    
 }

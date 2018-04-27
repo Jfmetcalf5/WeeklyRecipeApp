@@ -40,8 +40,12 @@ class ShoppingListController {
         
         for day in days {
             guard let dayDay = day.date?.day, let monthDay = day.date?.month, let yearDay = day.date?.year, let dateDay = day.date else { return nil }
-            if todaysDate <= dayDay && todaysMonth <= monthDay && todaysYear <= yearDay && dateDay.addingTimeInterval(-604800) < Date() {
+            if todaysDate == dayDay && todaysMonth == monthDay && todaysYear == yearDay {
                 return day
+            } else {
+                if todaysDate <= dayDay && todaysMonth <= monthDay && todaysYear <= yearDay && dateDay.addingTimeInterval(-691200) < Date() {
+                    return day
+                }
             }
             continue
         }
@@ -49,8 +53,8 @@ class ShoppingListController {
     }
     
     func getTheIngredientsForTheNextSixDaysFrom(matchingDay: Day) -> [Ingredient] {
-        guard let fromDate = matchingDay.date,
-            let toDate = matchingDay.date?.addingTimeInterval(604800) else { return [] }
+        guard let fromDate = matchingDay.date?.addingTimeInterval(86400),
+            let toDate = matchingDay.date?.addingTimeInterval(777600) else { return [] }
         let days = DayController.shared.fetchDaysInWeek(fromDate: fromDate, toDate: toDate)
         self.daysInWeek = days
         var ingredientsInWeek: [Ingredient] = []
