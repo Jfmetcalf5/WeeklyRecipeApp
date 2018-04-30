@@ -102,24 +102,6 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
         }
     }
     
-    //    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    //        guard let day = day else { return false }
-    //        let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days, for: day)
-    //        if Date().day == today?.date?.day {
-    //            return true
-    //        } else {
-    //            return false
-    //        }
-    //    }
-    //
-    //    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-    //        if editingStyle == .delete {
-    //            weeksIngredients.remove(at: indexPath.row)
-    //
-    //            tableView.deleteRows(at: [indexPath], with: .automatic)
-    //        }
-    //    }
-    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

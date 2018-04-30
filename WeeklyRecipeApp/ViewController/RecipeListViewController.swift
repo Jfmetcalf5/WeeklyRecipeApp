@@ -79,15 +79,15 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
 
 //MARK: - NSFetchedResulstsControllerDelegate Methods
 extension RecipeListViewController: NSFetchedResultsControllerDelegate {
-    // Tell the table view I'm about to do a bunch of stuff
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         recipeTableView.beginUpdates()
     }
-    // Tell the table view I finished doing my stuff, you do you thing
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         recipeTableView.endUpdates()
     }
-    // I just created, read, updated, or seleted something
+    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
                     didChange anObject: Any,
                     at indexPath: IndexPath?,

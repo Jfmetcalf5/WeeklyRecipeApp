@@ -23,7 +23,7 @@ class ShoppingListController {
     
     func checkAndGetAllMatchingDaysForVisibleMonth() -> [Day] {
         getTheSelectedDay()
-        let days = DayController.shared.daysOfMonth
+        let days = DayController.shared.beforeAndAfterMonth
         var matchingDays: [Day] = []
         for day in days {
             if dayOfWeek == day.dayOfWeek {
@@ -34,16 +34,17 @@ class ShoppingListController {
     }
     
     func checkIfTodayIsTheDayToGoShopping(days: [Day], for dayOfWeek: String) -> Day? {
-        let todaysDate = Calendar.current.component(.day, from: Date())
-        let todaysMonth = Calendar.current.component(.month, from: Date())
-        let todaysYear = Calendar.current.component(.year, from: Date())
+        let todaysDate = Date() /*Calendar.current.component(.day, from: Date())*/
+        //        let todaysMonth = Calendar.current.component(.month, from: Date())
+        //        let todaysYear = Calendar.current.component(.year, from: Date())
         
         for day in days {
-            guard let dayDay = day.date?.day, let monthDay = day.date?.month, let yearDay = day.date?.year, let dateDay = day.date else { return nil }
-            if todaysDate == dayDay && todaysMonth == monthDay && todaysYear == yearDay {
+            
+            guard let dayDay = day.date/*?.day, let monthDay = day.date?.month, let yearDay = day.date?.year, let dateDay = day.date*/ else { return nil }
+            if todaysDate.day == dayDay.day && todaysDate.day == dayDay.day /*&& todaysMonth == monthDay && todaysYear == yearDay*/ {
                 return day
             } else {
-                if todaysDate <= dayDay && todaysMonth <= monthDay && todaysYear <= yearDay && dateDay.addingTimeInterval(-691200) < Date() {
+                if todaysDate <= dayDay /*&& todaysMonth <= monthDay && todaysYear <= yearDay*/ && dayDay.addingTimeInterval(-604800) < Date() {
                     return day
                 }
             }
@@ -54,23 +55,17 @@ class ShoppingListController {
     
     func getTheIngredientsForTheNextSixDaysFrom(matchingDay: Day) -> [Ingredient] {
         guard let fromDate = matchingDay.date?.addingTimeInterval(86400),
-            let toDate = matchingDay.date?.addingTimeInterval(777600) else { return [] }
+            let toDate = matchingDay.date?.addingTimeInterval(604800) else { return [] }
         let days = DayController.shared.fetchDaysInWeek(fromDate: fromDate, toDate: toDate)
         self.daysInWeek = days
         var ingredientsInWeek: [Ingredient] = []
         for day in days {
             guard let recipes = day.recipes?.array as? [Recipe] else { continue }
-            if recipes.count > 1 {
-                for recipe in recipes {
-                    guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { continue }
-                    ingredientsInWeek.append(contentsOf: ingredients)
-                }
-            } else {
-                guard let ingredients = recipes.first?.ingredients?.array as? [Ingredient] else { continue }
+            for recipe in recipes {
+                guard let ingredients = recipe.ingredients?.array as? [Ingredient] else { continue }
                 ingredientsInWeek.append(contentsOf: ingredients)
             }
         }
         return ingredientsInWeek
     }
-    
 }

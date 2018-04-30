@@ -88,6 +88,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         myCollectionView.register(DateCVCell.self, forCellWithReuseIdentifier: "Cell")
         
         DayController.shared.fetchDaysFor(month: currentMonthIndex, year: currentYear, lastDay: numOfDaysInMonth[currentMonthIndex - 1])
+        DayController.shared.fetchDaysForBeforeAndAfter(month: currentMonthIndex, year: currentYear, lastDay: numOfDaysInMonth[currentMonthIndex - 1])
         
         guard parentVC != nil else { return }
         self.parentVC.delegate = self
@@ -97,11 +98,14 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         return numOfDaysInMonth[currentMonthIndex-1] + firstWeekDayOfMonth - 1
     }
     
+    var emptyCellCount = 0
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? DateCVCell else { return UICollectionViewCell() }
         cell.backgroundColor = UIColor.clear
         if indexPath.item <= firstWeekDayOfMonth - 2 {
             cell.isHidden = true
+            emptyCellCount += 1
         } else {
             let calcDate = indexPath.item - firstWeekDayOfMonth + 2
             cell.isHidden = false
@@ -111,8 +115,8 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                 cell.isUserInteractionEnabled = false
                 cell.lbl.textColor = UIColor.lightGray
             } else {
-                if indexPath.item < DayController.shared.daysOfMonth.count {
-                    let day = DayController.shared.daysOfMonth[indexPath.item]
+                if indexPath.item < DayController.shared.daysOfMonth.count + emptyCellCount {
+                    let day = DayController.shared.daysOfMonth[indexPath.item - emptyCellCount]
                     cell.day = day
                 } else {
                     let day = DayController.shared.daysOfMonth[indexPath.row - 12]
@@ -191,7 +195,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
     func didChangeMonth(monthIndex: Int, year: Int) {
         currentMonthIndex = monthIndex + 1
         currentYear = year
-        
+        emptyCellCount = 0
         //for leap year, make february month of 29 days
         if monthIndex == 1 {
             if currentYear % 4 == 0 {
@@ -202,6 +206,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         }
         
         DayController.shared.fetchDaysFor(month: currentMonthIndex, year: currentYear, lastDay: numOfDaysInMonth[currentMonthIndex - 1])
+        DayController.shared.fetchDaysForBeforeAndAfter(month: currentMonthIndex, year: currentYear, lastDay: numOfDaysInMonth[currentMonthIndex - 1])
         
         firstWeekDayOfMonth = getFirstWeekDay()
         

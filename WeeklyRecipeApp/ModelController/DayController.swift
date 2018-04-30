@@ -18,6 +18,7 @@ class DayController {
     let weeks = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     
     var daysOfMonth: [Day] = []
+    var beforeAndAfterMonth: [Day] = []
     var tempWeekSelected: String?
     
     func createDaysForTenYears() {
@@ -88,6 +89,32 @@ class DayController {
         do {
             let days = (try CoreDataStack.context.fetch(request))
             daysOfMonth = days
+        } catch let e {
+            print("Error fetching Days from CoreData :\(e.localizedDescription)")
+        }
+    }
+    
+    func fetchDaysForBeforeAndAfter(month: Int, year: Int, lastDay: Int) {
+        var firstDayOfMonth: Date?
+        var lastDayOfMonth: Date?
+        let firstComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: year, month: month, day: 1, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+        let lastComponents = DateComponents(calendar: Calendar.current, timeZone: nil, era: nil, year: year, month: month, day: lastDay, hour: nil, minute: nil, second: nil, nanosecond: nil, weekday: nil, weekdayOrdinal: nil, quarter: nil, weekOfMonth: nil, weekOfYear: nil, yearForWeekOfYear: nil)
+        firstDayOfMonth = Calendar.current.date(from: firstComponents)
+        lastDayOfMonth = Calendar.current.date(from: lastComponents)
+        guard let firstDay = firstDayOfMonth,
+            let lastDay = lastDayOfMonth else { return }
+        
+        let request: NSFetchRequest<Day> = Day.fetchRequest()
+        
+        let predicate1 = NSPredicate(format: "date >= %@", firstDay.addingTimeInterval(-604800) as NSDate)
+        let predicate2 = NSPredicate(format: "date <= %@", lastDay.addingTimeInterval(604800) as NSDate)
+        let compound = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate1, predicate2])
+        let sortDesciptor = NSSortDescriptor(key: "date", ascending: true)
+        request.predicate = compound
+        request.sortDescriptors = [sortDesciptor]
+        do {
+            let days = (try CoreDataStack.context.fetch(request))
+            beforeAndAfterMonth = days
         } catch let e {
             print("Error fetching Days from CoreData :\(e.localizedDescription)")
         }
