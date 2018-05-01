@@ -75,7 +75,7 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
                     let ingredient = Ingredient(name: name, quantity: value, unit: unit)
                     ingredients.append(ingredient)
                 }
-
+                
                 self.weeksIngredients = ingredients
                 tableView.reloadData()
                 
@@ -128,8 +128,24 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
         }
     }
     
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    }
+//    var tempDeletedIngredient: [Ingredient] = []
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//
+//            let ingredient = weeksIngredients[indexPath.row]
+//            tempDeletedIngredient.append(ingredient)
+//            weeksIngredients.remove(at: indexPath.row)
+//
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
+//
+//    // MARK: - Navigation
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toDeletedIngredients" {
+//            guard let detailVC = segue.destination as? DeletedIngredientsTableViewController else { return }
+//            detailVC.deletedIngredients = tempDeletedIngredient
+//        }
+//    }
 }

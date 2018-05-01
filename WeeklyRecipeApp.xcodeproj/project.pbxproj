@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B072CE52098D145008DAE0B /* DeletedIngredientsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B072CE42098D145008DAE0B /* DeletedIngredientsTableViewController.swift */; };
 		3B0842CA208FA6B40054CDCC /* ShoppingListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0842C9208FA6B40054CDCC /* ShoppingListController.swift */; };
 		3B0842CE208FD9AC0054CDCC /* ShoppingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0842CD208FD9AC0054CDCC /* ShoppingListTableViewController.swift */; };
 		3B09E30F2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09E30E2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B072CE42098D145008DAE0B /* DeletedIngredientsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedIngredientsTableViewController.swift; sourceTree = "<group>"; };
 		3B0842C9208FA6B40054CDCC /* ShoppingListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListController.swift; sourceTree = "<group>"; };
 		3B0842CD208FD9AC0054CDCC /* ShoppingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewController.swift; sourceTree = "<group>"; };
 		3B09E30E2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListIngredientTableViewCell.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				3BD988D2208822ED00FE0D89 /* DayRecipeViewController.swift */,
 				3B0B4408208E44AF0041BAD8 /* ChangeDayViewController.swift */,
 				3B0842CD208FD9AC0054CDCC /* ShoppingListTableViewController.swift */,
+				3B072CE42098D145008DAE0B /* DeletedIngredientsTableViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				3B0B4409208E44AF0041BAD8 /* ChangeDayViewController.swift in Sources */,
 				3B0A7E862087B1CD007C55CF /* WeekdaysView.swift in Sources */,
 				3B0A7E8A2087B204007C55CF /* CalendarViewController.swift in Sources */,
+				3B072CE52098D145008DAE0B /* DeletedIngredientsTableViewController.swift in Sources */,
 				3B0A7E842087B193007C55CF /* CalendarView.swift in Sources */,
 				3B624C7B20855E4900EA5CCE /* IngredientController.swift in Sources */,
 				3B2CB193208BEF40008DD137 /* WeekSelected+Convenience.swift in Sources */,

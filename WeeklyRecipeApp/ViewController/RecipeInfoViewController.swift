@@ -38,8 +38,6 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = ingredientsListTableView.dequeueReusableCell(withIdentifier: "ingredientListCell", for: indexPath)
         guard let recipe = recipe else { return UITableViewCell() }
