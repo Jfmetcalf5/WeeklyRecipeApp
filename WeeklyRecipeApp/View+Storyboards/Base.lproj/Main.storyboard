@@ -816,9 +816,7 @@
                             <outlet property="delegate" destination="WK2-DE-J1J" id="hwL-ag-ulA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="e4R-j9-hX8">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Deleted Ingredients &gt;" id="mBX-Qn-ywu"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="e4R-j9-hX8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVi-hd-OSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
