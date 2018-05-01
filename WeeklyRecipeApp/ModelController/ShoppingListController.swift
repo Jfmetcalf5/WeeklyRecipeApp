@@ -34,17 +34,15 @@ class ShoppingListController {
     }
     
     func checkIfTodayIsTheDayToGoShopping(days: [Day], for dayOfWeek: String) -> Day? {
-        let todaysDate = Date() /*Calendar.current.component(.day, from: Date())*/
-        //        let todaysMonth = Calendar.current.component(.month, from: Date())
-        //        let todaysYear = Calendar.current.component(.year, from: Date())
+        let todaysDate = Date()
         
         for day in days {
             
-            guard let dayDay = day.date/*?.day, let monthDay = day.date?.month, let yearDay = day.date?.year, let dateDay = day.date*/ else { return nil }
-            if todaysDate.day == dayDay.day && todaysDate.day == dayDay.day /*&& todaysMonth == monthDay && todaysYear == yearDay*/ {
+            guard let dayDay = day.date else { return nil }
+            if todaysDate.day == dayDay.day && todaysDate.day == dayDay.day {
                 return day
             } else {
-                if todaysDate <= dayDay /*&& todaysMonth <= monthDay && todaysYear <= yearDay*/ && dayDay.addingTimeInterval(-604800) < Date() {
+                if todaysDate <= dayDay && dayDay.addingTimeInterval(-604800) < Date() {
                     return day
                 }
             }

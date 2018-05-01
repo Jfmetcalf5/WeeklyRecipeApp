@@ -8,13 +8,7 @@
 
 import UIKit
 
-protocol ShoppingListTableViewControllerDelegate: class {
-    func checkBoxButtonTapped(sender: ShoppingListIngredientTableViewCell)
-}
-
 class ShoppingListIngredientTableViewCell: UITableViewCell {
-    
-    weak var delegate: ShoppingListTableViewControllerDelegate?
     
     var ingredient: Ingredient? {
         didSet {
@@ -26,21 +20,9 @@ class ShoppingListIngredientTableViewCell: UITableViewCell {
     @IBOutlet weak var IngredientNameLabel: UILabel!
     @IBOutlet weak var checkBoxButton: UIButton!
     
-    @IBAction func checkBoxButtonTapped(_ sender: UIButton) {
-        if let delegate = delegate {
-        delegate.checkBoxButtonTapped(sender: self)
-        }
-    }
-    
     func updateCellViews() {
         guard let ingredient = ingredient else { return }
         quantityUnitLabel.text = "\(ingredient.quantity) \(ingredient.unit ?? "")"
         IngredientNameLabel.text = ingredient.name
-        
-        if ingredient.isChecked == false {
-            checkBoxButton.setImage(#imageLiteral(resourceName: "EmptyBox"), for: .normal)
-        } else {
-            checkBoxButton.setImage(#imageLiteral(resourceName: "CheckedBox"), for: .normal)
-        }
     }
 }

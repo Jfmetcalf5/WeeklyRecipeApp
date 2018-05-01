@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ShoppingListTableViewController: UITableViewController, ShoppingListTableViewControllerDelegate {
+class ShoppingListTableViewController: UITableViewController {
     
     var day: String?
     var days: [Day] = []
     var weeksIngredients: [Ingredient] = []
+    
+    @IBOutlet weak var undoButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,21 +22,11 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        undoButton.isEnabled = false
         tableView.allowsSelection = false
         getAndCheck()
         checkIfTodaysTheDay()
         navigationItem.title = day ?? "Unknown Day?"
-    }
-    
-    func checkBoxButtonTapped(sender: ShoppingListIngredientTableViewCell) {
-        guard let day = day else { return }
-        let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days, for: day)
-        if Date().day == today?.date?.day {
-            guard let indexPath = tableView.indexPath(for: sender) else { return }
-            let selectedIngredient = weeksIngredients[indexPath.row]
-            IngredientController.shared.updateIsChecked(ingredient: selectedIngredient)
-            sender.updateCellViews()
-        }
     }
     
     func getAndCheck() {
@@ -111,16 +103,14 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
         let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days, for: day)
         if Date().day != today?.date?.day {
             cell.checkBoxButton.isHidden = true
-            cell.delegate = self
-            
+            tableView.isUserInteractionEnabled = false
             let ingredient = weeksIngredients[indexPath.row]
             cell.ingredient = ingredient
             
             return cell
         } else {
             cell.checkBoxButton.isHidden = false
-            cell.delegate = self
-            
+            tableView.isUserInteractionEnabled = true
             let ingredient = weeksIngredients[indexPath.row]
             cell.ingredient = ingredient
             
@@ -128,24 +118,31 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
         }
     }
     
-//    var tempDeletedIngredient: [Ingredient] = []
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//
-//            let ingredient = weeksIngredients[indexPath.row]
-//            tempDeletedIngredient.append(ingredient)
-//            weeksIngredients.remove(at: indexPath.row)
-//
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-//
-//    // MARK: - Navigation
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toDeletedIngredients" {
-//            guard let detailVC = segue.destination as? DeletedIngredientsTableViewController else { return }
-//            detailVC.deletedIngredients = tempDeletedIngredient
-//        }
-//    }
+    @IBAction func undoDeleteButtonTapped(_ sender: UIButton) {
+    guard let lastIngredient = tempDeletedIngredient.last else {
+            return
+        }
+        weeksIngredients.append(lastIngredient)
+        tempDeletedIngredient.removeLast()
+        let sortedIngredients = weeksIngredients.sorted(by: {$0.name ?? "" < $1.name ?? ""})
+        self.weeksIngredients = sortedIngredients
+        
+        if tempDeletedIngredient.count == 0 {
+            undoButton.isEnabled = false
+        }
+        tableView.reloadData()
+    }
+    
+    var tempDeletedIngredient: [Ingredient] = []
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+
+            let ingredient = weeksIngredients[indexPath.row]
+            tempDeletedIngredient.append(ingredient)
+            weeksIngredients.remove(at: indexPath.row)
+
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            undoButton.isEnabled = true
+        }
+    }
 }

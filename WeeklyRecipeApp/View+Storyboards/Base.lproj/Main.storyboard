@@ -770,43 +770,42 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Quantity&amp;Unit)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVw-jh-Gt4">
-                                            <rect key="frame" x="63.5" y="9" width="295.5" height="21"/>
+                                            <rect key="frame" x="16" y="9" width="295" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(IngredientName)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsW-N7-Yym">
-                                            <rect key="frame" x="63.5" y="36" width="295.5" height="21"/>
+                                            <rect key="frame" x="16" y="33" width="295" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-Qk-oWu">
-                                            <rect key="frame" x="6" y="9" width="50" height="50"/>
+                                            <rect key="frame" x="214" y="8" width="151" height="50"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" secondItem="V4e-Qk-oWu" secondAttribute="height" multiplier="1:1" id="BFq-mS-SkV"/>
+                                                <constraint firstAttribute="width" secondItem="V4e-Qk-oWu" secondAttribute="height" multiplier="1:1" constant="101" id="BFq-mS-SkV"/>
                                                 <constraint firstAttribute="height" constant="50" id="fjW-FZ-GpH"/>
                                             </constraints>
-                                            <state key="normal" image="EmptyBox"/>
-                                            <connections>
-                                                <action selector="checkBoxButtonTapped:" destination="SVl-eJ-qvZ" eventType="touchUpInside" id="Fg3-Vp-cj8"/>
-                                            </connections>
+                                            <state key="normal" title="&lt; Swipe to delete">
+                                                <color key="titleColor" red="1" green="0.05479137577282045" blue="0.047842907591843065" alpha="0.22744541952054795" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="V4e-Qk-oWu" firstAttribute="leading" secondItem="xZ3-0S-bSI" secondAttribute="leading" constant="6" id="1H3-AB-sO9"/>
-                                        <constraint firstAttribute="trailing" secondItem="qsW-N7-Yym" secondAttribute="trailing" constant="16" id="DYX-G7-EOE"/>
+                                        <constraint firstItem="V4e-Qk-oWu" firstAttribute="leading" secondItem="xZ3-0S-bSI" secondAttribute="leading" constant="214" id="1H3-AB-sO9"/>
+                                        <constraint firstAttribute="trailing" secondItem="qsW-N7-Yym" secondAttribute="trailing" constant="64" id="DYX-G7-EOE"/>
                                         <constraint firstItem="qsW-N7-Yym" firstAttribute="leading" secondItem="sVw-jh-Gt4" secondAttribute="leading" id="N4a-tQ-xae"/>
                                         <constraint firstItem="V4e-Qk-oWu" firstAttribute="centerY" secondItem="xZ3-0S-bSI" secondAttribute="centerY" id="RY8-j4-3hi"/>
                                         <constraint firstItem="sVw-jh-Gt4" firstAttribute="top" secondItem="xZ3-0S-bSI" secondAttribute="top" constant="9" id="VwS-ek-Ddd"/>
-                                        <constraint firstAttribute="trailing" secondItem="sVw-jh-Gt4" secondAttribute="trailing" constant="16" id="ddr-7C-rui"/>
-                                        <constraint firstItem="qsW-N7-Yym" firstAttribute="top" secondItem="sVw-jh-Gt4" secondAttribute="bottom" constant="6" id="hwW-6Q-KMX"/>
-                                        <constraint firstItem="sVw-jh-Gt4" firstAttribute="leading" secondItem="V4e-Qk-oWu" secondAttribute="trailing" constant="8" id="vFe-DE-xmw"/>
+                                        <constraint firstAttribute="trailing" secondItem="sVw-jh-Gt4" secondAttribute="trailing" constant="64" id="ddr-7C-rui"/>
+                                        <constraint firstItem="qsW-N7-Yym" firstAttribute="top" secondItem="sVw-jh-Gt4" secondAttribute="bottom" constant="3" id="hwW-6Q-KMX"/>
+                                        <constraint firstItem="sVw-jh-Gt4" firstAttribute="leading" secondItem="V4e-Qk-oWu" secondAttribute="trailing" constant="-349" id="vFe-DE-xmw"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="IngredientNameLabel" destination="qsW-N7-Yym" id="5X9-rT-aRh"/>
-                                    <outlet property="checkBoxButton" destination="V4e-Qk-oWu" id="RKE-JI-SVw"/>
+                                    <outlet property="checkBoxButton" destination="V4e-Qk-oWu" id="48V-US-J1n"/>
                                     <outlet property="quantityUnitLabel" destination="sVw-jh-Gt4" id="EPB-zd-Y5N"/>
                                 </connections>
                             </tableViewCell>
@@ -816,55 +815,28 @@
                             <outlet property="delegate" destination="WK2-DE-J1J" id="hwL-ag-ulA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="e4R-j9-hX8"/>
+                    <navigationItem key="navigationItem" id="e4R-j9-hX8">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="lMF-QN-Ksp">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h2x-5C-fV0">
+                                <rect key="frame" x="16" y="7" width="86" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Undo Delete"/>
+                                <connections>
+                                    <action selector="undoDeleteButtonTapped:" destination="WK2-DE-J1J" eventType="touchUpInside" id="zRa-pf-rJO"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="undoButtonTapped:" destination="WK2-DE-J1J" id="M4A-61-4bn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="undoButton" destination="lMF-QN-Ksp" id="Xra-lc-k6b"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVi-hd-OSG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3397.5999999999999" y="854.1229385307347"/>
-        </scene>
-        <!--Deleted Ingredients Table View Controller-->
-        <scene sceneID="GEC-Ii-mlA">
-            <objects>
-                <tableViewController id="eLK-Cc-LX8" customClass="DeletedIngredientsTableViewController" customModule="WeeklyRecipeApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="gaq-yy-0o0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="deletedIngredientCell" textLabel="RUB-nQ-SG7" detailTextLabel="lR3-wd-17K" style="IBUITableViewCellStyleSubtitle" id="ft3-fH-Xsf">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ft3-fH-Xsf" id="cgP-2C-z2p">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RUB-nQ-SG7">
-                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lR3-wd-17K">
-                                            <rect key="frame" x="16" y="25.5" width="33" height="14.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="eLK-Cc-LX8" id="b6b-d4-3Ok"/>
-                            <outlet property="delegate" destination="eLK-Cc-LX8" id="lSZ-oa-Hax"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WX1-Yb-jDW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4260" y="1191"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="O8V-4H-egP">
@@ -946,7 +918,6 @@
     </scenes>
     <resources>
         <image name="Calendar" width="36" height="36"/>
-        <image name="EmptyBox" width="50" height="50"/>
         <image name="Recipe" width="36" height="36"/>
         <image name="RecipePlanner" width="231" height="231"/>
         <image name="ShoppingList" width="36" height="36"/>
