@@ -50,7 +50,33 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
             if let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days, for: day) {
                 
                 let weeksWorthIngredients = ShoppingListController.shared.getTheIngredientsForTheNextSixDaysFrom(matchingDay: today)
-                self.weeksIngredients = weeksWorthIngredients
+                let sortedIngredients = weeksWorthIngredients.sorted(by: {$0.name ?? "" < $1.name ?? ""})
+                
+                var ingredientCountDictionary: [String: Int16] = [:]
+                
+                for ingredient in sortedIngredients {
+                    
+                    guard let ingredientName = ingredient.name,
+                        let unit = ingredient.unit else { continue }
+                    
+                    if let numberOfIngredient = ingredientCountDictionary["\(ingredientName) \(unit)"] {
+                        ingredientCountDictionary["\(ingredientName) \(unit)"] = numberOfIngredient + ingredient.quantity
+                    } else {
+                        ingredientCountDictionary["\(ingredientName) \(unit)"] = ingredient.quantity
+                    }
+                }
+                
+                var ingredients: [Ingredient] = []
+                
+                for (key, value) in ingredientCountDictionary {
+                    let keys = key.components(separatedBy: " ")
+                    guard let name = keys.first,
+                        let unit = keys.last else { return }
+                    let ingredient = Ingredient(name: name, quantity: value, unit: unit)
+                    ingredients.append(ingredient)
+                }
+
+                self.weeksIngredients = ingredients
                 tableView.reloadData()
                 
                 if Date().day == today.date?.day {
@@ -92,13 +118,13 @@ class ShoppingListTableViewController: UITableViewController, ShoppingListTableV
             
             return cell
         } else {
-        cell.checkBoxButton.isHidden = false
-        cell.delegate = self
-        
-        let ingredient = weeksIngredients[indexPath.row]
-        cell.ingredient = ingredient
-        
-        return cell
+            cell.checkBoxButton.isHidden = false
+            cell.delegate = self
+            
+            let ingredient = weeksIngredients[indexPath.row]
+            cell.ingredient = ingredient
+            
+            return cell
         }
     }
     
