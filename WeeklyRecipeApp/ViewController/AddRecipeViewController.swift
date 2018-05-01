@@ -117,7 +117,7 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     @IBAction func addIngredientButtonTapped(_ sender: UIButton) {
         if let recipe = recipe {
             guard let name = searchBar.text, name != "",
-                let quantityString = quantityTextField.text, let quantity = Int16(quantityString), let unit = unitTextView.text, unit != "" else { return }
+                let quantityString = quantityTextField.text, let quantity = Double(quantityString), let unit = unitTextView.text, unit != "" else { return }
             IngredientController.shared.addIngredientWith(name: name, quantity: quantity, unit: unit, recipe: recipe)
             view.resignFirstResponder()
             ingredientsTableView.reloadData()
@@ -129,7 +129,12 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     
     @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
         guard let title = titleTextField.text, titleTextField.text != "",
-            let directions = directionsTextView.text, directionsTextView.text != "" else { return }
+            let directions = directionsTextView.text, directionsTextView.text != "" else {
+                let alert = UIAlertController(title: "Missing Info", message: "Either the 'Title' or 'Directions' field is empty. Please put something in them", preferredStyle: .alert)
+                let okayAction = UIAlertAction(title: "Okay", style: .default, handler: nil)
+                alert.addAction(okayAction)
+                present(alert, animated: true, completion: nil)
+                return }
         if let recipe = recipe {
             RecipeController.shared.update(recipe: recipe, with: title, directions: directions)
         }

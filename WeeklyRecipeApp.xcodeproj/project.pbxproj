@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B072CE720990AA6008DAE0B /* MeasurementDictionaryConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B072CE620990AA6008DAE0B /* MeasurementDictionaryConverter.swift */; };
 		3B0842CA208FA6B40054CDCC /* ShoppingListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0842C9208FA6B40054CDCC /* ShoppingListController.swift */; };
 		3B0842CE208FD9AC0054CDCC /* ShoppingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0842CD208FD9AC0054CDCC /* ShoppingListTableViewController.swift */; };
 		3B09E30F2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B09E30E2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B072CE620990AA6008DAE0B /* MeasurementDictionaryConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementDictionaryConverter.swift; sourceTree = "<group>"; };
 		3B0842C9208FA6B40054CDCC /* ShoppingListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListController.swift; sourceTree = "<group>"; };
 		3B0842CD208FD9AC0054CDCC /* ShoppingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewController.swift; sourceTree = "<group>"; };
 		3B09E30E2093B6450092A478 /* ShoppingListIngredientTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListIngredientTableViewCell.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				3B101A8E20868949003FD569 /* ShiftableViewController.swift */,
 				3B0F17C62088EC8B007B3879 /* DateHelpers.swift */,
+				3B072CE620990AA6008DAE0B /* MeasurementDictionaryConverter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				3B0F17C72088EC8B007B3879 /* DateHelpers.swift in Sources */,
 				3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */,
 				3B0F17C92088F0CB007B3879 /* Day+Convenience.swift in Sources */,
+				3B072CE720990AA6008DAE0B /* MeasurementDictionaryConverter.swift in Sources */,
 				3BD988D3208822ED00FE0D89 /* DayRecipeViewController.swift in Sources */,
 				3B0AD73220877F5500262C08 /* RecipeInfoViewController.swift in Sources */,
 				3B624C712085183300EA5CCE /* CoreDataStack.swift in Sources */,

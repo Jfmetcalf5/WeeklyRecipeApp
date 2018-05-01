@@ -44,7 +44,7 @@ class ShoppingListTableViewController: UITableViewController {
                 let weeksWorthIngredients = ShoppingListController.shared.getTheIngredientsForTheNextSixDaysFrom(matchingDay: today)
                 let sortedIngredients = weeksWorthIngredients.sorted(by: {$0.name ?? "" < $1.name ?? ""})
                 
-                var ingredientCountDictionary: [String: Int16] = [:]
+                var ingredientCountDictionary: [String: Double] = [:]
                 
                 for ingredient in sortedIngredients {
                     
@@ -67,7 +67,7 @@ class ShoppingListTableViewController: UITableViewController {
                     let ingredient = Ingredient(name: name, quantity: value, unit: unit)
                     ingredients.append(ingredient)
                 }
-                
+            
                 self.weeksIngredients = ingredients
                 tableView.reloadData()
                 
