@@ -761,51 +761,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="vF7-vV-X1V">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="22"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wNm-1A-MEh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="22"/>
+                                    <state key="normal" title="&lt; Swipe to delete">
+                                        <color key="titleColor" red="0.92790291879999998" green="0.5234198336" blue="0.0" alpha="0.74537136130000003" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="wNm-1A-MEh" firstAttribute="width" secondItem="vF7-vV-X1V" secondAttribute="width" id="jbd-eC-HLQ"/>
+                                <constraint firstItem="wNm-1A-MEh" firstAttribute="centerX" secondItem="vF7-vV-X1V" secondAttribute="centerX" id="p9W-sS-Mf4"/>
+                                <constraint firstItem="wNm-1A-MEh" firstAttribute="height" secondItem="vF7-vV-X1V" secondAttribute="height" id="ytv-S2-WE9"/>
+                                <constraint firstItem="wNm-1A-MEh" firstAttribute="centerY" secondItem="vF7-vV-X1V" secondAttribute="centerY" id="zT9-JU-wYT"/>
+                            </constraints>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="weeksIngredientCell" rowHeight="68" id="SVl-eJ-qvZ" customClass="ShoppingListIngredientTableViewCell" customModule="WeeklyRecipeApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="68"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="weeksIngredientCell" rowHeight="57" id="SVl-eJ-qvZ" customClass="ShoppingListIngredientTableViewCell" customModule="WeeklyRecipeApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="375" height="57"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="SVl-eJ-qvZ" id="xZ3-0S-bSI">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="67.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="56.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Quantity&amp;Unit)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVw-jh-Gt4">
-                                            <rect key="frame" x="16" y="9" width="295" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="16" y="15" width="151" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(IngredientName)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qsW-N7-Yym">
-                                            <rect key="frame" x="16" y="33" width="295" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="175" y="15" width="167.5" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-Qk-oWu">
-                                            <rect key="frame" x="214" y="8" width="151" height="50"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="V4e-Qk-oWu" secondAttribute="height" multiplier="1:1" constant="101" id="BFq-mS-SkV"/>
-                                                <constraint firstAttribute="height" constant="50" id="fjW-FZ-GpH"/>
-                                            </constraints>
-                                            <state key="normal" title="&lt; Swipe to delete">
-                                                <color key="titleColor" red="1" green="0.05479137577282045" blue="0.047842907591843065" alpha="0.22744541952054795" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="V4e-Qk-oWu" firstAttribute="leading" secondItem="xZ3-0S-bSI" secondAttribute="leading" constant="214" id="1H3-AB-sO9"/>
-                                        <constraint firstAttribute="trailing" secondItem="qsW-N7-Yym" secondAttribute="trailing" constant="64" id="DYX-G7-EOE"/>
-                                        <constraint firstItem="qsW-N7-Yym" firstAttribute="leading" secondItem="sVw-jh-Gt4" secondAttribute="leading" id="N4a-tQ-xae"/>
-                                        <constraint firstItem="V4e-Qk-oWu" firstAttribute="centerY" secondItem="xZ3-0S-bSI" secondAttribute="centerY" id="RY8-j4-3hi"/>
-                                        <constraint firstItem="sVw-jh-Gt4" firstAttribute="top" secondItem="xZ3-0S-bSI" secondAttribute="top" constant="9" id="VwS-ek-Ddd"/>
-                                        <constraint firstAttribute="trailing" secondItem="sVw-jh-Gt4" secondAttribute="trailing" constant="64" id="ddr-7C-rui"/>
-                                        <constraint firstItem="qsW-N7-Yym" firstAttribute="top" secondItem="sVw-jh-Gt4" secondAttribute="bottom" constant="3" id="hwW-6Q-KMX"/>
-                                        <constraint firstItem="sVw-jh-Gt4" firstAttribute="leading" secondItem="V4e-Qk-oWu" secondAttribute="trailing" constant="-349" id="vFe-DE-xmw"/>
+                                        <constraint firstItem="sVw-jh-Gt4" firstAttribute="leading" secondItem="xZ3-0S-bSI" secondAttribute="leading" constant="16" id="DW8-kk-LPf"/>
+                                        <constraint firstItem="qsW-N7-Yym" firstAttribute="centerY" secondItem="xZ3-0S-bSI" secondAttribute="centerY" id="NAH-vs-Ecp"/>
+                                        <constraint firstItem="sVw-jh-Gt4" firstAttribute="centerY" secondItem="xZ3-0S-bSI" secondAttribute="centerY" id="OAp-Qy-whM"/>
+                                        <constraint firstItem="qsW-N7-Yym" firstAttribute="leading" secondItem="xZ3-0S-bSI" secondAttribute="trailing" constant="-200" id="gEb-xZ-fCK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="IngredientNameLabel" destination="qsW-N7-Yym" id="5X9-rT-aRh"/>
-                                    <outlet property="checkBoxButton" destination="V4e-Qk-oWu" id="48V-US-J1n"/>
                                     <outlet property="quantityUnitLabel" destination="sVw-jh-Gt4" id="EPB-zd-Y5N"/>
                                 </connections>
                             </tableViewCell>
@@ -831,6 +835,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="swipeToDeleteLabel" destination="wNm-1A-MEh" id="YcO-b2-mtf"/>
                         <outlet property="undoButton" destination="lMF-QN-Ksp" id="Xra-lc-k6b"/>
                     </connections>
                 </tableViewController>

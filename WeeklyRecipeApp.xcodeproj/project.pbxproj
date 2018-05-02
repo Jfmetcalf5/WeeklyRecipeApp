@@ -25,6 +25,7 @@
 		3B0F17C72088EC8B007B3879 /* DateHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F17C62088EC8B007B3879 /* DateHelpers.swift */; };
 		3B0F17C92088F0CB007B3879 /* Day+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F17C82088F0CB007B3879 /* Day+Convenience.swift */; };
 		3B0F17CB2088F1A8007B3879 /* DayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F17CA2088F1A8007B3879 /* DayController.swift */; };
+		3B0F5C95209A0B46009CA4C6 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F5C94209A0B46009CA4C6 /* ColorHelper.swift */; };
 		3B101A8F20868949003FD569 /* ShiftableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B101A8E20868949003FD569 /* ShiftableViewController.swift */; };
 		3B2CB193208BEF40008DD137 /* WeekSelected+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2CB192208BEF40008DD137 /* WeekSelected+Convenience.swift */; };
 		3B624C5220850E9300EA5CCE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B624C5120850E9300EA5CCE /* AppDelegate.swift */; };
@@ -61,6 +62,7 @@
 		3B0F17C62088EC8B007B3879 /* DateHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelpers.swift; sourceTree = "<group>"; };
 		3B0F17C82088F0CB007B3879 /* Day+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Day+Convenience.swift"; sourceTree = "<group>"; };
 		3B0F17CA2088F1A8007B3879 /* DayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayController.swift; sourceTree = "<group>"; };
+		3B0F5C94209A0B46009CA4C6 /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		3B101A8E20868949003FD569 /* ShiftableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShiftableViewController.swift; sourceTree = "<group>"; };
 		3B2CB192208BEF40008DD137 /* WeekSelected+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekSelected+Convenience.swift"; sourceTree = "<group>"; };
 		3B624C4E20850E9300EA5CCE /* WeeklyRecipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeeklyRecipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 				3B101A8E20868949003FD569 /* ShiftableViewController.swift */,
 				3B0F17C62088EC8B007B3879 /* DateHelpers.swift */,
 				3B072CE620990AA6008DAE0B /* MeasurementDictionaryConverter.swift */,
+				3B0F5C94209A0B46009CA4C6 /* ColorHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -158,9 +161,9 @@
 			isa = PBXGroup;
 			children = (
 				3B624C76208521B600EA5CCE /* WelcomeViewController.swift */,
-				3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */,
 				3B0AA89720858DA3007F94F9 /* RecipeListViewController.swift */,
 				3B0AD73120877F5500262C08 /* RecipeInfoViewController.swift */,
+				3B624C78208557E900EA5CCE /* AddRecipeViewController.swift */,
 				3B0A7E892087B204007C55CF /* CalendarViewController.swift */,
 				3BD988D2208822ED00FE0D89 /* DayRecipeViewController.swift */,
 				3B0B4408208E44AF0041BAD8 /* ChangeDayViewController.swift */,
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B0AA89820858DA3007F94F9 /* RecipeListViewController.swift in Sources */,
+				3B0F5C95209A0B46009CA4C6 /* ColorHelper.swift in Sources */,
 				3B624C79208557E900EA5CCE /* AddRecipeViewController.swift in Sources */,
 				3B624C732085187600EA5CCE /* Ingredient+Convenience.swift in Sources */,
 				3B0842CE208FD9AC0054CDCC /* ShoppingListTableViewController.swift in Sources */,

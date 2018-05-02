@@ -15,6 +15,7 @@ class ShoppingListTableViewController: UITableViewController {
     var weeksIngredients: [Ingredient] = []
     
     @IBOutlet weak var undoButton: UIBarButtonItem!
+    @IBOutlet weak var swipeToDeleteLabel: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,17 +100,23 @@ class ShoppingListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "weeksIngredientCell", for: indexPath) as? ShoppingListIngredientTableViewCell else { return UITableViewCell() }
         
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.8)
+        } else {
+            cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.5)
+        }
+        
         guard let day = day else { return UITableViewCell() }
         let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days, for: day)
         if Date().day != today?.date?.day {
-            cell.checkBoxButton.isHidden = true
+            swipeToDeleteLabel.setTitle("No touchy...", for: .normal)
             tableView.isUserInteractionEnabled = false
             let ingredient = weeksIngredients[indexPath.row]
             cell.ingredient = ingredient
             
             return cell
         } else {
-            cell.checkBoxButton.isHidden = false
+            swipeToDeleteLabel.setTitle("< Swipe to delete >", for: .normal)
             tableView.isUserInteractionEnabled = true
             let ingredient = weeksIngredients[indexPath.row]
             cell.ingredient = ingredient

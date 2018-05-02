@@ -42,9 +42,17 @@ class RecipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
         
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = UIColor.outsidePlate
+        } else {
+            cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.5)
+        }
+        
         let recipe = RecipeController.shared.recipes[indexPath.row]
         cell.textLabel?.text = recipe.title
         cell.detailTextLabel?.text = recipe.directions
+        cell.textLabel?.backgroundColor = UIColor.clear
+        cell.detailTextLabel?.backgroundColor = UIColor.clear
         
         return cell
     }

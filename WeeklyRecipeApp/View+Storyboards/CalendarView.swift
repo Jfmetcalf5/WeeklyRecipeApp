@@ -123,7 +123,7 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
                     cell.day = day
                 }
                 if cell.day?.recipes?.count != 0 {
-                    cell.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
+                    cell.backgroundColor = UIColor.knifeColor.withAlphaComponent(0.7)
                 }
                 cell.isUserInteractionEnabled = true
                 cell.lbl.textColor = Style.activeCellLblColor
@@ -146,10 +146,10 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
             dayCellSelectedHasNoMoreRecipes = cell
             delegate?.dayCellWasSelected(day: day)
         }
-        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.3) || cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.7) {
-            cell?.backgroundColor = UIColor.orange.withAlphaComponent(0.7)
+        if cell?.backgroundColor == UIColor.knifeColor.withAlphaComponent(0.7) || cell?.backgroundColor == UIColor.knifeColor.withAlphaComponent(0.9) {
+            cell?.backgroundColor = UIColor.knifeColor.withAlphaComponent(0.9)
         } else {
-            cell?.backgroundColor = Colors.green.withAlphaComponent(0.5)
+            cell?.backgroundColor = UIColor.knifeColor
         }
         isSelected = true
     }
@@ -158,8 +158,8 @@ class CalenderView: UIView, UICollectionViewDelegate, UICollectionViewDataSource
         let cell = collectionView.cellForItem(at: indexPath)
         guard let lbl = cell?.subviews[1] as? UILabel else { return }
         lbl.textColor = Style.activeCellLblColor
-        if cell?.backgroundColor == UIColor.orange.withAlphaComponent(0.7) {
-            cell?.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
+        if cell?.backgroundColor == UIColor.knifeColor.withAlphaComponent(0.9) {
+            cell?.backgroundColor = UIColor.knifeColor.withAlphaComponent(0.7)
         } else {
             cell?.backgroundColor = UIColor.clear
         }

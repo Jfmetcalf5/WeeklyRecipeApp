@@ -96,6 +96,11 @@ class CalendarViewController: UIViewController, UICollectionViewDelegate, UITabl
         
         let recipe = selectedDay?.recipes?.object(at: indexPath.row) as? Recipe
         
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = UIColor.outsidePlate
+        } else {
+            cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.5)
+        }
         cell.textLabel?.text = recipe?.title
         cell.detailTextLabel?.text = recipe?.directions
         

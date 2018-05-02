@@ -18,7 +18,6 @@ class ShoppingListIngredientTableViewCell: UITableViewCell {
     
     @IBOutlet weak var quantityUnitLabel: UILabel!
     @IBOutlet weak var IngredientNameLabel: UILabel!
-    @IBOutlet weak var checkBoxButton: UIButton!
     
     func updateCellViews() {
         guard let ingredient = ingredient else { return }
