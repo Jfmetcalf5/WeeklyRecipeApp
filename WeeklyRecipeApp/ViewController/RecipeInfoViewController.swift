@@ -18,6 +18,8 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        directionsTextView.backgroundColor = UIColor.outsidePlate
         ingredientsListTableView.delegate = self
         ingredientsListTableView.dataSource = self
         updateViews()
@@ -42,9 +44,18 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = ingredientsListTableView.dequeueReusableCell(withIdentifier: "ingredientListCell", for: indexPath)
         guard let recipe = recipe else { return UITableViewCell() }
         if let ingredients = recipe.ingredients?.array as? [Ingredient] {
+            
+            if indexPath.row % 2 == 0 {
+                cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.8)
+            } else {
+                cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.5)
+            }
+            
             let ingredient = ingredients[indexPath.row]
             cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
+            cell.textLabel?.backgroundColor = UIColor.clear
             cell.detailTextLabel?.text = ingredient.name
+            cell.detailTextLabel?.backgroundColor = UIColor.clear
         }
         
         return cell

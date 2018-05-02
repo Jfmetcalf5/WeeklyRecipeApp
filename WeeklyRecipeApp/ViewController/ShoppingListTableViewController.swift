@@ -19,6 +19,7 @@ class ShoppingListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -140,16 +141,43 @@ class ShoppingListTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    var tempDeletedIngredient: [Ingredient] = []
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-
-            let ingredient = weeksIngredients[indexPath.row]
-            tempDeletedIngredient.append(ingredient)
-            weeksIngredients.remove(at: indexPath.row)
-
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let ingredient = self.weeksIngredients[indexPath.row]
+        weak var parentVC = self
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (delete, self, completion) in
+            parentVC?.tempDeletedIngredient.append(ingredient)
+            parentVC?.weeksIngredients.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            undoButton.isEnabled = true
+            parentVC?.undoButton.isEnabled = true
+            completion(true)
         }
+        let swipeLeading = UISwipeActionsConfiguration(actions: [action])
+        return swipeLeading
     }
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let ingredient = self.weeksIngredients[indexPath.row]
+        weak var parentVC = self
+        let action = UIContextualAction(style: .destructive, title: "Delete") { (delete, self, completion) in
+            parentVC?.tempDeletedIngredient.append(ingredient)
+            parentVC?.weeksIngredients.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            parentVC?.undoButton.isEnabled = true
+            completion(true)
+        }
+        let swipeLeading = UISwipeActionsConfiguration(actions: [action])
+        return swipeLeading
+    }
+    
+    var tempDeletedIngredient: [Ingredient] = []
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//
+//            let ingredient = weeksIngredients[indexPath.row]
+//            tempDeletedIngredient.append(ingredient)
+//            weeksIngredients.remove(at: indexPath.row)
+//
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            undoButton.isEnabled = true
+//        }
+//    }
 }

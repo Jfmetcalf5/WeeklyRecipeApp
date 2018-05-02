@@ -36,6 +36,12 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = calendarRecipesTableView.dequeueReusableCell(withIdentifier: "recipeCell", for: indexPath)
         let recipe = RecipeController.shared.recipes[indexPath.row]
         
+        if indexPath.row % 2 == 0 {
+            cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.8)
+        } else {
+            cell.backgroundColor = UIColor.outsidePlate.withAlphaComponent(0.5)
+        }
+        
         cell.textLabel?.text = recipe.title
         cell.detailTextLabel?.text = recipe.directions
         
@@ -46,7 +52,6 @@ class DayRecipeViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeCell")
         let selectedRecipe = RecipeController.shared.recipes[indexPath.row]
         recipeNameLabel.text = selectedRecipe.title
-        cell?.isSelected = false
     }
     
     // MARK: - Navigation

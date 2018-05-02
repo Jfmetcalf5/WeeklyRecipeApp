@@ -30,6 +30,8 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor.insidePlate
+        
         let ingredientsList = IngredientsListController.shared.fetchIngredients()
         self.ingredientsList = ingredientsList
         
