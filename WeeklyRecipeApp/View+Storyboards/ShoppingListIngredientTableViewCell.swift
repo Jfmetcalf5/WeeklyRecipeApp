@@ -23,7 +23,7 @@ class ShoppingListIngredientTableViewCell: UITableViewCell {
         guard let ingredient = ingredient else { return }
 //        let quantityString = String(ingredient.quantity)
 //        if quantityString.count > something
-        quantityUnitLabel.text = "\(ingredient.quantity) \(ingredient.unit ?? "")"
+        quantityUnitLabel.text = "\(ingredient.quantity ?? "") \(ingredient.unit ?? "")"
         IngredientNameLabel.text = ingredient.name
     }
 }

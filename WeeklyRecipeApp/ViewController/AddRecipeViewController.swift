@@ -119,13 +119,14 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     @IBAction func addIngredientButtonTapped(_ sender: UIButton) {
         if let recipe = recipe {
             guard let name = searchBar.text, name != "",
-                let quantityString = quantityTextField.text, let quantity = Double(quantityString), let unit = unitTextView.text, unit != "" else { return }
+                let quantity = quantityTextField.text, let unit = unitTextView.text, unit != "" else { return }
             IngredientController.shared.addIngredientWith(name: name, quantity: quantity, unit: unit, recipe: recipe)
             view.resignFirstResponder()
             ingredientsTableView.reloadData()
             searchBar.text = ""
             unitTextView.text = ""
             quantityTextField.text = ""
+            ingredientsListTableView.isHidden = true
         }
     }
     

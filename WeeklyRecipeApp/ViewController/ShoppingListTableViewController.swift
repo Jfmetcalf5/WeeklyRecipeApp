@@ -53,11 +53,30 @@ class ShoppingListTableViewController: UITableViewController {
                     guard let ingredientName = ingredient.name,
                         let unit = ingredient.unit else { continue }
                     
-                    if let numberOfIngredient = ingredientCountDictionary["\(ingredientName) \(unit)"] {
-                        ingredientCountDictionary["\(ingredientName) \(unit)"] = numberOfIngredient + ingredient.quantity
-                    } else {
-                        ingredientCountDictionary["\(ingredientName) \(unit)"] = ingredient.quantity
+                    guard let quantity = ingredient.quantity else { return }
+                    if let intQuantity = Int(quantity) {
+                        
+                        if let numberOfIngredient = ingredientCountDictionary["\(ingredientName) \(unit)"] {
+                            ingredientCountDictionary["\(ingredientName) \(unit)"] = numberOfIngredient + Double(intQuantity)
+                        } else {
+                            ingredientCountDictionary["\(ingredientName) \(unit)"] = Double(intQuantity)
+                        }
+                        
+                    } else if let doubleQuantity = MeasurementDictionaryConverter.shared.fractionsDictionary[quantity] {
+                        
+                        if let numberOfIngredient = ingredientCountDictionary["\(ingredientName) \(unit)"] {
+                            ingredientCountDictionary["\(ingredientName) \(unit)"] = numberOfIngredient + doubleQuantity
+                        } else {
+                            ingredientCountDictionary["\(ingredientName) \(unit)"] = doubleQuantity
+                        }
+                        
                     }
+                    
+//                    if let numberOfIngredient = ingredientCountDictionary["\(ingredientName) \(unit)"] {
+//                        ingredientCountDictionary["\(ingredientName) \(unit)"] = numberOfIngredient + ingredient.quantity
+//                    } else {
+//                        ingredientCountDictionary["\(ingredientName) \(unit)"] = ingredient.quantity
+//                    }
                 }
                 
                 var ingredients: [Ingredient] = []
@@ -66,10 +85,10 @@ class ShoppingListTableViewController: UITableViewController {
                     let keys = key.components(separatedBy: " ")
                     guard let name = keys.first,
                         let unit = keys.last else { return }
-                    let ingredient = Ingredient(name: name, quantity: value, unit: unit)
+                    let ingredient = Ingredient(name: name, quantity: "\(value)", unit: unit)
                     ingredients.append(ingredient)
                 }
-            
+                
                 self.weeksIngredients = ingredients
                 tableView.reloadData()
                 
