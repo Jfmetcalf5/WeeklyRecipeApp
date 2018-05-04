@@ -22,6 +22,9 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
         ingredientsListTableView.delegate = self
         ingredientsListTableView.dataSource = self
         updateViews()
+        guard let navigation = self.navigationController else { return }
+        navigation.navigationBar.barStyle = UIBarStyle.default
+        navigation.navigationBar.tintColor = UIColor.newOrange
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,7 +54,7 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
             }
             
             let ingredient = ingredients[indexPath.row]
-            cell.textLabel?.text = "\(ingredient.quantity) \(ingredient.unit ?? "*")"
+            cell.textLabel?.text = "\(ingredient.quantity ?? "") \(ingredient.unit ?? "")"
             cell.textLabel?.backgroundColor = UIColor.clear
             cell.detailTextLabel?.text = ingredient.name
             cell.detailTextLabel?.backgroundColor = UIColor.clear
