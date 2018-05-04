@@ -14,5 +14,5 @@ extension UIColor {
     static var knifeColor = UIColor(red: 127.0/255.0, green: 215.0/255.0, blue: 165.0/255.0, alpha: 1.0)
     static var outsidePlate = UIColor(red: 191.0/255.0, green: 235.0/255.0, blue: 210.0/255.0, alpha: 1.0)
     static var insidePlate = UIColor(red: 168.0/255.0, green: 225.0/255.0, blue: 196.0/255.0, alpha: 1.0)
-    
+    static var newOrange = UIColor(red: 237.0/255.0, green: 143.0/255.0, blue: 50.0/255.0, alpha: 1.0)
 }

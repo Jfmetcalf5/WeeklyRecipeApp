@@ -18,7 +18,6 @@ class RecipeInfoViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         directionsTextView.backgroundColor = UIColor.outsidePlate
         ingredientsListTableView.delegate = self
         ingredientsListTableView.dataSource = self

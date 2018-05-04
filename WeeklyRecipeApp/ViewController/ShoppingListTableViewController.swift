@@ -19,12 +19,14 @@ class ShoppingListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        tableView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        swipeToDeleteLabel.isHidden = true
         undoButton.isEnabled = false
+        undoButton.tintColor = UIColor.orange.withAlphaComponent(0.1)
         tableView.allowsSelection = false
         getAndCheck()
         checkIfTodaysTheDay()
@@ -129,13 +131,14 @@ class ShoppingListTableViewController: UITableViewController {
         guard let day = day else { return UITableViewCell() }
         let today = ShoppingListController.shared.checkIfTodayIsTheDayToGoShopping(days: days, for: day)
         if Date().day != today?.date?.day {
-            swipeToDeleteLabel.setTitle("No touchy...", for: .normal)
+            swipeToDeleteLabel.isHidden = true
             tableView.isUserInteractionEnabled = false
             let ingredient = weeksIngredients[indexPath.row]
             cell.ingredient = ingredient
             
             return cell
         } else {
+            swipeToDeleteLabel.isHidden = false
             swipeToDeleteLabel.setTitle("< Swipe to delete >", for: .normal)
             tableView.isUserInteractionEnabled = true
             let ingredient = weeksIngredients[indexPath.row]

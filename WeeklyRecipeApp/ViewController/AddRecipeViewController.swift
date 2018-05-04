@@ -57,7 +57,6 @@ class AddRecipeViewController: ShiftableViewController, UITableViewDelegate, UIT
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         if let recipe = recipe {
             titleTextField.text = recipe.title
             directionsTextView.text = recipe.directions
